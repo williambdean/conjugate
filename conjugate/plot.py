@@ -111,9 +111,6 @@ class PlotDistMixin:
 
         return x
 
-    def _settle_axis(self, ax: Axes | None = None) -> Axes:
-        return ax if ax is not None else plt.gca()
-
 
 class ContinuousPlotDistMixin(PlotDistMixin):
     """Functionality for plot_pdf method of continuous distributions."""
@@ -122,7 +119,7 @@ class ContinuousPlotDistMixin(PlotDistMixin):
         x = self._create_x_values()
         x = self._reshape_x_values(x)
 
-        ax = self._settle_axis(ax=ax)
+        ax = ax if ax is not None else plt.gca()
 
         return self._create_plot_on_axis(x=x, cdf=cdf, ax=ax, **kwargs)
 
@@ -183,7 +180,14 @@ class ContinuousPlotDistMixin(PlotDistMixin):
 
         ax.plot(x, yy, label=label, **kwargs)
         self._setup_labels(ax=ax, cdf=cdf)
-        ax.set_ylim(0, None)
+
+        y_max = np.max(yy)
+        _, current_y_max = ax.get_ylim()
+        new_max_value = max(y_max, current_y_max) * 1.02
+        if not np.isfinite(new_max_value):
+            new_max_value = None
+
+        ax.set_ylim(None, new_max_value)
         return ax
 
 
@@ -211,7 +215,7 @@ class DirichletPlotDistMixin(ContinuousPlotDistMixin):
         """
         distribution_samples = self.dist.rvs(size=samples, random_state=random_state)
 
-        ax = self._settle_axis(ax=ax)
+        ax = ax if ax is not None else plt.gca()
         xx = self._create_x_values()
 
         labels = label_to_iterable(
@@ -242,7 +246,7 @@ class DiscretePlotMixin(PlotDistMixin):
         x = self._create_x_values()
         x = self._reshape_x_values(x)
 
-        ax = self._settle_axis(ax=ax)
+        ax = ax if ax is not None else plt.gca()
         return self._create_plot_on_axis(
             x,
             ax=ax,
@@ -353,5 +357,12 @@ class DiscretePlotMixin(PlotDistMixin):
 
         ax.set_xlabel("Domain")
         ax.set_ylabel(ylabel)
-        ax.set_ylim(0, None)
+
+        y_max = np.max(yy)
+        _, current_y_max = ax.get_ylim()
+        new_max_value = max(y_max, current_y_max) * 1.02
+        if not np.isfinite(new_max_value):
+            new_max_value = None
+
+        ax.set_ylim(None, new_max_value)
         return ax

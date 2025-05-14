@@ -49,6 +49,7 @@ dev = [
 ]
 docs = [
     "mkdocs>=1.4.3,<2",
+    "mkdocs-marimo>=0.2.1",
     "mkdocs-material>=9.1.17,<10",
     "mkdocstrings[python]>=0.23.0",
 ]

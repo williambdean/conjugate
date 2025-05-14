@@ -84,7 +84,7 @@ def _(mo):
 
     Generally, this quantity is known as the prior predictive distribution $p(x| \mathbf{x}) = \int_{\theta}{p(x|\theta)p(\theta| \mathbf{x})d\theta}$, where $x$ is a new data point, $\mathbf{x}$ is the observed data and $\theta$ are the parameters of the model. Using Bayes' theorem, we can expand
 
-    Returning to our example, if we pick the Gamma distribution as our prior distribution over the rate of the Poisson distributions, then the posterior predictive is the negative binomial distribution, as can be seen from the table below. The Gamma distribution is parameterized by two hyperparameters $\alpha$, $\beta$, which we have to choose. By looking at plots of the gamma distribution, we pick a reasonable prior for the average number of cars. The choice of prior hyperparameters is inherently subjective and based on prior knowledge.
+    Returning to our example, if we pick the Gamma distribution as our prior distribution over the rate of the Poisson distributions, then the posterior predictive is the negative binomial distribution. The Gamma distribution is parameterized by two hyperparameters $\alpha$, $\beta$, which we have to choose. By looking at plots of the Gamma distribution, we pick a reasonable prior for the average number of cars. The choice of prior hyperparameters is inherently subjective and based on prior knowledge.
     """)
 
     parameters = mo.md(r"""
@@ -93,7 +93,7 @@ def _(mo):
 
     $\beta$ = {beta}
     """).batch(
-        alpha=mo.ui.slider(start=0.01, stop=5, step=0.01, value=2, show_value=True),
+        alpha=mo.ui.slider(start=0.01, stop=5, step=0.01, show_value=True, value=2),
         beta=mo.ui.slider(start=0.01, stop=5, step=0.01, show_value=True, value=2),
     )
     return build_up, parameters

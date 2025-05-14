@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://williambdean.github.io/conjugate/examples/scipy-connection/">
+        <link rel="canonical" href="https://williambdean.github.io/conjugate/examples/wiki-rental-car/">
       
       
-        <link rel="prev" href="../plotting/">
+        <link rel="prev" href="../limit/">
       
       
-        <link rel="next" href="../sampling-distributions/">
+        <link rel="next" href="../plotting/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>SciPy Distributions - Conjugate Models</title>
+        <title>Available Rental Cars - Conjugate Models</title>
       
     
     
@@ -97,7 +97,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#connection-to-scipy-distributions" class="md-skip">
+        <a href="#available-rental-cars" class="md-skip">
           Skip to content
         </a>
       
@@ -131,7 +131,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              SciPy Distributions
+              Available Rental Cars
             
           </span>
         </div>
@@ -567,8 +567,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -602,13 +604,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
         
           
           <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
@@ -624,7 +624,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_1">
             <span class="md-nav__icon md-icon"></span>
             Case Studies
@@ -819,10 +819,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../wiki-rental-car/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -833,6 +842,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -850,8 +860,6 @@
                 
   
   
-    
-  
   
   
     
@@ -883,11 +891,13 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
         
           
           <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
@@ -903,7 +913,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
             Features
@@ -937,19 +947,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../scipy-connection/" class="md-nav__link">
         
   
   
@@ -960,7 +961,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1133,20 +1133,129 @@
   
 
 
-<h1 id="connection-to-scipy-distributions">Connection to SciPy Distributions</h1>
-<p>Many distributions have the <code>dist</code> attribute which is a <a href=https://docs.scipy.org/doc/scipy/reference/stats.html>scipy.stats distribution</a> object. From there, the methods from scipy.stats to get the pdf, cdf, etc can be leveraged.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">conjugate.distribution</span><span class="w"> </span><span class="kn">import</span> <span class="n">Beta</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">beta</span> <span class="o">=</span> <span class="n">Beta</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">scipy_dist</span> <span class="o">=</span> <span class="n">beta</span><span class="o">.</span><span class="n">dist</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">scipy_dist</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># 0.5</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">scipy_dist</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.975</span><span class="p">]))</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># [0.025 0.975]</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">samples</span> <span class="o">=</span> <span class="n">scipy_dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-</span></code></pre></div>
+<h1 id="available-rental-cars">Available Rental Cars</h1>
+<div style="margin: auto; max-width: none;">
+                  <marimo-island
+        data-app-id="main"
+        data-cell-id="Kclp"
+        data-reactive="false"
+    >
+        <marimo-cell-output>
+
+<div class="marimo">
+  <div class="flex flex-col flex-1 items-center justify-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="size-20 animate-spin text-primary"
+    >
+      <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+    </svg>
+    <div>Initializing...</div>
+  </div>
+</div>
+
+        </marimo-cell-output>
+        <marimo-cell-code hidden></marimo-cell-code>
+    </marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="Hbol"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>mo.md(%0A%20%20%20%20r%22%22%22%0AFind%20the%20original%20example%20on%20%5BWikipedia%5D(https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FConjugate_prior%23Practical_example).%0A%0ASuppose%20a%20rental%20car%20service%20operates%20in%20your%20city.%20Drivers%20can%20drop%20off%20and%20pick%20up%20cars%20anywhere%20inside%20the%20city%20limits.%20You%20can%20find%20and%20rent%20cars%20using%20an%20app.%0A%0ASuppose%20you%20wish%20to%20find%20the%20probability%20that%20you%20can%20find%20a%20rental%20car%20within%20a%20short%20distance%20of%20your%20home%20address%20at%20any%20time%20of%20day.%0A%0AOver%20three%20days%20you%20look%20at%20the%20app%20and%20find%20the%20following%20number%20of%20cars%20within%20a%20short%20distance%20of%20your%20home%20address%3A%20%24%5Cmathbf%7Bx%7D%20%3D%20%5B3%2C%204%2C%201%5D%24%0A%0AWe%20can%20represent%20this%20data%20with%20an%20numpy%20array%20or%20any%20other%20data%20that%20works%20like%20a%20%5Bnumerical%20array%5D(.%2F..%2Fgeneralized-inputs).%0A%0A%60%60%60python%0Aimport%20numpy%20as%20np%0A%0Ax%20%3D%20np.array(%5B3%2C%204%2C%201%5D)%0A%60%60%60%0A%22%22%22%0A)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="MJUe"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>import%20micropip%0A%0Aawait%20micropip.install(%22conjugate-models%22)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="vblA"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>import%20marimo%20as%20mo%0Aimport%20numpy%20as%20np%0A%0Ax%20%3D%20np.array(%5B3%2C%204%2C%201%5D)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="bkHC"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>numerator%20%3D%20%22%2B%22.join(map(str%2C%20x))%0Aden%20%3D%20len(x)%0Alam%20%3D%20np.mean(x)%0Aat_least_one%20%3D%201%20-%20np.exp(-lam)%0A%0Amo.md(rf%22%22%22%0ASuppose%20we%20assume%20the%20data%20comes%20from%20a%20Poisson%20distribution.%20In%20that%20case%2C%20we%20can%20compute%20the%20maximum%20likelihood%20estimate%20of%20the%20parameters%20of%20the%20mode%2C%20which%20is%0A%0A%24%24%0A%5Clambda%20%3D%20%5Cfrac%7B%7B%20%7Bnumerator%7D%20%7D%7D%7B%7B%20%7Bden%7D%20%7D%7D%20%5Capprox%20%20%7Blam%3A.2f%7D%0A%24%24%0A%0AUsing%20this%20maximum%20likelihood%20estimate%2C%20we%20can%20compute%20the%20probability%20that%20there%20will%20be%20at%20least%20one%20car%20available%20on%20a%20given%20day%3A%0A%0A%24%24%0Ap(x%20%3E%200%20%7C%20%5Clambda%20%5Capprox%20%7Blam%3A.2f%7D)%20%3D%201%20-%20p(x%3D0%20%7C%20%5Clambda%20%5Capprox%20%7Blam%3A.2f%7D)%20%3D%201%20-%20%5Cfrac%7B%7B%20%7Blam%3A.2f%7D%5E0%20e%5E%7B%7B%20-%7Blam%3A.2f%7D%20%7D%7D%20%7D%7D%7B%7B0!%7D%7D%20%5Capprox%20%7Bat_least_one%3A.2f%7D%0A%24%24%0A%22%22%22)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="lEQa"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>build_up%20%3D%20mo.md(r%22%22%22%0AThis%20is%20the%20Poisson%20distribution%20that%20is%20*the*%20most%20likely%20to%20have%20generated%20the%20observed%20data%20%24%5Cmathbf%7Bx%7D%24.%20But%20the%20data%20could%20also%20have%20come%20from%20another%20Poisson%20distribution%2C%20e.g.%2C%20one%20with%20%24%5Clambda%20%3D%203%24%2C%20or%20%24%5Clambda%20%3D%202%24%2C%20etc.%20In%20fact%2C%20there%20is%20an%20infinite%20number%20of%20Poisson%20distributions%20that%20*could*%20have%20generated%20the%20observed%20data.%20With%20relatively%20few%20data%20points%2C%20we%20should%20be%20quite%20uncertain%20about%20which%20exact%20Poisson%20distribution%20generated%20this%20data.%20Intuitively%20we%20should%20instead%20take%20a%20weighted%20average%20of%20the%20the%20probability%20of%20%24p(x%20%3E%200%20%7C%20%5Clambda%20)%24%20for%20each%20of%20those%20Poisson%20distributions%2C%20weighted%20by%20how%20likely%20they%20each%20are%2C%20given%20the%20data%20we've%20observed%20%24%5Cmathbf%7Bx%7D%24.%0A%0AGenerally%2C%20this%20quantity%20is%20known%20as%20the%20prior%20predictive%20distribution%20%24p(x%7C%20%5Cmathbf%7Bx%7D)%20%3D%20%5Cint_%7B%5Ctheta%7D%7Bp(x%7C%5Ctheta)p(%5Ctheta%7C%20%5Cmathbf%7Bx%7D)d%5Ctheta%7D%24%2C%20where%20%24x%24%20is%20a%20new%20data%20point%2C%20%24%5Cmathbf%7Bx%7D%24%20is%20the%20observed%20data%20and%20%24%5Ctheta%24%20are%20the%20parameters%20of%20the%20model.%20Using%20Bayes'%20theorem%2C%20we%20can%20expand%0A%0AReturning%20to%20our%20example%2C%20if%20we%20pick%20the%20Gamma%20distribution%20as%20our%20prior%20distribution%20over%20the%20rate%20of%20the%20Poisson%20distributions%2C%20then%20the%20posterior%20predictive%20is%20the%20negative%20binomial%20distribution.%20The%20Gamma%20distribution%20is%20parameterized%20by%20two%20hyperparameters%20%24%5Calpha%24%2C%20%24%5Cbeta%24%2C%20which%20we%20have%20to%20choose.%20By%20looking%20at%20plots%20of%20the%20Gamma%20distribution%2C%20we%20pick%20a%20reasonable%20prior%20for%20the%20average%20number%20of%20cars.%20The%20choice%20of%20prior%20hyperparameters%20is%20inherently%20subjective%20and%20based%20on%20prior%20knowledge.%0A%22%22%22)%0A%0Aparameters%20%3D%20mo.md(r%22%22%22%0A%23%23%23%20Prior%20Parameters%0A%24%5Calpha%24%20%3D%20%7Balpha%7D%0A%0A%24%5Cbeta%24%20%3D%20%7Bbeta%7D%0A%22%22%22).batch(%0A%20%20%20%20alpha%3Dmo.ui.slider(start%3D0.01%2C%20stop%3D5%2C%20step%3D0.01%2C%20show_value%3DTrue%2C%20value%3D2)%2C%0A%20%20%20%20beta%3Dmo.ui.slider(start%3D0.01%2C%20stop%3D5%2C%20step%3D0.01%2C%20show_value%3DTrue%2C%20value%3D2)%2C%0A)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="PKri"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>from%20conjugate.distributions%20import%20Gamma%0Afrom%20conjugate.models%20import%20poisson_gamma%2C%20poisson_gamma_predictive%0A%0Aprior%20%3D%20Gamma(**parameters.value)%0Aposterior%20%3D%20poisson_gamma(n%3Dlen(x)%2C%20x_total%3Dsum(x)%2C%20prior%3Dprior)%0Aposterior_predictive%20%3D%20poisson_gamma_predictive(distribution%3Dposterior)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="Xref"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>mo.vstack(%5Bbuild_up%2C%20parameters%5D)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="SFPL"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>upper%20%3D%2010%0Aax%20%3D%20prior.set_bounds(0%2C%20upper).plot_pdf(label%3D%22prior%22)%0Aax.set(%0A%20%20%20%20title%3Df%22Prior%20distribution%20for%20average%5CnGamma(alpha%3D%7Bparameters.value%5B'alpha'%5D%7D%2C%20beta%3D%7Bparameters.value%5B'beta'%5D%7D)%22%2C%0A%20%20%20%20xlabel%3D%22Average%20number%20of%20cars%22%2C%0A)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="BYtC"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>posterior_section%20%3D%20mo.md(r%22%22%22%0AGiven%20the%20prior%20hyperparameters%20%24%5Calpha%24%20and%20%24%5Cbeta%24%20we%20can%20compute%20the%20posterior%20hyperparameters%20%24%5Calpha%20%5Cprime%20%3D%20%5Calpha%20%2B%20%5Csum_%7Bi%7D%20%7Bx_i%7D%24%20and%20%24%5Cbeta%20%5Cprime%20%3D%20%5Cbeta%20%2B%20n%24.%0A%22%22%22)%0A%0Aconjugate_posterior_section%20%3D%20mo.md(f%22%22%22%0AUsing%20%60conjugate-models%60%2C%20we%20can%20import%20%60poisson_gamma%60%20to%20compute%20the%20posterior%20hyperparmeters%20instead%20of%20remembering%20the%20formula%3A%0A%0A%60%60%60python%0Afrom%20conjugate.distributions%20import%20Gamma%0Afrom%20conjugate.models%20import%20poisson_gamma%0A%0An%20%3D%20len(x)%0Ax_total%20%3D%20sum(x)%0A%0Aprior%20%3D%20Gamma(alpha%3D%7Bparameters.value%5B%22alpha%22%5D%7D%2C%20beta%3D%7Bparameters.value%5B%22beta%22%5D%7D)%0Aposterior%3A%20Gamma%20%3D%20poisson_gamma(n%3Dn%2C%20x_total%3Dx_total%2C%20prior%3Dprior)%0A%60%60%60%0A%22%22%22)%0A%0Amo.vstack(%5Bposterior_section%2C%20conjugate_posterior_section%5D)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="RGSE"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>greater_than_zero%20%3D%201%20-%20posterior_predictive.dist.cdf(0)%0A%0Aposterior_predictive_section%20%3D%20mo.md(rf%22%22%22%0AGiven%20the%20posterior%20hyperparameters%2C%20we%20can%20finally%20compute%20the%20posterior%20predictive%20of%0A%0A%24%24%0Ap(x%20%3E%200%7C%20%5Cmathbf%7B%7Bx%7D%7D)%20%3D%201%20-%20p(x%3D0%20%7C%20%5Cmathbf%7B%7Bx%7D%7D)%20%3D%201%20-%20NB(0%20%7C%20%7Bposterior_predictive.n.item()%3A.2f%7D%2C%20%5Cfrac%7B%7B%20%7Bposterior.beta%3A.2f%7D%20%7D%7D%7B%7B%201%20%2B%20%7Bposterior.beta%3A.2f%7D%20%7D%7D)%20%5Capprox%20%7Bgreater_than_zero%3A.2f%7D%0A%24%24%0A%0AWith%20%60conjugate-models%60%2C%20the%20%60poisson_gamma%60%20function%20has%20complimentary%20%60poisson_gamma_predictive%60%20function%20for%20posterior%0Apredictive.%20The%20%60dist%60%20attribute%20to%20%5Baccess%20scipy%20distributions%5D(.%2F..%2Fscipy-connection).%20This%20gives%0Aaccess%20to%20various%20statistics%20and%20methods%20of%20the%20distribuition%20making%20this%20calculation%0Atrivial.%0A%0A%60%60%60python%0Afrom%20conjugate.models%20import%20poisson_gamma_predictive%0A%0Aposterior_predictive%3A%20%22NegativeBinomial%22%20%3D%20poisson_gamma_predictive(distribution%3Dposterior)%0Agreater_than_zero%20%3D%201%20-%20posterior_predictive.dist.cdf(0)%0A%23%20%7Bgreater_than_zero%3A.2f%7D%0A%60%60%60%0A%0AThis%20much%20more%20conservative%20estimate%20reflects%20the%20uncertainty%20in%20the%20model%20parameters%2C%20which%20the%20posterior%20predictive%20takes%20into%20account.%0A%22%22%22)%0A%0Amo.vstack(%0A%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20posterior_predictive_section%2C%0A%20%20%20%20%5D%0A)</marimo-cell-code>
+</marimo-island>
+                </div>
 
 
 

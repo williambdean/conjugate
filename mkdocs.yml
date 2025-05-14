@@ -53,6 +53,7 @@ nav:
       - Inference in SQL: examples/sql.md
       - Bootstrap Comparison: examples/bootstrap.md
       - Limit Estimation: examples/limit.md
+      - Available Rental Cars: examples/wiki-rental-car.md
     - Features:
       - Plotting: examples/plotting.md
       - SciPy Distributions: examples/scipy-connection.md
@@ -64,6 +65,7 @@ nav:
 
 plugins:
 - search
+- marimo
 - mkdocstrings:
     handlers:
       python:

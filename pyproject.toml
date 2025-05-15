@@ -1,6 +1,6 @@
 [project]
 name = "conjugate-models"
-version = "0.12.0"
+version = "0.12.1"
 description = "Bayesian Conjugate Models in Python"
 authors = [{ name = "Will Dean", email = "wd60622@gmail.com" }]
 requires-python = ">=3.10,<4.0"

@@ -3,6 +3,7 @@ import pytest
 import numpy as np
 
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 
 from conjugate.distributions import (
     Beta,
@@ -23,7 +24,7 @@ FIGSIZE = (10, 7)
 
 
 @pytest.mark.mpl_image_compare
-def test_label() -> None:
+def test_label() -> Figure:
     fig, ax = plt.subplots(figsize=FIGSIZE)
     beta = Beta(1, 1)
     beta.plot_pdf(ax=ax, label="Uniform")
@@ -32,7 +33,7 @@ def test_label() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_multiple_labels_str() -> None:
+def test_multiple_labels_str() -> Figure:
     fig, ax = plt.subplots(figsize=FIGSIZE)
     beta = Beta(np.array([1, 2, 3]), np.array([1, 2, 3]))
     beta.plot_pdf(label="Beta", ax=ax)
@@ -41,7 +42,7 @@ def test_multiple_labels_str() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_multiple_with_labels() -> None:
+def test_multiple_with_labels() -> Figure:
     fig, ax = plt.subplots(figsize=FIGSIZE)
     beta = Beta(np.array([1, 2, 3]), np.array([1, 2, 3]))
     ax = beta.plot_pdf(label=["First Beta", "Second Beta", "Third Beta"], ax=ax)
@@ -50,7 +51,7 @@ def test_multiple_with_labels() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_skip_label() -> None:
+def test_skip_label() -> Figure:
     fig, ax = plt.subplots(figsize=FIGSIZE)
     beta = Beta(np.array([1, 2, 3]), np.array([1, 2, 3]))
     ax = beta.plot_pdf(label=["First Beta", None, "Third Beta"], ax=ax)
@@ -59,7 +60,7 @@ def test_skip_label() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_different_distributions() -> None:
+def test_different_distributions() -> Figure:
     fig, ax = plt.subplots(figsize=FIGSIZE)
     beta = Beta(1, np.array([1, 2]))
     gamma = Gamma(1, 1)
@@ -74,7 +75,7 @@ def test_different_distributions() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_analysis() -> None:
+def test_analysis() -> Figure:
     prior = Beta(1, 1)
 
     N = 10
@@ -108,7 +109,7 @@ def test_analysis() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_dirichlet() -> None:
+def test_dirichlet() -> Figure:
     fig, ax = plt.subplots(figsize=FIGSIZE)
     dirichlet = Dirichlet(np.array([1, 2, 3]))
     ax = dirichlet.plot_pdf(random_state=0, ax=ax)
@@ -116,7 +117,7 @@ def test_dirichlet() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_dirichlet_labels() -> None:
+def test_dirichlet_labels() -> Figure:
     fig, ax = plt.subplots(figsize=FIGSIZE)
     dirichlet = Dirichlet(np.array([1, 2, 3]))
     ax = dirichlet.plot_pdf(random_state=0, label="Category", ax=ax)
@@ -125,7 +126,7 @@ def test_dirichlet_labels() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_dirichlet_multiple_labels() -> None:
+def test_dirichlet_multiple_labels() -> Figure:
     fig, ax = plt.subplots(figsize=FIGSIZE)
     dirichlet = Dirichlet(np.array([1, 2, 3]))
     ax = dirichlet.plot_pdf(
@@ -138,7 +139,7 @@ def test_dirichlet_multiple_labels() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_bayesian_update_example() -> None:
+def test_bayesian_update_example() -> Figure:
     def create_sampler(mu, sigma, rng):
         def sample(n: int):
             return rng.normal(loc=mu, scale=sigma, size=n)
@@ -196,7 +197,7 @@ def test_bayesian_update_example() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_polar_plot() -> None:
+def test_polar_plot() -> Figure:
     kappas = np.array([0.5, 1, 5, 10])
     dist = VonMises(0, kappa=kappas)
 
@@ -210,7 +211,7 @@ def test_polar_plot() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_cdf_continuous() -> None:
+def test_cdf_continuous() -> Figure:
     dist = Normal(0, 1)
     dist.set_bounds(-5, 5)
     fig, ax = plt.subplots(figsize=FIGSIZE)
@@ -220,7 +221,7 @@ def test_cdf_continuous() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_cdf_discrete() -> None:
+def test_cdf_discrete() -> Figure:
     dist = Binomial(n=10, p=0.25)
     fig, ax = plt.subplots(figsize=FIGSIZE)
 
@@ -229,7 +230,7 @@ def test_cdf_discrete() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_conditional_plot() -> None:
+def test_conditional_plot() -> Figure:
     dist = Binomial(n=10, p=0.25)
     dist.set_bounds(3, 7)
 
@@ -239,7 +240,7 @@ def test_conditional_plot() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_conditional_plot_cdf() -> None:
+def test_conditional_plot_cdf() -> Figure:
     dist = Binomial(n=10, p=0.25)
     dist.set_bounds(3, 7)
 
@@ -249,7 +250,7 @@ def test_conditional_plot_cdf() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_color_cycle_continuous() -> None:
+def test_color_cycle_continuous() -> Figure:
     dist = Normal(mu=0, sigma=[1, 2, 3]).set_bounds(-10, 10)
     fig, ax = plt.subplots(figsize=FIGSIZE)
     dist.plot_pdf(ax=ax, color=["red", "green", "teal"])
@@ -257,7 +258,7 @@ def test_color_cycle_continuous() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_color_cycle_discrete() -> None:
+def test_color_cycle_discrete() -> Figure:
     dist = Binomial(n=10, p=[0.15, 0.5, 0.85])
     fig, ax = plt.subplots(figsize=FIGSIZE)
     dist.plot_pmf(ax=ax, color=["red", "green", "teal"])
@@ -265,8 +266,20 @@ def test_color_cycle_discrete() -> None:
 
 
 @pytest.mark.mpl_image_compare
-def test_large_discrete_x_axis() -> None:
+def test_large_discrete_x_axis() -> Figure:
     dist = Binomial(n=50, p=0.5)
     fig, ax = plt.subplots(figsize=FIGSIZE)
     dist.plot_pmf(ax=ax)
+    return fig
+
+
+@pytest.mark.mpl_image_compare
+def test_rgba_colors() -> Figure:
+    prior = Beta(1, 1)
+    posterior = Beta(10, 10)
+
+    fig, ax = plt.subplots(figsize=FIGSIZE)
+    prior.plot_pdf(ax=ax, color=(1, 0, 0, 0.5), label="Prior")
+    posterior.plot_pdf(ax=ax, color=(0, 1, 0, 0.5), label="Posterior")
+    ax.legend(title="Distribution")
     return fig

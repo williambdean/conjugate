@@ -42,6 +42,17 @@ def label_to_iterable(label: LABEL_INPUT, ncols: int) -> Iterable[str]:
     )  # pragma: no cover
 
 
+def _is_rgba_color(color) -> bool:
+    """Check if the color is a valid RGBA color."""
+    if isinstance(color, str):
+        return False
+
+    if isinstance(color, Iterable) and len(color) == 4:
+        return all(isinstance(c, (int, float)) for c in color)
+
+    return False
+
+
 def resolve_label(label: LABEL_INPUT, yy: np.ndarray):
     """
 
@@ -175,7 +186,11 @@ class ContinuousPlotDistMixin(PlotDistMixin):
         else:
             label = None
 
-        if "color" in kwargs and isinstance(kwargs["color"], Iterable):
+        if (
+            "color" in kwargs
+            and isinstance(kwargs["color"], Iterable)
+            and not _is_rgba_color(kwargs["color"])
+        ):
             ax.set_prop_cycle(color=kwargs.pop("color"))
 
         ax.plot(x, yy, label=label, **kwargs)
@@ -344,7 +359,11 @@ class DiscretePlotMixin(PlotDistMixin):
         else:
             label = None
 
-        if "color" in kwargs and isinstance(kwargs["color"], Iterable):
+        if (
+            "color" in kwargs
+            and isinstance(kwargs["color"], Iterable)
+            and not _is_rgba_color(kwargs["color"])
+        ):
             ax.set_prop_cycle(color=kwargs.pop("color"))
 
         ax.plot(x, yy, mark, label=label, **kwargs)

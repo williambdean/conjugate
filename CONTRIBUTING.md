@@ -28,17 +28,18 @@ Do this once but keep it up to date
 
 ### Setup Local Development Environment
 
-The project is developed with [Poetry](https://python-poetry.org/).
+The project is developed with [uv](https://docs.astral.sh/uv/).
 
-In the root of the repo, run:
+To check for a local python environment, run:
 
 ```bash
-poetry install
+uv run python
 ```
 
-And also install the [pre-commit](https://pre-commit.com/) hooks with:
+Also install the [pre-commit](https://pre-commit.com/) hooks with:
 
 ```bash
+uv tool install pre-commit
 pre-commit install
 ```
 
@@ -46,9 +47,9 @@ pre-commit install
 
 Please check that your pull request meets the following criteria:
 
-- Unit tests pass
-- pre-commit hooks pass
-- Docstrings and examples render correctly in the documentation
+- Unit tests pass. i.e. `make test`
+- pre-commit hooks pass. i.e. `pre-commit run --all-files`
+- Docstrings and examples render correctly in the documentation. i.e. `make html`
 
 ## Documentation
 

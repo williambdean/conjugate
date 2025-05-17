@@ -1,5 +1,7 @@
+---
+comments: true
+---
 # Bayesian Models with SQL
-
 
 Because `conjugate-models` works with [general numerical inputs](generalized-inputs.md), we can use Bayesian models in SQL
 with the SQL builder, `PyPika`.

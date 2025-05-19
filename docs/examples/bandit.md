@@ -6,7 +6,7 @@ comments: true
 We will assume a Bernoulli distribution of successes for each arm
 with an unknown average probability of success for each arm.
 
-The conjugate prior of the Bernoulli distribution is a beta distribution
+The conjugate prior of the Bernoulli distribution is a Beta distribution
 
 The goal is to find the arm with the highest probability of success.
 
@@ -27,7 +27,7 @@ true_dist = Binomial(n=1, p=p)
 Helper functions:
 
 - sampling from the true distribution of given arm
-- create the statistics required for Bayesian update of exponential gamma model
+- create the statistics required for Bayesian update of Binomial-Beta model
 - single step in the Thompson sampling process
 
 ```python
@@ -60,7 +60,7 @@ def thompson_step(estimate: Beta, rng) -> Beta:
     arm_sample = sample_true_distribution(arm_to_sample, rng=rng)
     x, n = bayesian_update_stats(arm_to_sample, arm_sample)
 
-    return binomial_beta(n=n,x=x, prior=estimate)
+    return binomial_beta(n=n, x=x, prior=estimate)
 ```
 
 After defining a prior / initial estimate for each of the distributions, we can use a for loop in
@@ -105,4 +105,5 @@ ax.set(
 ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:.0%}"))
 plt.show()
 ```
+
 ![Bandit](./../images/bandit.png)

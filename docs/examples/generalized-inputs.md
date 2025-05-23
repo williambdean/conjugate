@@ -41,6 +41,72 @@ ax.legend(title="sample size")
 
 ![Polars Example](./../images/polars.png)
 
+## Narwhals
+
+The [`Narwhals` package](https://narwhals-dev.github.io/narwhals/) allows users to bring their own DataFrame library.
+
+Their API is subset of polars:
+
+```python
+import narwhals as nw
+
+@nw.narwhalify
+def bayesian_inference(df, prior):
+    N = nw.col("total")
+    X = nw.col("successes")
+
+    posterior = binomial_beta(n=N, x=X, prior=prior)
+
+    return df.with_columns(
+        posterior_alpha=posterior.alpha,
+        posterior_beta=posterior.beta
+    )
+```
+
+But works for various DataFrame libraries! Try Polars
+
+```python
+df = pl.DataFrame({
+    "total": [10, 20, 50],
+    "successes": [5, 10, 25]
+})
+
+prior = Beta(alpha=1, beta=1)
+bayesian_inference(df, prior)
+```
+
+```
+shape: (3, 4)
+┌───────┬───────────┬─────────────────┬────────────────┐
+│ total ┆ successes ┆ posterior_alpha ┆ posterior_beta │
+│ ---   ┆ ---       ┆ ---             ┆ ---            │
+│ i64   ┆ i64       ┆ i64             ┆ i64            │
+╞═══════╪═══════════╪═════════════════╪════════════════╡
+│ 10    ┆ 5         ┆ 6               ┆ 6              │
+│ 20    ┆ 10        ┆ 11              ┆ 11             │
+│ 50    ┆ 25        ┆ 26              ┆ 26             │
+└───────┴───────────┴─────────────────┴────────────────┘
+```
+
+Or Pandas
+
+```python
+df = pd.DataFrame({
+    "total": [10, 20, 50],
+    "successes": [5, 10, 25]
+})
+
+prior = Beta(alpha=1, beta=1)
+bayesian_inference(df, prior)
+```
+
+```
+   total  successes  posterior_alpha  posterior_beta
+0     10          5                6               6
+1     20         10               11              11
+2     50         25               26              26
+```
+
 ## Models with SQL
 
 Bayesian models in SQL using the SQL Builder,

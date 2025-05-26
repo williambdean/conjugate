@@ -171,7 +171,9 @@ def _(mo, posterior, posterior_predictive):
     ```python
     from conjugate.models import poisson_gamma_predictive
 
-    posterior_predictive: "NegativeBinomial" = poisson_gamma_predictive(distribution=posterior)
+    posterior_predictive: "NegativeBinomial" = poisson_gamma_predictive(
+        distribution=posterior
+    )
     greater_than_zero = 1 - posterior_predictive.dist.cdf(0)
     # {greater_than_zero:.2f}
     ```

@@ -11358,7 +11358,7 @@ r: NUMERIC</p>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">beta</span> <span class="o">=</span> <span class="n">k</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">lam</span> <span class="o">**</span> <span class="n">beta</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">lam</span><span class="o">**</span><span class="n">beta</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">distribution</span> <span class="o">=</span> <span class="n">Weibull</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">ax</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">set_bounds</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span>
@@ -11449,7 +11449,7 @@ plt.close()
 </span><span id="__span-0-1330"><a id="__codelineno-0-1330" name="__codelineno-0-1330"></a><span class="sd">        k = np.array([0.5, 1.0, 1.5, 5.0])</span>
 </span><span id="__span-0-1331"><a id="__codelineno-0-1331" name="__codelineno-0-1331"></a>
 </span><span id="__span-0-1332"><a id="__codelineno-0-1332" name="__codelineno-0-1332"></a><span class="sd">        beta = k</span>
-</span><span id="__span-0-1333"><a id="__codelineno-0-1333" name="__codelineno-0-1333"></a><span class="sd">        theta = lam ** beta</span>
+</span><span id="__span-0-1333"><a id="__codelineno-0-1333" name="__codelineno-0-1333"></a><span class="sd">        theta = lam**beta</span>
 </span><span id="__span-0-1334"><a id="__codelineno-0-1334" name="__codelineno-0-1334"></a>
 </span><span id="__span-0-1335"><a id="__codelineno-0-1335" name="__codelineno-0-1335"></a><span class="sd">        distribution = Weibull(beta=beta, theta=theta)</span>
 </span><span id="__span-0-1336"><a id="__codelineno-0-1336" name="__codelineno-0-1336"></a><span class="sd">        ax = distribution.set_bounds(0, 2.5).plot_pdf(</span>

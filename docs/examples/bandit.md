@@ -21,7 +21,6 @@ import matplotlib.pyplot as plt
 p = np.array([0.8, 0.9, 0.7, 0.3])
 n_arms = len(p)
 true_dist = Binomial(n=1, p=p)
-
 ```
 
 Helper functions:
@@ -81,7 +80,7 @@ for _ in range(total_samples):
 We can see that the arm with the highest probability of success was actually exploited the most!
 
 ```python
-fig, axes = plt.subplots(ncols=2, figsize=(12,8))
+fig, axes = plt.subplots(ncols=2, figsize=(12, 8))
 fig.suptitle("Thompson Sampling using conjugate-models")
 
 ax = axes[0]

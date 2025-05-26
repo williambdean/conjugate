@@ -7,8 +7,7 @@ Over the 10 hours, I have collected the number of new issues that have come in.
 Each hour is as follows:
 
 ```python
-data = [3, 5, 4, 1, 0,
-        0, 0, 1, 4, 7]
+data = [3, 5, 4, 1, 0, 0, 0, 1, 4, 7]
 ```
 
 For a next time period, I want to estimate the `limit` size that I should use
@@ -93,12 +92,13 @@ We can plot the prior and posterior predictive distributions using either
 ```python
 import matplotlib.pyplot as plt
 
+
 def plot_picked_limit(limit: float, percentile: float, ax: plt.Axes) -> plt.Axes:
     alpha = 0.25
     kwargs = {
         "color": "black",
     }
-    x_kwargs  = {
+    x_kwargs = {
         "marker": "x",
         "markersize": 10,
         "label": "picked limit",
@@ -111,6 +111,7 @@ def plot_picked_limit(limit: float, percentile: float, ax: plt.Axes) -> plt.Axes
     ax.plot([0, limit], [percentile, percentile], **line_kwargs, **kwargs)
     ax.plot([limit, limit], [0, percentile], **line_kwargs, **kwargs)
     return ax
+
 
 max_value = limit * 2.0
 ax = plt.gca()

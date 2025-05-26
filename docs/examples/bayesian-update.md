@@ -30,8 +30,10 @@ import matplotlib.pyplot as plt
 from conjugate.distributions import NormalInverseGamma
 from conjugate.models import normal
 
+
 def create_sampler(mu, sigma, rng):
     """Generate a sampler from a normal distribution with mean `mu` and standard deviation `sigma`."""
+
     def sample(n: int):
         return rng.normal(loc=mu, scale=sigma, size=n)
 
@@ -46,7 +48,8 @@ sample = create_sampler(mu=mu, sigma=sigma, rng=rng)
 
 prior = NormalInverseGamma(
     mu=0,
-    alpha=1, beta=1,
+    alpha=1,
+    beta=1,
     nu=1,
 )
 
@@ -57,17 +60,16 @@ for batch_size in batch_sizes:
     data = sample(n=batch_size)
 
     posterior = normal(
-        x_total=data.sum(),
-        x2_total=(data ** 2).sum(),
-        n=batch_size,
-        prior=prior
+        x_total=data.sum(), x2_total=(data**2).sum(), n=batch_size, prior=prior
     )
 
-    beta_samples, variance_samples = posterior.sample_beta(size=1000, return_variance=True, random_state=rng)
+    beta_samples, variance_samples = posterior.sample_beta(
+        size=1000, return_variance=True, random_state=rng
+    )
 
     cumsum += batch_size
     label = f"n={cumsum}"
-    ax.scatter(variance_samples ** 0.5, beta_samples, alpha=0.25, label=label)
+    ax.scatter(variance_samples**0.5, beta_samples, alpha=0.25, label=label)
 
     prior = posterior
 
@@ -77,7 +79,7 @@ ax.set(
     ylabel="$\mu$",
     xlim=(0, None),
     ylim=(0, None),
-    title="Updated posterior samples of $\mu$ and $\sigma$"
+    title="Updated posterior samples of $\mu$ and $\sigma$",
 )
 ax.legend()
 
@@ -99,11 +101,13 @@ import matplotlib.pyplot as plt
 from conjugate.distributions import Beta
 from conjugate.models import binomial_beta
 
+
 def create_sampler(p, rng):
     def sampler(n: int):
         return rng.binomial(n=n, p=p)
 
     return sampler
+
 
 prior = Beta(1, 1)
 

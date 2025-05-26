@@ -45,9 +45,11 @@ rng = np.random.default_rng(seed)
 true_lambda = 1.5
 true_distribution = Poisson(true_lambda)
 
+
 def create_data_generator(true_distribution, rng):
     def generate_data(size) -> pd.Series:
         return pd.Series(true_distribution.dist.rvs(size=size, random_state=rng))
+
     return generate_data
 
 
@@ -67,13 +69,17 @@ documentation [here](https://williambdean.github.io/pandas-bootstrap/extensions/
 n_new = 10
 samples = 5_000
 
+
 def stat(data: pd.Series, n: int) -> int:
     return data.sample(frac=1).iloc[:n].max()
+
 
 def create_bootstrap_stat(n_new: int, samples: int):
     def bootstrap_stat(data: pd.Series) -> pd.Series:
         return data.boot.get_samples(stat, n=n_new, B=samples)
+
     return bootstrap_stat
+
 
 bootstrap_stat = create_bootstrap_stat(n_new, samples)
 ```
@@ -90,16 +96,14 @@ def get_posterior_predictive(data: pd.Series, prior: Gamma) -> NegativeBinomial:
     posterior = poisson_gamma(x_total=x_total, n=n, prior=prior)
     return poisson_gamma_predictive(distribution=posterior)
 
+
 def create_conjugate_stat(n_new: int, samples: int, prior: Gamma):
     def conjugate_stat(data: pd.Series) -> pd.Series:
         posterior_predictive = get_posterior_predictive(data, prior)
-        return pd.Series(
-            posterior_predictive
-            .dist
-            .rvs((n_new, samples))
-            .max(axis=0)
-        )
+        return pd.Series(posterior_predictive.dist.rvs((n_new, samples)).max(axis=0))
+
     return conjugate_stat
+
 
 prior = Gamma(1, 1)
 conjugate_stat = create_conjugate_stat(n_new=n_new, samples=samples, prior=prior)
@@ -123,12 +127,12 @@ fig, axes = plt.subplots(
     sharey=True,
 )
 
+
 def plot_processing(samples: pd.Series, max_value: int) -> pd.Series:
-    return (
-        samples
-        .value_counts(normalize=True)
-        .reindex(range(0, max_value), fill_value=0)
+    return samples.value_counts(normalize=True).reindex(
+        range(0, max_value), fill_value=0
     )
+
 
 max_value = 8
 
@@ -144,8 +148,12 @@ for ax, n in zip(axes.ravel(), ns):
     conjugate_samples = data.pipe(conjugate_stat)
 
     true_pdf.plot(ax=ax, label="True", color="black", linestyle="--")
-    bootstrap_samples.pipe(plot_processing, max_value=max_value).plot(ax=ax, label="Bootstrap")
-    conjugate_samples.pipe(plot_processing, max_value=max_value).plot(ax=ax, label="Model")
+    bootstrap_samples.pipe(plot_processing, max_value=max_value).plot(
+        ax=ax, label="Bootstrap"
+    )
+    conjugate_samples.pipe(plot_processing, max_value=max_value).plot(
+        ax=ax, label="Model"
+    )
 
     ax.legend()
     ax.set(title=f"{n = } samples")

@@ -11,7 +11,7 @@ prior = Beta(alpha=1, beta=beta)
 
 idx = [0, 5, -1]
 prior_subset = prior[idx]
-prior_subset.plot_pdf(label = lambda i: f"prior {i}")
+prior_subset.plot_pdf(label=lambda i: f"prior {i}")
 plt.legend()
 plt.show()
 ```

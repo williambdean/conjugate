@@ -54,7 +54,9 @@ prior = Beta(1, 1)
 prior_predictive: BetaBinomial = binomial_beta_predictive(n=N, distribution=prior)
 
 posterior: Beta = binomial_beta(n=N, x=x, prior=prior)
-posterior_predictive: BetaBinomial = binomial_beta_predictive(n=N, distribution=posterior)
+posterior_predictive: BetaBinomial = binomial_beta_predictive(
+    n=N, distribution=posterior
+)
 ```
 
 From here, do any analysis you'd like!
@@ -68,7 +70,7 @@ fig, axes = plt.subplots(ncols=2)
 ax = axes[0]
 ax = posterior.plot_pdf(ax=ax, label="posterior")
 prior.plot_pdf(ax=ax, label="prior")
-ax.axvline(x=x/N, color="black", ymax=0.05, label="MLE")
+ax.axvline(x=x / N, color="black", ymax=0.05, label="MLE")
 ax.set_title("Success Rate")
 ax.legend()
 

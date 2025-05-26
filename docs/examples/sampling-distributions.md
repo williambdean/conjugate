@@ -32,10 +32,12 @@ distribution.
 ```python
 import numpy as np
 
-lam = np.array([
-    [1, 2],
-    [0.5, 5],
-])
+lam = np.array(
+    [
+        [1, 2],
+        [0.5, 5],
+    ]
+)
 
 true_distribution = Exponential(lam=lam)
 

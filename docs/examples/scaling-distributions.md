@@ -42,7 +42,9 @@ norm_times_2 = norm * 2
 
 bound = 6
 ax = norm.set_bounds(-bound, bound).plot_pdf(label=f"normal (std = {norm.sigma:.2f})")
-norm_times_2.set_bounds(-bound, bound).plot_pdf(ax=ax, label=f"normal * 2 (std = {norm_times_2.sigma:.2f})")
+norm_times_2.set_bounds(-bound, bound).plot_pdf(
+    ax=ax, label=f"normal * 2 (std = {norm_times_2.sigma:.2f})"
+)
 ax.legend()
 plt.show()
 ```

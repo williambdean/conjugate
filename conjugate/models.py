@@ -138,11 +138,7 @@ def binomial_beta(*, n: NUMERIC, x: NUMERIC, prior: Beta) -> Beta:
 
         prior = Beta(1, 1)
 
-        posterior = binomial_beta(
-            n=impressions,
-            x=clicks,
-            prior=prior
-        )
+        posterior = binomial_beta(n=impressions, x=clicks, prior=prior)
 
         ax = plt.subplot(111)
         posterior.set_bounds(0, 0.5).plot_pdf(ax=ax, label=["A", "B"])
@@ -191,15 +187,8 @@ def binomial_beta_predictive(*, n: NUMERIC, distribution: Beta) -> BetaBinomial:
         clicks = np.array([10, 35])
 
         prior = Beta(1, 1)
-        posterior = binomial_beta(
-            n=impressions,
-            x=clicks,
-            prior=prior
-        )
-        posterior_predictive = binomial_beta_predictive(
-            n=100,
-            distribution=posterior
-        )
+        posterior = binomial_beta(n=impressions, x=clicks, prior=prior)
+        posterior_predictive = binomial_beta_predictive(n=100, distribution=posterior)
 
 
         ax = plt.subplot(111)
@@ -242,10 +231,7 @@ def bernoulli_beta(*, x: NUMERIC, prior: Beta) -> Beta:
 
         # Positive outcome
         x = 1
-        posterior = bernoulli_beta(
-            x=x,
-            prior=prior
-        )
+        posterior = bernoulli_beta(x=x, prior=prior)
 
         posterior.dist.ppf([0.025, 0.975])
         # array([0.15811388, 0.98742088])
@@ -372,11 +358,7 @@ def geometric_beta(*, x_total, n, prior: Beta, one_start: bool = True) -> Beta:
         data = np.array([3, 1, 1, 3, 2, 1])
 
         prior = Beta(1, 1)
-        posterior = geometric_beta(
-            x_total=data.sum(),
-            n=data.size,
-            prior=prior
-        )
+        posterior = geometric_beta(x_total=data.sum(), n=data.size, prior=prior)
 
         ax = plt.subplot(111)
         posterior.set_bounds(0, 1).plot_pdf(ax=ax, label="posterior")
@@ -510,17 +492,16 @@ def multinomial_dirichlet(*, x: NUMERIC, prior: Dirichlet) -> Dirichlet:
         from conjugate.models import multinomial_dirichlet
 
         kinds = ["chocolate", "vanilla", "strawberry"]
-        data = np.array([
-            [5, 2, 1],
-            [3, 1, 0],
-            [3, 2, 0],
-        ])
+        data = np.array(
+            [
+                [5, 2, 1],
+                [3, 1, 0],
+                [3, 2, 0],
+            ]
+        )
 
         prior = Dirichlet([1, 1, 1])
-        posterior = multinomial_dirichlet(
-            x=data.sum(axis=0),
-            prior=prior
-        )
+        posterior = multinomial_dirichlet(x=data.sum(axis=0), prior=prior)
 
         ax = plt.subplot(111)
         posterior.plot_pdf(ax=ax, label=kinds)
@@ -669,11 +650,7 @@ def exponential_gamma_predictive(*, distribution: Gamma) -> Lomax:
 
         prior = Gamma(1, 1)
 
-        posterior = exponential_gamma(
-            n=n_samples,
-            x_total=data.sum(),
-            prior=prior
-        )
+        posterior = exponential_gamma(n=n_samples, x_total=data.sum(), prior=prior)
 
         prior_predictive = exponential_gamma_predictive(distribution=prior)
         posterior_predictive = exponential_gamma_predictive(distribution=posterior)
@@ -911,10 +888,7 @@ def normal_known_variance_predictive(*, var: NUMERIC, distribution: Normal) -> N
         prior = Normal(0, 10)
 
         posterior = normal_known_variance(
-            n=n_samples,
-            x_total=data.sum(),
-            var=known_var,
-            prior=prior
+            n=n_samples, x_total=data.sum(), var=known_var, prior=prior
         )
 
         prior_predictive = normal_known_variance_predictive(
@@ -929,7 +903,9 @@ def normal_known_variance_predictive(*, var: NUMERIC, distribution: Normal) -> N
         bound = 5
         ax = plt.subplot(111)
         true.set_bounds(-bound, bound).plot_pdf(ax=ax, label="true distribution")
-        posterior_predictive.set_bounds(-bound, bound).plot_pdf(ax=ax, label="posterior predictive")
+        posterior_predictive.set_bounds(-bound, bound).plot_pdf(
+            ax=ax, label="posterior predictive"
+        )
         prior_predictive.set_bounds(-bound, bound).plot_pdf(ax=ax, label="prior predictive")
         ax.legend()
         ```
@@ -985,10 +961,7 @@ def normal_known_precision(
         prior = Normal(0, 10)
 
         posterior = normal_known_precision(
-            n=n_samples,
-            x_total=data.sum(),
-            precision=known_precision,
-            prior=prior
+            n=n_samples, x_total=data.sum(), precision=known_precision, prior=prior
         )
 
         bound = 5
@@ -1050,10 +1023,7 @@ def normal_known_precision_predictive(
         prior = Normal(0, 10)
 
         posterior = normal_known_precision(
-            n=n_samples,
-            x_total=data.sum(),
-            precision=known_precision,
-            prior=prior
+            n=n_samples, x_total=data.sum(), precision=known_precision, prior=prior
         )
 
         prior_predictive = normal_known_precision_predictive(
@@ -1068,7 +1038,9 @@ def normal_known_precision_predictive(
         bound = 5
         ax = plt.subplot(111)
         true.set_bounds(-bound, bound).plot_pdf(ax=ax, label="true distribution")
-        posterior_predictive.set_bounds(-bound, bound).plot_pdf(ax=ax, label="posterior predictive")
+        posterior_predictive.set_bounds(-bound, bound).plot_pdf(
+            ax=ax, label="posterior predictive"
+        )
         prior_predictive.set_bounds(-bound, bound).plot_pdf(ax=ax, label="prior predictive")
         ax.legend()
         ```
@@ -1179,7 +1151,7 @@ def normal_known_mean_predictive(
             x_total=data.sum(),
             x2_total=(data**2).sum(),
             mu=known_mu,
-            prior=prior
+            prior=prior,
         )
 
         bound = 5
@@ -1194,7 +1166,9 @@ def normal_known_mean_predictive(
             mu=known_mu,
             distribution=posterior,
         )
-        posterior_predictive.set_bounds(-bound, bound).plot_pdf(ax=ax, label="posterior predictive")
+        posterior_predictive.set_bounds(-bound, bound).plot_pdf(
+            ax=ax, label="posterior predictive"
+        )
         ax.legend()
         ```
         <!--
@@ -1486,11 +1460,7 @@ def uniform_pareto(
 
         prior = Pareto(1, 1)
 
-        posterior = uniform_pareto(
-            x_max=data.max(),
-            n=n_samples,
-            prior=prior
-        )
+        posterior = uniform_pareto(x_max=data.max(), n=n_samples, prior=prior)
         ```
 
     """
@@ -1907,10 +1877,12 @@ def multivariate_normal(
         from conjugate.models import multivariate_normal
 
         true_mean = np.array([1, 5])
-        true_cov = np.array([
-            [1, 0.5],
-            [0.5, 1],
-        ])
+        true_cov = np.array(
+            [
+                [1, 0.5],
+                [0.5, 1],
+            ]
+        )
 
         n_samples = 100
         rng = np.random.default_rng(42)
@@ -1924,10 +1896,12 @@ def multivariate_normal(
             mu=np.array([0, 0]),
             kappa=1,
             nu=3,
-            psi=np.array([
-                [1, 0],
-                [0, 1],
-            ]),
+            psi=np.array(
+                [
+                    [1, 0],
+                    [0, 1],
+                ]
+            ),
         )
 
         posterior = multivariate_normal(
@@ -1990,10 +1964,12 @@ def multivariate_normal_predictive(
         sigma_2 = 1.5
         rho = -0.65
         true_mean = np.array([mu_1, mu_2])
-        true_cov = np.array([
-            [sigma_1 ** 2, rho * sigma_1 * sigma_2],
-            [rho * sigma_1 * sigma_2, sigma_2 ** 2],
-        ])
+        true_cov = np.array(
+            [
+                [sigma_1**2, rho * sigma_1 * sigma_2],
+                [rho * sigma_1 * sigma_2, sigma_2**2],
+            ]
+        )
         true = MultivariateNormal(true_mean, true_cov)
 
         n_samples = 100
@@ -2004,10 +1980,12 @@ def multivariate_normal_predictive(
             mu=np.array([0, 0]),
             kappa=1,
             nu=2,
-            psi=np.array([
-                [5 ** 2, 0],
-                [0, 5 ** 2],
-            ]),
+            psi=np.array(
+                [
+                    [5**2, 0],
+                    [0, 5**2],
+                ]
+            ),
         )
 
         posterior = multivariate_normal(
@@ -2021,13 +1999,15 @@ def multivariate_normal_predictive(
 
         xmax = mu_1 + 3 * sigma_1
         ymax = mu_2 + 3 * sigma_2
-        x, y = np.mgrid[-xmax:xmax:.1, -ymax:ymax:.1]
+        x, y = np.mgrid[-xmax:xmax:0.1, -ymax:ymax:0.1]
         pos = np.dstack((x, y))
         z = true.dist.pdf(pos)
         # z = np.where(z < 0.005, np.nan, z)
         contours = ax.contour(x, y, z, alpha=0.55, color="black")
 
-        for label, dist in zip(["prior", "posterior"], [prior_predictive, posterior_predictive]):
+        for label, dist in zip(
+            ["prior", "posterior"], [prior_predictive, posterior_predictive]
+        ):
             X = dist.dist.rvs(size=1000)
             ax.scatter(X[:, 0], X[:, 1], alpha=0.15, label=f"{label} predictive")
 
@@ -2110,10 +2090,7 @@ def log_normal(
 
         prior = NormalInverseGamma(mu=1, nu=1, alpha=1, beta=1)
         posterior = log_normal_normal_inverse_gamma(
-            ln_x_total=ln_data.sum(),
-            ln_x2_total=(ln_data**2).sum(),
-            n=n_samples,
-            prior=prior
+            ln_x_total=ln_data.sum(), ln_x2_total=(ln_data**2).sum(), n=n_samples, prior=prior
         )
 
         fig, axes = plt.subplots(ncols=2)

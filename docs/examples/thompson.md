@@ -88,7 +88,6 @@ for _ in range(total_samples):
 We can see that the group with the lowest wait time was actually exploited the most!
 
 ```python
-
 fig, axes = plt.subplots(ncols=2)
 fig.suptitle("Thompson Sampling using conjugate-models")
 

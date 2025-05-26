@@ -79,7 +79,6 @@ Perform any analysis on the distributions to compare the prior and posterior as
 well as the predictive distributions with the true distribution.
 
 ```python
-
 # Figure
 fig, axes = plt.subplots(ncols=2, nrows=1, figsize=(8, 4))
 
@@ -87,7 +86,7 @@ fig, axes = plt.subplots(ncols=2, nrows=1, figsize=(8, 4))
 ax: plt.Axes = axes[0]
 posterior.plot_pdf(ax=ax, label="posterior")
 prior.plot_pdf(ax=ax, label="prior")
-ax.axvline(x=X/N, color="black", ymax=0.05, label="MLE")
+ax.axvline(x=X / N, color="black", ymax=0.05, label="MLE")
 ax.axvline(x=true_dist.p, color="black", ymax=0.05, linestyle="--", label="True")
 ax.set_title("Success Rate")
 ax.legend()

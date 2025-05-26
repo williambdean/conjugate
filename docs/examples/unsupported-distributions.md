@@ -51,7 +51,9 @@ Since the distributions are vectorized, just:
 n_samples = 1_000
 
 alpha_samples = posterior.dist.rvs(size=n_samples, random_state=rng)
-posterior_predictive_samples = Pareto(x_m=x_m, alpha=alpha_samples).dist.rvs(random_state=rng)
+posterior_predictive_samples = Pareto(x_m=x_m, alpha=alpha_samples).dist.rvs(
+    random_state=rng
+)
 ```
 
 ## 2. Using PyMC

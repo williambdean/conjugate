@@ -27,7 +27,6 @@ x_lim = 3
 n_points = 100
 x = np.linspace(-x_lim, x_lim, n_points)
 y = intercept + slope * x + rng.normal(scale=sigma, size=n_points)
-
 ```
 
 ## Define Prior and Find Posterior
@@ -42,8 +41,10 @@ prior = NormalInverseGamma(
     beta=1,
 )
 
+
 def create_X(x: np.ndarray) -> np.ndarray:
     return np.stack([np.ones_like(x), x]).T
+
 
 X = create_X(x)
 posterior: NormalInverseGamma = linear_regression(
@@ -51,7 +52,6 @@ posterior: NormalInverseGamma = linear_regression(
     y=y,
     prior=prior,
 )
-
 ```
 
 ## Posterior Predictive for New Data
@@ -59,7 +59,6 @@ posterior: NormalInverseGamma = linear_regression(
 The multivariate student-t distribution is used for the posterior predictive distribution. We have to draw samples from it since the scipy implementation does not have a `ppf` method.
 
 ```python
-
 # New Data
 x_lim_new = 1.5 * x_lim
 x_new = np.linspace(-x_lim_new, x_lim_new, 20)

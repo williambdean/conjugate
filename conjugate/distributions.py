@@ -1330,7 +1330,7 @@ class Weibull(ContinuousPlotDistMixin, SliceMixin):
         k = np.array([0.5, 1.0, 1.5, 5.0])
 
         beta = k
-        theta = lam ** beta
+        theta = lam**beta
 
         distribution = Weibull(beta=beta, theta=theta)
         ax = distribution.set_bounds(0, 2.5).plot_pdf(

@@ -26,10 +26,7 @@ Bayesian models with the [Polars](https://docs.pola.rs/) package:
 import polars as pl
 
 # Data
-df = pl.DataFrame({
-    "total": [10, 20, 50],
-    "successes": [5, 10, 25]
-})
+df = pl.DataFrame({"total": [10, 20, 50], "successes": [5, 10, 25]})
 
 # Conjugate prior
 prior = Beta(alpha=1, beta=1)
@@ -50,6 +47,7 @@ Their API is subset of polars:
 ```python
 import narwhals as nw
 
+
 @nw.narwhalify
 def bayesian_inference(df, prior):
     N = nw.col("total")
@@ -58,18 +56,14 @@ def bayesian_inference(df, prior):
     posterior = binomial_beta(n=N, x=X, prior=prior)
 
     return df.with_columns(
-        posterior_alpha=posterior.alpha,
-        posterior_beta=posterior.beta
+        posterior_alpha=posterior.alpha, posterior_beta=posterior.beta
     )
 ```
 
 But works for various DataFrame libraries! Try Polars
 
 ```python
-df = pl.DataFrame({
-    "total": [10, 20, 50],
-    "successes": [5, 10, 25]
-})
+df = pl.DataFrame({"total": [10, 20, 50], "successes": [5, 10, 25]})
 
 prior = Beta(alpha=1, beta=1)
 bayesian_inference(df, prior)
@@ -91,10 +85,7 @@ shape: (3, 4)
 Or Pandas
 
 ```python
-df = pd.DataFrame({
-    "total": [10, 20, 50],
-    "successes": [5, 10, 25]
-})
+df = pd.DataFrame({"total": [10, 20, 50], "successes": [5, 10, 25]})
 
 prior = Beta(alpha=1, beta=1)
 bayesian_inference(df, prior)

@@ -40,7 +40,17 @@ import numpy as np
 import warnings
 
 from conjugate.distributions import (
+    Multinomial,
+    Poisson,
+    Exponential,
+    Binomial,
+    Uniform,
+    VonMises,
+    LogNormal,
+    Weibull,
+    Bernoulli,
     Beta,
+    Geometric,
     BetaBinomial,
     BetaGeometric,
     BetaNegativeBinomial,
@@ -51,6 +61,7 @@ from conjugate.distributions import (
     Gamma,
     GammaKnownRateProportional,
     GammaProportional,
+    Hypergeometric,
     InverseGamma,
     InverseWishart,
     Lomax,
@@ -68,6 +79,15 @@ from conjugate.distributions import (
     VonMisesKnownDirectionProportional,
 )
 from conjugate._typing import NUMERIC
+
+
+def add_associated_likelihood(name):
+    def decorator(func: Callable) -> Callable:
+        """Decorator to add an associated distribution to the function."""
+        setattr(func, "associated_likelihood", name)
+        return func
+
+    return decorator
 
 
 def validate_type(func, parameter: str):
@@ -110,6 +130,7 @@ def get_binomial_beta_posterior_params(
     return alpha_post, beta_post
 
 
+@add_associated_likelihood(Binomial)
 @validate_prior_type
 def binomial_beta(*, n: NUMERIC, x: NUMERIC, prior: Beta) -> Beta:
     """Posterior distribution for a binomial likelihood with a beta prior.
@@ -161,6 +182,7 @@ def binomial_beta(*, n: NUMERIC, x: NUMERIC, prior: Beta) -> Beta:
     return Beta(alpha=alpha_post, beta=beta_post)
 
 
+@add_associated_likelihood(Binomial)
 @validate_distribution_type
 def binomial_beta_predictive(*, n: NUMERIC, distribution: Beta) -> BetaBinomial:
     """Posterior predictive distribution for a binomial likelihood with a beta prior.
@@ -209,6 +231,7 @@ def binomial_beta_predictive(*, n: NUMERIC, distribution: Beta) -> BetaBinomial:
     return BetaBinomial(n=n, alpha=distribution.alpha, beta=distribution.beta)
 
 
+@add_associated_likelihood(Bernoulli)
 @validate_prior_type
 def bernoulli_beta(*, x: NUMERIC, prior: Beta) -> Beta:
     """Posterior distribution for a bernoulli likelihood with a beta prior.
@@ -241,6 +264,7 @@ def bernoulli_beta(*, x: NUMERIC, prior: Beta) -> Beta:
     return binomial_beta(n=1, x=x, prior=prior)
 
 
+@add_associated_likelihood(Bernoulli)
 @validate_distribution_type
 def bernoulli_beta_predictive(*, distribution: Beta) -> BetaBinomial:
     """Predictive distribution for a bernoulli likelihood with a beta prior.
@@ -257,6 +281,7 @@ def bernoulli_beta_predictive(*, distribution: Beta) -> BetaBinomial:
     return binomial_beta_predictive(n=1, distribution=distribution)
 
 
+@add_associated_likelihood(NegativeBinomial)
 @validate_prior_type
 def negative_binomial_beta(*, r: NUMERIC, n: NUMERIC, x: NUMERIC, prior: Beta) -> Beta:
     """Posterior distribution for a negative binomial likelihood with a beta prior.
@@ -279,6 +304,7 @@ def negative_binomial_beta(*, r: NUMERIC, n: NUMERIC, x: NUMERIC, prior: Beta) -
     return Beta(alpha=alpha_post, beta=beta_post)
 
 
+@add_associated_likelihood(NegativeBinomial)
 @validate_distribution_type
 def negative_binomial_beta_predictive(
     *,
@@ -300,6 +326,7 @@ def negative_binomial_beta_predictive(
     return BetaNegativeBinomial(n=r, alpha=distribution.alpha, beta=distribution.beta)
 
 
+@add_associated_likelihood(Hypergeometric)
 @validate_prior_type
 def hypergeometric_beta_binomial(
     *,
@@ -329,6 +356,7 @@ def hypergeometric_beta_binomial(
     return BetaBinomial(n=n, alpha=alpha_post, beta=beta_post)
 
 
+@add_associated_likelihood(Geometric)
 @validate_prior_type
 def geometric_beta(*, x_total, n, prior: Beta, one_start: bool = True) -> Beta:
     """Posterior distribution for a geometric likelihood with a beta prior.
@@ -383,6 +411,7 @@ def geometric_beta(*, x_total, n, prior: Beta, one_start: bool = True) -> Beta:
     return Beta(alpha=alpha_post, beta=beta_post)
 
 
+@add_associated_likelihood(Geometric)
 @validate_distribution_type
 def geometric_beta_predictive(
     *,
@@ -469,6 +498,7 @@ def get_multi_categorical_dirichlet_posterior_params(
     return get_dirichlet_posterior_params(alpha_prior, x)
 
 
+@add_associated_likelihood(Multinomial)
 @validate_prior_type
 def multinomial_dirichlet(*, x: NUMERIC, prior: Dirichlet) -> Dirichlet:
     """Posterior distribution of Multinomial model with Dirichlet prior.
@@ -522,6 +552,7 @@ def multinomial_dirichlet(*, x: NUMERIC, prior: Dirichlet) -> Dirichlet:
     return Dirichlet(alpha=alpha_post)
 
 
+@add_associated_likelihood(Multinomial)
 @validate_distribution_type
 def multinomial_dirichlet_predictive(
     *,
@@ -555,6 +586,7 @@ def get_poisson_gamma_posterior_params(
     return alpha_post, beta_post
 
 
+@add_associated_likelihood(Poisson)
 @validate_prior_type
 def poisson_gamma(*, x_total: NUMERIC, n: NUMERIC, prior: Gamma) -> Gamma:
     """Posterior distribution for a poisson likelihood with a gamma prior.
@@ -575,6 +607,7 @@ def poisson_gamma(*, x_total: NUMERIC, n: NUMERIC, prior: Gamma) -> Gamma:
     return Gamma(alpha=alpha_post, beta=beta_post)
 
 
+@add_associated_likelihood(Poisson)
 @validate_distribution_type
 def poisson_gamma_predictive(
     *,
@@ -602,6 +635,7 @@ def poisson_gamma_predictive(
 get_exponential_gamma_posterior_params = get_poisson_gamma_posterior_params
 
 
+@add_associated_likelihood(Exponential)
 @validate_prior_type
 def exponential_gamma(*, x_total: NUMERIC, n: NUMERIC, prior: Gamma) -> Gamma:
     """Posterior distribution for an exponential likelihood with a gamma prior.
@@ -622,6 +656,7 @@ def exponential_gamma(*, x_total: NUMERIC, n: NUMERIC, prior: Gamma) -> Gamma:
     return Gamma(alpha=alpha_post, beta=beta_post)
 
 
+@add_associated_likelihood(Exponential)
 @validate_distribution_type
 def exponential_gamma_predictive(*, distribution: Gamma) -> Lomax:
     """Predictive distribution for an exponential likelihood with a gamma distribution
@@ -672,6 +707,7 @@ def exponential_gamma_predictive(*, distribution: Gamma) -> Lomax:
     return Lomax(alpha=distribution.beta, lam=distribution.alpha)
 
 
+@add_associated_likelihood(Gamma)
 @validate_prior_type
 def gamma_known_shape(
     *,
@@ -741,6 +777,7 @@ def gamma_known_shape(
     return Gamma(alpha=alpha_post, beta=beta_post)
 
 
+@add_associated_likelihood(Gamma)
 @validate_distribution_type
 def gamma_known_shape_predictive(
     *,
@@ -760,6 +797,7 @@ def gamma_known_shape_predictive(
     return CompoundGamma(alpha=alpha, beta=distribution.alpha, lam=distribution.beta)
 
 
+@add_associated_likelihood(InverseGamma)
 @validate_prior_type
 def inverse_gamma_known_rate(
     *,
@@ -786,6 +824,7 @@ def inverse_gamma_known_rate(
     return Gamma(alpha=alpha_post, beta=beta_post)
 
 
+@add_associated_likelihood(Normal)
 @validate_prior_type
 def normal_known_variance(
     *,
@@ -856,6 +895,7 @@ def normal_known_variance(
     return Normal(mu=mu_post, sigma=var_post**0.5)
 
 
+@add_associated_likelihood(Normal)
 @validate_distribution_type
 def normal_known_variance_predictive(*, var: NUMERIC, distribution: Normal) -> Normal:
     """Predictive distribution for a normal likelihood with known variance and a normal distribution on mean.
@@ -921,6 +961,7 @@ def normal_known_variance_predictive(*, var: NUMERIC, distribution: Normal) -> N
     return Normal(mu=distribution.mu, sigma=var_posterior_predictive**0.5)
 
 
+@add_associated_likelihood(Normal)
 @validate_prior_type
 def normal_known_precision(
     *,
@@ -987,6 +1028,7 @@ def normal_known_precision(
     )
 
 
+@add_associated_likelihood(Normal)
 @validate_distribution_type
 def normal_known_precision_predictive(
     *,
@@ -1072,6 +1114,7 @@ def _normal_known_mean_inverse_gamma_prior(
     return InverseGamma(alpha=alpha_post, beta=beta_post)
 
 
+@add_associated_likelihood(Normal)
 @validate_prior_type
 def normal_known_mean(
     *,
@@ -1111,6 +1154,7 @@ def normal_known_mean(
     return posterior
 
 
+@add_associated_likelihood(Normal)
 @validate_distribution_type
 def normal_known_mean_predictive(
     *,
@@ -1209,6 +1253,7 @@ def _normal(
     return mu_post, nu_post, alpha_post, beta_post
 
 
+@add_associated_likelihood(Normal)
 @validate_prior_type
 def normal(
     *,
@@ -1261,6 +1306,7 @@ def normal(
     return prior.__class__(**kwargs)
 
 
+@add_associated_likelihood(Normal)
 @validate_prior_type
 def normal_normal_inverse_gamma(
     *,
@@ -1292,6 +1338,7 @@ def normal_normal_inverse_gamma(
     return normal(x_total=x_total, x2_total=x2_total, n=n, prior=prior)  # type: ignore
 
 
+@add_associated_likelihood(Normal)
 @validate_distribution_type
 def normal_predictive(
     *,
@@ -1319,6 +1366,7 @@ def normal_predictive(
     )
 
 
+@add_associated_likelihood(Normal)
 @validate_distribution_type
 def normal_normal_inverse_gamma_predictive(
     *,
@@ -1426,6 +1474,7 @@ def linear_regression_predictive(
     )
 
 
+@add_associated_likelihood(Uniform)
 @validate_prior_type
 def uniform_pareto(
     *,
@@ -1470,6 +1519,7 @@ def uniform_pareto(
     return Pareto(x_m=x_m_post, alpha=alpha_post)
 
 
+@add_associated_likelihood(Pareto)
 @validate_prior_type
 def pareto_gamma(
     *,
@@ -1539,6 +1589,7 @@ def pareto_gamma(
     return Gamma(alpha=alpha_post, beta=beta_post)
 
 
+@add_associated_likelihood(Gamma)
 @validate_prior_type
 def gamma(
     *,
@@ -1569,6 +1620,7 @@ def gamma(
     return GammaProportional(p=p_post, q=q_post, r=r_post, s=s_post)
 
 
+@add_associated_likelihood(Gamma)
 @validate_prior_type
 def gamma_known_rate(
     *,
@@ -1597,6 +1649,7 @@ def gamma_known_rate(
     return GammaKnownRateProportional(a=a_post, b=b_post, c=c_post)
 
 
+@add_associated_likelihood(Beta)
 @validate_prior_type
 def beta(
     *,
@@ -1626,6 +1679,7 @@ def beta(
     return BetaProportional(p=p_post, q=q_post, k=k_post)
 
 
+@add_associated_likelihood(VonMises)
 @validate_prior_type
 def von_mises_known_concentration(
     *,
@@ -1661,6 +1715,7 @@ def von_mises_known_concentration(
     return VonMisesKnownConcentration(a=a_post, b=b_post)
 
 
+@add_associated_likelihood(VonMises)
 @validate_prior_type
 def von_mises_known_direction(
     *,
@@ -1701,6 +1756,7 @@ def _multivariate_normal_known_precision(
     return mu_post, precision_post
 
 
+@add_associated_likelihood(MultivariateNormal)
 @validate_prior_type
 def multivariate_normal_known_covariance(
     *,
@@ -1739,6 +1795,7 @@ def multivariate_normal_known_covariance(
     return MultivariateNormal(mu=mu_post, cov=inv(precision_post))
 
 
+@add_associated_likelihood(MultivariateNormal)
 @validate_distribution_type
 def multivariate_normal_known_covariance_predictive(
     *,
@@ -1760,6 +1817,7 @@ def multivariate_normal_known_covariance_predictive(
     return MultivariateNormal(mu=mu_pred, cov=cov_pred)
 
 
+@add_associated_likelihood(MultivariateNormal)
 @validate_prior_type
 def multivariate_normal_known_precision(
     *,
@@ -1796,6 +1854,7 @@ def multivariate_normal_known_precision(
     return MultivariateNormal(mu=mu_post, cov=inv(precision_post))
 
 
+@add_associated_likelihood(MultivariateNormal)
 @validate_distribution_type
 def multivariate_normal_known_precision_predictive(
     *,
@@ -1819,6 +1878,7 @@ def multivariate_normal_known_precision_predictive(
     return MultivariateNormal(mu=mu_pred, cov=cov_pred)
 
 
+@add_associated_likelihood(MultivariateNormal)
 @validate_prior_type
 def multivariate_normal_known_mean(
     *,
@@ -1846,6 +1906,7 @@ def multivariate_normal_known_mean(
     )
 
 
+@add_associated_likelihood(MultivariateNormal)
 @validate_prior_type
 def multivariate_normal(
     *,
@@ -1934,6 +1995,7 @@ def multivariate_normal(
     )
 
 
+@add_associated_likelihood(MultivariateNormal)
 @validate_distribution_type
 def multivariate_normal_predictive(
     *,
@@ -2045,6 +2107,7 @@ def multivariate_normal_predictive(
     return MultivariateStudentT(mu=mu, sigma=sigma, nu=nu)
 
 
+@add_associated_likelihood(LogNormal)
 @validate_prior_type
 def log_normal(
     *,
@@ -2120,6 +2183,7 @@ def log_normal(
     )
 
 
+@add_associated_likelihood(Weibull)
 @validate_prior_type
 def weibull_inverse_gamma_known_shape(
     *,

@@ -124,7 +124,7 @@ def _(dist, is_cdf, mo, parameters_ui, x_max, x_min):
             )
             title = f"{dist.__name__} Distribution"
             if is_cdf.value:
-                title += " CDF"
+                title = f"{dist.__name__} Distribution CDF"
 
             try:
                 return getattr(initialize_dist, method)().set(title=title)

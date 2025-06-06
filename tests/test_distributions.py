@@ -458,15 +458,25 @@ def test_normal_alternative_constructors() -> None:
 @pytest.mark.parametrize(
     "one_start, zero_start",
     [
+        (Geometric(p=0.3, one_start=True), Geometric(p=0.3, one_start=False)),
         (Geometric(p=0.5, one_start=True), Geometric(p=0.5, one_start=False)),
+        (Geometric(p=0.8, one_start=True), Geometric(p=0.8, one_start=False)),
         (
             BetaGeometric(alpha=1, beta=1, one_start=True),
             BetaGeometric(alpha=1, beta=1, one_start=False),
         ),
+        (
+            BetaGeometric(alpha=10, beta=1, one_start=True),
+            BetaGeometric(alpha=10, beta=1, one_start=False),
+        ),
+        (
+            BetaGeometric(alpha=1, beta=10, one_start=True),
+            BetaGeometric(alpha=1, beta=10, one_start=False),
+        ),
     ],
 )
 def test_one_start_is_same_as_shifted(one_start, zero_start) -> None:
-    x = np.arange(1, 25)
+    x = np.arange(1, 35)
     np.testing.assert_allclose(
         one_start.dist.pmf(x),
         zero_start.dist.pmf(x - 1),

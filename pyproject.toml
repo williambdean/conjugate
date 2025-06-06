@@ -28,6 +28,7 @@ dependencies = [
     "numpy",
     "scipy",
     "packaging",
+    "typing-extensions",
 ]
 
 [project.urls]

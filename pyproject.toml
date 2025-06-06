@@ -28,7 +28,6 @@ dependencies = [
     "numpy",
     "scipy",
     "packaging",
-    "typing-extensions;python_version<'3.11'",
 ]
 
 [project.urls]

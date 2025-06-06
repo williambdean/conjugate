@@ -63,6 +63,22 @@ def get_beta_param_from_mean_and_alpha(mean: NUMERIC, alpha: NUMERIC) -> NUMERIC
 
 
 @dataclass
+class Bernoulli(DiscretePlotMixin, SliceMixin):
+    """Bernoulli distribution.
+
+    Args:
+        p: probability of success
+
+    """
+
+    p: Probability
+
+    @property
+    def dist(self):
+        return stats.bernoulli(self.p)
+
+
+@dataclass
 class Beta(ContinuousPlotDistMixin, SliceMixin):
     """Beta distribution.
 

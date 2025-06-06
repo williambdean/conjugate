@@ -115,11 +115,11 @@ def _(dist, parameters_ui, x_max, x_min):
                 default(x_min.value, -10),
                 default(x_max.value, 10),
             )
-            return getattr(initialize_dist, method)()
+            return getattr(initialize_dist, method)().set(
+                title=f"{dist.__name__} Distribution"
+            )
 
-    ax = plot()
-    ax.set(title=f"{dist.__name__} Distribution")
-    return ax, initialize_dist
+    return initialize_dist, plot
 
 
 @app.cell
@@ -202,10 +202,10 @@ def _(
 
 
 @app.cell
-def _(ax, code, mo, reference):
+def _(code, mo, plot, reference):
     mo.hstack(
         [
-            ax,
+            plot(),
             code
             if reference is None
             else mo.vstack([code, reference], justify="start"),

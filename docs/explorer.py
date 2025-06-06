@@ -227,7 +227,6 @@ def _(code, mo, plot, reference):
             if reference is None
             else mo.vstack([code, reference], justify="start"),
         ],
-        justify="start",
     )
     return
 

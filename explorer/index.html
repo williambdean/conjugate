@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://williambdean.github.io/conjugate/examples/scaling-distributions/">
+        <link rel="canonical" href="https://williambdean.github.io/conjugate/explorer/">
       
       
-        <link rel="prev" href="../generalized-inputs/">
+        <link rel="prev" href="..">
       
       
+        <link rel="next" href="../models/">
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
-        <title>Scaling Distributions - Conjugate Models</title>
+        <title>Distribution Explorer - Conjugate Models</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -95,7 +97,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#scaling-distributions" class="md-skip">
+        <a href="#distribution-explorer" class="md-skip">
           Skip to content
         </a>
       
@@ -129,7 +131,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Scaling Distributions
+              Distribution Explorer
             
           </span>
         </div>
@@ -240,7 +242,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href=".." class="md-tabs__link">
         
   
   
@@ -257,9 +259,11 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="../../explorer/" class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
         
   
   
@@ -280,7 +284,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../models/" class="md-tabs__link">
+        <a href="../models/" class="md-tabs__link">
           
   
   
@@ -298,8 +302,6 @@
   
   
   
-    
-  
   
     
     
@@ -307,13 +309,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../binomial/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../examples/binomial/" class="md-tabs__link">
           
   
   
@@ -341,7 +341,9 @@
           
             
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -382,7 +384,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -401,10 +403,19 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../explorer/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -415,6 +426,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -479,7 +491,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../models/" class="md-nav__link">
+      <a href="../models/" class="md-nav__link">
         
   
   
@@ -502,7 +514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../distributions/" class="md-nav__link">
+      <a href="../distributions/" class="md-nav__link">
         
   
   
@@ -525,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mixins/" class="md-nav__link">
+      <a href="../mixins/" class="md-nav__link">
         
   
   
@@ -552,10 +564,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -567,22 +577,21 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -595,7 +604,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Examples
@@ -637,13 +646,10 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
@@ -652,7 +658,7 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
         
           
-          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
             
   
   
@@ -679,7 +685,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../binomial/" class="md-nav__link">
+      <a href="../examples/binomial/" class="md-nav__link">
         
   
   
@@ -702,7 +708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bayesian-update/" class="md-nav__link">
+      <a href="../examples/bayesian-update/" class="md-nav__link">
         
   
   
@@ -725,7 +731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../thompson/" class="md-nav__link">
+      <a href="../examples/thompson/" class="md-nav__link">
         
   
   
@@ -748,7 +754,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bandit/" class="md-nav__link">
+      <a href="../examples/bandit/" class="md-nav__link">
         
   
   
@@ -771,7 +777,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../linear-regression/" class="md-nav__link">
+      <a href="../examples/linear-regression/" class="md-nav__link">
         
   
   
@@ -794,7 +800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../unsupported-distributions/" class="md-nav__link">
+      <a href="../examples/unsupported-distributions/" class="md-nav__link">
         
   
   
@@ -817,7 +823,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sql/" class="md-nav__link">
+      <a href="../examples/sql/" class="md-nav__link">
         
   
   
@@ -840,7 +846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bootstrap/" class="md-nav__link">
+      <a href="../examples/bootstrap/" class="md-nav__link">
         
   
   
@@ -863,7 +869,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../limit/" class="md-nav__link">
+      <a href="../examples/limit/" class="md-nav__link">
         
   
   
@@ -886,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../wiki-rental-car/" class="md-nav__link">
+      <a href="../examples/wiki-rental-car/" class="md-nav__link">
         
   
   
@@ -914,10 +920,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -940,21 +944,20 @@
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
         
           
-          
         
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
             
   
   
@@ -967,7 +970,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             Features
@@ -981,7 +984,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../plotting/" class="md-nav__link">
+      <a href="../examples/plotting/" class="md-nav__link">
         
   
   
@@ -1004,7 +1007,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../scipy-connection/" class="md-nav__link">
+      <a href="../examples/scipy-connection/" class="md-nav__link">
         
   
   
@@ -1027,7 +1030,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sampling-distributions/" class="md-nav__link">
+      <a href="../examples/sampling-distributions/" class="md-nav__link">
         
   
   
@@ -1050,7 +1053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vectorized-inputs/" class="md-nav__link">
+      <a href="../examples/vectorized-inputs/" class="md-nav__link">
         
   
   
@@ -1073,7 +1076,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../indexing/" class="md-nav__link">
+      <a href="../examples/indexing/" class="md-nav__link">
         
   
   
@@ -1096,7 +1099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generalized-inputs/" class="md-nav__link">
+      <a href="../examples/generalized-inputs/" class="md-nav__link">
         
   
   
@@ -1116,19 +1119,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../examples/scaling-distributions/" class="md-nav__link">
         
   
   
@@ -1139,7 +1133,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1168,6 +1161,8 @@
             
             
               
+                
+              
               <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -1191,57 +1186,7 @@
               <article class="md-content__inner md-typeset">
                 
                   
-
-
   
-  
-
-
-<h1 id="scaling-distributions">Scaling Distributions</h1>
-<p>Some of the distributions can be scaled by a constant factor or added together. For instance, operations with Poisson distribution represent the number of events in a given time interval.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">conjugate.distributions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Poisson</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">daily_rate</span> <span class="o">=</span> <span class="mf">0.25</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">daily_pois</span> <span class="o">=</span> <span class="n">Poisson</span><span class="p">(</span><span class="n">lam</span><span class="o">=</span><span class="n">daily_rate</span><span class="p">)</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">two_day_pois</span> <span class="o">=</span> <span class="n">daily_pois</span> <span class="o">+</span> <span class="n">daily_pois</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">weekly_pois</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">daily_pois</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">max_value</span> <span class="o">=</span> <span class="mi">7</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">dists</span> <span class="o">=</span> <span class="p">[</span><span class="n">daily_pois</span><span class="p">,</span> <span class="n">two_day_pois</span><span class="p">,</span> <span class="n">weekly_pois</span><span class="p">]</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">base_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;daily&quot;</span><span class="p">,</span> <span class="s2">&quot;two day&quot;</span><span class="p">,</span> <span class="s2">&quot;weekly&quot;</span><span class="p">]</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="k">for</span> <span class="n">dist</span><span class="p">,</span> <span class="n">base_label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">dists</span><span class="p">,</span> <span class="n">base_labels</span><span class="p">):</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_label</span><span class="si">}</span><span class="s2"> rate=</span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">lam</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">dist</span><span class="o">.</span><span class="n">set_max_value</span><span class="p">(</span><span class="n">max_value</span><span class="p">)</span><span class="o">.</span><span class="n">plot_pmf</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</span></code></pre></div>
-<p><img alt="Scaled Poisson" src="../../images/poisson-scaling-example.png" /></p>
-<p>The normal distribution also supports scaling making use of the fact that the variance of a scaled normal distribution is the square of the scaling factor.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">conjugate.distributions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Normal</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">norm</span> <span class="o">=</span> <span class="n">Normal</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">norm_times_2</span> <span class="o">=</span> <span class="n">norm</span> <span class="o">*</span> <span class="mi">2</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">bound</span> <span class="o">=</span> <span class="mi">6</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">ax</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">set_bounds</span><span class="p">(</span><span class="o">-</span><span class="n">bound</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;normal (std = </span><span class="si">{</span><span class="n">norm</span><span class="o">.</span><span class="n">sigma</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">norm_times_2</span><span class="o">.</span><span class="n">set_bounds</span><span class="p">(</span><span class="o">-</span><span class="n">bound</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;normal * 2 (std = </span><span class="si">{</span><span class="n">norm_times_2</span><span class="o">.</span><span class="n">sigma</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">)</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</span></code></pre></div>
-<p><img alt="Scaled Normal" src="../../images/normal-scaling-example.png" /></p>
-
-
-
-
 
 
 
@@ -1249,7 +1194,161 @@
   
 
 
+<h1 id="distribution-explorer">Distribution Explorer</h1>
+<div style="margin: auto; max-width: none;">
+                  <marimo-island
+        data-app-id="main"
+        data-cell-id="Hstk"
+        data-reactive="false"
+    >
+        <marimo-cell-output>
 
+<div class="marimo">
+  <div class="flex flex-col flex-1 items-center justify-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="size-20 animate-spin text-primary"
+    >
+      <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+    </svg>
+    <div>Initializing...</div>
+  </div>
+</div>
+
+        </marimo-cell-output>
+        <marimo-cell-code hidden></marimo-cell-code>
+    </marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="Hbol"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>import%20marimo%20as%20mo%0A%0Aimport%20micropip%0A%0Aawait%20micropip.install(%22conjugate-models%22)%0A%0Afrom%20conjugate.interactive%20import%20(%0A%20%20%20%20supported_distributions%2C%0A%20%20%20%20lookup_model%2C%0A%20%20%20%20lookup_model_by_predictive%2C%0A)%0A</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="MJUe"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>def%20create_model_documentation_url(model_name%3A%20str)%20-%3E%20str%3A%0A%20%20%20%20return%20f%22https%3A%2F%2Fwilliambdean.github.io%2Fconjugate%2Fmodels%2F%23conjugate.models.%7Bmodel_name%7D%22</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="vblA"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>names%20%3D%20list(supported_distributions.keys())%0Adistribution%20%3D%20mo.ui.dropdown(%0A%20%20%20%20options%3Dnames%2C%0A%20%20%20%20label%3D%22Distribution%3A%22%2C%0A%20%20%20%20value%3Dnames%5B0%5D%2C%0A)%0Adistribution</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="bkHC"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>x_min%20%3D%20mo.ui.number(label%3D%22x%20min%22)%0Ax_max%20%3D%20mo.ui.number(label%3D%22x%20max%22)%0A%0Amo.hstack(%0A%20%20%20%20%5Bx_min%2C%20x_max%5D%2C%0A%20%20%20%20justify%3D%22start%22%2C%0A)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="lEQa"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>def%20get_parameter_ui(metadata%2C%20name)%3A%0A%20%20%20%20kwargs%20%3D%20%7B%22show_value%22%3A%20True%7D%0A%20%20%20%20if%20metadata%20%3D%3D%20(%22Real%22%2C)%3A%0A%20%20%20%20%20%20%20%20return%20mo.ui.slider(start%3D-10%2C%20value%3D0.0%2C%20stop%3D10%2C%20step%3D0.01%2C%20**kwargs)%0A%20%20%20%20elif%20metadata%20%3D%3D%20(%22Positive%22%2C%20%22Real%22)%3A%0A%20%20%20%20%20%20%20%20return%20mo.ui.slider(start%3D0.01%2C%20value%3D1.0%2C%20step%3D0.01%2C%20stop%3D10%2C%20**kwargs)%0A%20%20%20%20elif%20metadata%20%3D%3D%20(%22Natural%22%2C)%3A%0A%20%20%20%20%20%20%20%20return%20mo.ui.slider(start%3D1%2C%20value%3D10%2C%20stop%3D30%2C%20step%3D1%2C%20**kwargs)%0A%20%20%20%20elif%20metadata%20%3D%3D%20(%22Probability%22%2C)%3A%0A%20%20%20%20%20%20%20%20return%20mo.ui.slider(start%3D0%2C%20value%3D0.5%2C%20stop%3D1%2C%20step%3D0.01%2C%20**kwargs)%0A</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="PKri"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>dist%20%3D%20supported_distributions%5Bdistribution.value%5D%0Aparameters%20%3D%20dist.__annotations__%0Aparameters_meta%20%3D%20%7Bname%3A%20value.__metadata__%20for%20name%2C%20value%20in%20parameters.items()%7D%0A</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="Xref"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>parameters_ui%20%3D%20mo.ui.dictionary(%0A%20%20%20%20%7Bname%3A%20get_parameter_ui(meta%2C%20name)%20for%20name%2C%20meta%20in%20parameters_meta.items()%7D%0A)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="SFPL"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>parameters_ui</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="BYtC"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>initialize_dist%20%3D%20dist(**parameters_ui.value)%0A%0Aif%20hasattr(initialize_dist%2C%20%22plot_pmf%22)%3A%0A%20%20%20%20method%20%3D%20%22plot_pmf%22%0Aelif%20hasattr(initialize_dist%2C%20%22plot_pdf%22)%3A%0A%20%20%20%20method%20%3D%20%22plot_pdf%22%0A%0Adef%20default(value%2C%20default_value)%3A%0A%20%20%20%20return%20value%20if%20value%20is%20not%20None%20else%20default_value%0A%0Adef%20plot()%3A%0A%20%20%20%20%22%22%22Plot%20the%20distribution.%22%22%22%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20return%20getattr(initialize_dist%2C%20method)()%0A%20%20%20%20except%20Exception%3A%0A%20%20%20%20%20%20%20%20initialize_dist.set_bounds(%0A%20%20%20%20%20%20%20%20%20%20%20%20default(x_min.value%2C%20-10)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20default(x_max.value%2C%2010)%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20return%20getattr(initialize_dist%2C%20method)()%0A%0Aax%20%3D%20plot()%0Aax.set(title%3Df%22%7Bdist.__name__%7D%20Distribution%22)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="RGSE"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>from%20conjugate.plot%20import%20DiscretePlotMixin%0A%0Aformatted_parameters%20%3D%20%22%2C%20%22.join(%0A%20%20%20%20f%22%7Bkey%7D%3D%7Bvalue%7D%22%20for%20key%2C%20value%20in%20parameters_ui.value.items()%0A)%0A%0Aplot_method%20%3D%20(%0A%20%20%20%20isinstance(initialize_dist%2C%20DiscretePlotMixin)%20and%20%22plot_pmf%22%20or%20%22plot_pdf%22%0A)%0Acode%20%3D%20mo.md(f%22%22%22%0ARecreate%20the%20plot%20with%20the%20following%20code%3A%0A%0A%60%60%60python%0Afrom%20conjugate.distributions%20import%20%7Bdistribution.value%7D%0A%0Adistribution%20%3D%20%7Bdistribution.value%7D(%7Bformatted_parameters%7D)%0Adistribution.set_bounds(%7Bx_min.value%7D%2C%20%7Bx_max.value%7D)%0A%0Aax%20%3D%20distribution.%7Bplot_method%7D()%0Aax.set(title%3D%22%7Bdistribution.value%7D%20Distribution%22)%0A%60%60%60%0A%22%22%22)%0A%0Adef%20create_bullet_points(models%2C%20links)%3A%0A%20%20%20%20model_list%20%3D%20%22%5Cn%22.join(%0A%20%20%20%20%20%20%20%20f%22-%20%5B%60%7Bmodel%7D%60%5D(%7Blink%7D)%5Cn%22%20for%20model%2C%20link%20in%20zip(models%2C%20links)%0A%20%20%20%20)%0A%20%20%20%20return%20f%22%5Cn%7Bmodel_list%7D%22%0A%0Amodels%20%3D%20lookup_model(distribution.value)%0Amodels_from_predictive%20%3D%20lookup_model_by_predictive(distribution.value)%0Aif%20isinstance(models%2C%20list)%3A%0A%20%20%20%20links%20%3D%20%5Bcreate_model_documentation_url(model)%20for%20model%20in%20models%5D%0A%20%20%20%20model_list%20%3D%20create_bullet_points(models%2C%20links)%0A%20%20%20%20reference%20%3D%20mo.md(f%22%22%22%0A%20%20%20%20Model%20this%20distribution%20using%3A%0A%0A%20%20%20%20%7Bmodel_list%7D%0A%20%20%20%20%22%22%22)%0Aelif%20models%3A%0A%20%20%20%20link%20%3D%20create_model_documentation_url(models)%0A%20%20%20%20reference%20%3D%20mo.md(f%22%22%22%0A%0A%20%20%20%20Model%20this%20distribution%20using%20the%20%5B%60%7Bmodels%7D%60%5D(%7Blink%7D)%20function.%0A%0A%20%20%20%20%22%22%22)%0Aelif%20isinstance(models_from_predictive%2C%20list)%3A%0A%20%20%20%20links%20%3D%20%5B%0A%20%20%20%20%20%20%20%20create_model_documentation_url(model)%20for%20model%20in%20models_from_predictive%0A%20%20%20%20%5D%0A%20%20%20%20model_list%20%3D%20create_bullet_points(models_from_predictive%2C%20links)%0A%20%20%20%20reference%20%3D%20mo.md(f%22%22%22%0A%20%20%20%20Find%20this%20distribution%20as%20the%20predictive%20distribution%20of%3A%0A%0A%20%20%20%20%7Bmodel_list%7D%0A%20%20%20%20%22%22%22)%0Aelif%20models_from_predictive%3A%0A%20%20%20%20link%20%3D%20create_model_documentation_url(models_from_predictive)%0A%20%20%20%20reference%20%3D%20mo.md(f%22%22%22%0A%0A%20%20%20%20Find%20this%20distribution%20as%20the%20predictive%20distribution%20of%20%5B%60%7Bmodels_from_predictive%7D%60%5D(%7Blink%7D)%20function.%0A%0A%20%20%20%20%22%22%22)%0Aelse%3A%0A%20%20%20%20reference%20%3D%20None</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="Kclp"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden>mo.hstack(%0A%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20ax%2C%0A%20%20%20%20%20%20%20%20code%0A%20%20%20%20%20%20%20%20if%20reference%20is%20None%0A%20%20%20%20%20%20%20%20else%20mo.vstack(%5Bcode%2C%20reference%5D%2C%20justify%3D%22start%22)%2C%0A%20%20%20%20%5D%2C%0A%20%20%20%20justify%3D%22start%22%2C%0A)</marimo-cell-code>
+</marimo-island>
+<marimo-island
+    data-app-id="main"
+    data-cell-id="emfo"
+    data-reactive="true"
+>
+    <marimo-cell-output>
+    </marimo-cell-output>
+    <marimo-cell-code hidden></marimo-cell-code>
+</marimo-island>
+                </div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
 
 
 
@@ -1365,12 +1464,12 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.expand", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.expand", "navigation.top"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
-        <script src="../../javascripts/mathjax.js"></script>
+        <script src="../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       

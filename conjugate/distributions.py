@@ -531,8 +531,8 @@ class Pareto(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    x_m: Real
-    alpha: Real
+    x_m: PositiveReal
+    alpha: PositiveReal
 
     @property
     def dist(self):
@@ -549,8 +549,8 @@ class InverseGamma(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    alpha: Real
-    beta: Real
+    alpha: PositiveReal
+    beta: PositiveReal
 
     @property
     def dist(self):

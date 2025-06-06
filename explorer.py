@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.13.7"
+__generated_with = "0.13.15"
 app = marimo.App(width="medium")
 
 
@@ -39,8 +39,9 @@ def _(mo, supported_distributions):
         label="Distribution:",
         value=names[0],
     )
-    distribution
-    return (distribution,)
+    is_cdf = mo.ui.checkbox(label="Plot CDF", value=False)
+    mo.hstack([distribution, is_cdf], justify="start")
+    return distribution, is_cdf
 
 
 @app.cell
@@ -57,8 +58,12 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    def get_parameter_ui(metadata, name):
+    def get_parameter_ui(value, name):
+        if value is bool:
+            return mo.ui.checkbox(value=True)
+
         kwargs = {"show_value": True}
+        metadata = value.__metadata__
         if metadata == ("Real",):
             return mo.ui.slider(start=-10, value=0.0, stop=10, step=0.01, **kwargs)
         elif metadata == ("Positive", "Real"):
@@ -75,7 +80,7 @@ def _(mo):
 def _(distribution, supported_distributions):
     dist = supported_distributions[distribution.value]
     parameters = dist.__annotations__
-    parameters_meta = {name: value.__metadata__ for name, value in parameters.items()}
+    parameters_meta = {name: value for name, value in parameters.items()}
 
     return dist, parameters_meta
 
@@ -83,7 +88,7 @@ def _(distribution, supported_distributions):
 @app.cell
 def _(get_parameter_ui, mo, parameters_meta):
     parameters_ui = mo.ui.dictionary(
-        {name: get_parameter_ui(meta, name) for name, meta in parameters_meta.items()}
+        {name: get_parameter_ui(value, name) for name, value in parameters_meta.items()}
     )
     return (parameters_ui,)
 
@@ -95,10 +100,12 @@ def _(parameters_ui):
 
 
 @app.cell
-def _(dist, parameters_ui, x_max, x_min):
+def _(dist, is_cdf, mo, parameters_ui, x_max, x_min):
     initialize_dist = dist(**parameters_ui.value)
 
-    if hasattr(initialize_dist, "plot_pmf"):
+    if is_cdf.value:
+        method = "plot_cdf"
+    elif hasattr(initialize_dist, "plot_pmf"):
         method = "plot_pmf"
     elif hasattr(initialize_dist, "plot_pdf"):
         method = "plot_pdf"
@@ -112,12 +119,17 @@ def _(dist, parameters_ui, x_max, x_min):
             return getattr(initialize_dist, method)()
         except Exception:
             initialize_dist.set_bounds(
-                default(x_min.value, -10),
-                default(x_max.value, 10),
+                default(x_min.value, getattr(initialize_dist, "_min_value", -10)),
+                default(x_max.value, getattr(initialize_dist, "_max_value", 10)),
             )
-            return getattr(initialize_dist, method)().set(
-                title=f"{dist.__name__} Distribution"
-            )
+            title = f"{dist.__name__} Distribution"
+            if is_cdf.value:
+                title = f"{dist.__name__} Distribution CDF"
+
+            try:
+                return getattr(initialize_dist, method)().set(title=title)
+            except Exception:
+                return mo.md("The distribution couldn't be plotted.")
 
     return initialize_dist, plot
 
@@ -126,12 +138,11 @@ def _(dist, parameters_ui, x_max, x_min):
 def _(
     distribution,
     initialize_dist,
+    is_cdf,
     lookup_model,
     lookup_model_by_predictive,
     mo,
     parameters_ui,
-    x_max,
-    x_min,
 ):
     from conjugate.plot import DiscretePlotMixin
 
@@ -139,9 +150,16 @@ def _(
         f"{key}={value}" for key, value in parameters_ui.value.items()
     )
 
-    plot_method = (
-        isinstance(initialize_dist, DiscretePlotMixin) and "plot_pmf" or "plot_pdf"
-    )
+    if is_cdf.value:
+        plot_method = "plot_cdf"
+    elif isinstance(initialize_dist, DiscretePlotMixin):
+        plot_method = "plot_pmf"
+    else:
+        plot_method = "plot_pdf"
+
+    actual_min_value = initialize_dist.min_value
+    actual_max_value = getattr(initialize_dist, "_max_value", 10)
+
     code = mo.md(f"""
     Recreate the plot with the following code:
 
@@ -149,7 +167,7 @@ def _(
     from conjugate.distributions import {distribution.value}
 
     distribution = {distribution.value}({formatted_parameters})
-    distribution.set_bounds({x_min.value}, {x_max.value})
+    distribution.set_bounds({actual_min_value}, {actual_max_value})
 
     ax = distribution.{plot_method}()
     ax.set(title="{distribution.value} Distribution")
@@ -210,7 +228,6 @@ def _(code, mo, plot, reference):
             if reference is None
             else mo.vstack([code, reference], justify="start"),
         ],
-        justify="start",
     )
     return
 

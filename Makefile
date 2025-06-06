@@ -26,6 +26,5 @@ html: ## Serve documentation
 release: ## Kick off a new release pipeline
 	gh release create --generate-notes "v$(shell grep -E "^version" pyproject.toml | sed 's/[^0-9\.]*//g')"
 
-
 explorer:  ## Kick off local explorer notebook
 	uv run marimo edit docs/explorer.py

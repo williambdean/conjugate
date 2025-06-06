@@ -88,7 +88,7 @@ predictive_distributions = {
 }
 
 
-def lookup_model(name: str):
+def lookup_model(name: str) -> str | list[str] | None:
     models = [
         function_name
         for function_name, class_name in likelihoods.items()

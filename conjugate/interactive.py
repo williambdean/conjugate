@@ -124,3 +124,19 @@ def get_associated_conjugate_models(name: str):
         for name, distribution in likelihoods.items()
         if name in model_names
     }
+
+
+def lookup_model_by_predictive(name: str) -> str | list[str] | None:
+    model = [
+        function_name
+        for function_name, class_name in predictive_distributions.items()
+        if not isinstance(class_name, UnionType) and class_name.__name__ == name
+    ]
+
+    if not model:
+        return None
+
+    if len(model) > 1:
+        return model
+
+    return model[0]

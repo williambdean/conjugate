@@ -5,12 +5,18 @@ from conjugate import distributions, models
 from conjugate.plot import PlotDistMixin
 
 
-def all_annotations_are_annotated(annotations: Iterable[Any]) -> bool:
-    return all(get_origin(value) is Annotated for value in annotations)
+def all_supported_types(annotations: Iterable[Any]) -> bool:
+    def is_supported(value):
+        if value is bool:
+            return True
+
+        return get_origin(value) is Annotated
+
+    return all(is_supported(value) for value in annotations)
 
 
 def has_built_in_plotting(distribution) -> bool:
-    return issubclass(distribution, PlotDistMixin) and all_annotations_are_annotated(
+    return issubclass(distribution, PlotDistMixin) and all_supported_types(
         distribution.__annotations__.values()
     )
 

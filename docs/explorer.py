@@ -143,8 +143,6 @@ def _(
     lookup_model_by_predictive,
     mo,
     parameters_ui,
-    x_max,
-    x_min,
 ):
     from conjugate.plot import DiscretePlotMixin
 
@@ -159,6 +157,9 @@ def _(
     else:
         plot_method = "plot_pdf"
 
+    actual_min_value = initialize_dist.min_value
+    actual_max_value = getattr(initialize_dist, "_max_value", 10)
+
     code = mo.md(f"""
     Recreate the plot with the following code:
 
@@ -166,7 +167,7 @@ def _(
     from conjugate.distributions import {distribution.value}
 
     distribution = {distribution.value}({formatted_parameters})
-    distribution.set_bounds({x_min.value}, {x_max.value})
+    distribution.set_bounds({actual_min_value}, {actual_max_value})
 
     ax = distribution.{plot_method}()
     ax.set(title="{distribution.value} Distribution")

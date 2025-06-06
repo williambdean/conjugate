@@ -1,6 +1,11 @@
+import sys
 from types import UnionType
 from typing import Any, Annotated, Iterable
-from typing_extensions import get_origin
+
+if sys.version_info >= (3, 13):
+    from typing import get_origin
+else:
+    from typing_extensions import get_origin
 
 from conjugate import distributions, models
 from conjugate.plot import PlotDistMixin

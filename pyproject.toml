@@ -50,6 +50,7 @@ dev = [
     "narwhals>=1.39.0",
 ]
 docs = [
+    "marimo>=0.13.15",
     "mkdocs>=1.4.3,<2",
     "mkdocs-marimo>=0.2.1",
     "mkdocs-material>=9.1.17,<10",

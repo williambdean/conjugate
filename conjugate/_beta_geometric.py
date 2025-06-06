@@ -16,7 +16,7 @@ def beta_geometric_pmf(x, a, b, one_start: bool = True):
 
     start = 1 if one_start else 0
     below_start = x < start
-    pmf[below_start] = 0
+    pmf = np.where(below_start, 0, pmf)
     return pmf
 
 

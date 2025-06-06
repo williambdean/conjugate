@@ -47,7 +47,7 @@ from scipy.special import gammaln, i0
 
 from conjugate._compound_gamma import compound_gamma
 from conjugate._beta_geometric import beta_geometric
-from conjugate._typing import NUMERIC
+from conjugate._typing import NUMERIC, Real, PositiveReal, Natural, Probability
 from conjugate.plot import (
     DirichletPlotDistMixin,
     DiscretePlotMixin,
@@ -72,14 +72,14 @@ class Beta(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    alpha: NUMERIC
-    beta: NUMERIC
+    alpha: PositiveReal
+    beta: PositiveReal
 
     def __post_init__(self) -> None:
         self.max_value = 1.0
 
     @classmethod
-    def from_mean(cls, mean: NUMERIC, alpha: NUMERIC) -> "Beta":
+    def from_mean(cls, mean: Probability, alpha: PositiveReal) -> "Beta":
         """Alternative constructor from mean and alpha."""
         beta = get_beta_param_from_mean_and_alpha(mean=mean, alpha=alpha)
         return cls(alpha=alpha, beta=beta)
@@ -90,7 +90,9 @@ class Beta(ContinuousPlotDistMixin, SliceMixin):
 
     @classmethod
     def from_successes_and_failures(
-        cls, successes: NUMERIC, failures: NUMERIC
+        cls,
+        successes: PositiveReal,
+        failures: PositiveReal,
     ) -> "Beta":
         """Alternative constructor based on hyperparameter interpretation."""
         alpha = successes + 1
@@ -112,8 +114,8 @@ class Binomial(DiscretePlotMixin, SliceMixin):
 
     """
 
-    n: NUMERIC
-    p: NUMERIC
+    n: Natural
+    p: Probability
 
     def __post_init__(self):
         if isinstance(self.n, np.ndarray):
@@ -176,8 +178,8 @@ class Multinomial(SliceMixin):
 
     """
 
-    n: NUMERIC
-    p: NUMERIC
+    n: Natural
+    p: Probability
 
     @property
     def dist(self):
@@ -211,7 +213,7 @@ class Exponential(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    lam: NUMERIC
+    lam: PositiveReal
 
     @property
     def dist(self):
@@ -235,11 +237,15 @@ class Gamma(ContinuousPlotDistMixin, SliceMixin):
         beta: rate parameter
     """
 
-    alpha: NUMERIC
-    beta: NUMERIC
+    alpha: PositiveReal
+    beta: PositiveReal
 
     @classmethod
-    def from_occurrences_in_intervals(cls, occurrences: NUMERIC, intervals: NUMERIC):
+    def from_occurrences_in_intervals(
+        cls,
+        occurrences: PositiveReal,
+        intervals: PositiveReal,
+    ) -> "Gamma":
         return cls(alpha=occurrences, beta=intervals)
 
     @property
@@ -262,8 +268,8 @@ class NegativeBinomial(DiscretePlotMixin, SliceMixin):
 
     """
 
-    n: NUMERIC
-    p: NUMERIC
+    n: Natural
+    p: Probability
 
     @property
     def dist(self):
@@ -286,9 +292,9 @@ class Hypergeometric(DiscretePlotMixin, SliceMixin):
 
     """
 
-    N: NUMERIC
-    k: NUMERIC
-    n: NUMERIC
+    N: Natural
+    k: Natural
+    n: Natural
 
     def __post_init__(self) -> None:
         if isinstance(self.N, np.ndarray):
@@ -310,7 +316,7 @@ class Poisson(DiscretePlotMixin, SliceMixin):
 
     """
 
-    lam: NUMERIC
+    lam: PositiveReal
 
     @property
     def dist(self):
@@ -338,9 +344,9 @@ class BetaBinomial(DiscretePlotMixin, SliceMixin):
 
     """
 
-    n: NUMERIC
-    alpha: NUMERIC
-    beta: NUMERIC
+    n: Natural
+    alpha: PositiveReal
+    beta: PositiveReal
 
     def __post_init__(self):
         if isinstance(self.n, np.ndarray):
@@ -364,9 +370,9 @@ class BetaNegativeBinomial(DiscretePlotMixin, SliceMixin):
 
     """
 
-    n: NUMERIC
-    alpha: NUMERIC
-    beta: NUMERIC
+    n: Natural
+    alpha: PositiveReal
+    beta: PositiveReal
 
     def __post_init__(self):
         if isinstance(self.n, np.ndarray):
@@ -393,7 +399,7 @@ class Geometric(DiscretePlotMixin, SliceMixin):
 
     """
 
-    p: NUMERIC
+    p: Probability
     one_start: bool = True
 
     @property
@@ -413,8 +419,8 @@ class BetaGeometric(DiscretePlotMixin, SliceMixin):
 
     """
 
-    alpha: NUMERIC
-    beta: NUMERIC
+    alpha: PositiveReal
+    beta: PositiveReal
     one_start: bool = True
 
     @property
@@ -432,25 +438,33 @@ class Normal(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    mu: NUMERIC
-    sigma: NUMERIC
+    mu: Real
+    sigma: PositiveReal
 
     @property
     def dist(self):
         return stats.norm(self.mu, self.sigma)
 
     @classmethod
-    def uninformative(cls, sigma: NUMERIC = 1) -> "Normal":
+    def uninformative(cls, sigma: PositiveReal = 1.0) -> "Normal":
         """Uninformative normal distribution."""
         return cls(mu=0, sigma=sigma)
 
     @classmethod
-    def from_mean_and_variance(cls, mean: NUMERIC, variance: NUMERIC) -> "Normal":
+    def from_mean_and_variance(
+        cls,
+        mean: Real,
+        variance: PositiveReal,
+    ) -> "Normal":
         """Alternative constructor from mean and variance."""
         return cls(mu=mean, sigma=variance**0.5)
 
     @classmethod
-    def from_mean_and_precision(cls, mean: NUMERIC, precision: NUMERIC) -> "Normal":
+    def from_mean_and_precision(
+        cls,
+        mean: Real,
+        precision: PositiveReal,
+    ) -> "Normal":
         """Alternative constructor from mean and precision."""
         return cls(mu=mean, sigma=precision**-0.5)
 
@@ -495,8 +509,8 @@ class Uniform(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    low: NUMERIC
-    high: NUMERIC
+    low: Real
+    high: Real
 
     def __post_init__(self):
         self.min_value = self.low
@@ -517,8 +531,8 @@ class Pareto(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    x_m: NUMERIC
-    alpha: NUMERIC
+    x_m: Real
+    alpha: Real
 
     @property
     def dist(self):
@@ -535,8 +549,8 @@ class InverseGamma(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    alpha: NUMERIC
-    beta: NUMERIC
+    alpha: Real
+    beta: Real
 
     @property
     def dist(self):
@@ -558,11 +572,11 @@ class NormalInverseGamma:
 
     """
 
-    mu: NUMERIC
-    alpha: NUMERIC
-    beta: NUMERIC
+    mu: Real
+    alpha: PositiveReal
+    beta: PositiveReal
     delta_inverse: NUMERIC | None = None
-    nu: NUMERIC | None = None
+    nu: PositiveReal | None = None
 
     def __post_init__(self) -> None:
         if self.delta_inverse is None and self.nu is None:
@@ -678,9 +692,9 @@ class StudentT(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    mu: NUMERIC
-    sigma: NUMERIC
-    nu: NUMERIC
+    mu: Real
+    sigma: PositiveReal
+    nu: PositiveReal
 
     @property
     def dist(self):
@@ -725,8 +739,8 @@ class Lomax(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    alpha: NUMERIC
-    lam: NUMERIC
+    alpha: PositiveReal
+    lam: PositiveReal
 
     @property
     def dist(self):
@@ -744,9 +758,9 @@ class CompoundGamma(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    alpha: NUMERIC
-    beta: NUMERIC
-    lam: NUMERIC
+    alpha: PositiveReal
+    beta: PositiveReal
+    lam: PositiveReal
 
     @property
     def dist(self):
@@ -879,8 +893,8 @@ class VonMises(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    mu: NUMERIC
-    kappa: NUMERIC
+    mu: Real
+    kappa: PositiveReal
 
     def __post_init__(self) -> None:
         self.min_value = -np.pi
@@ -961,8 +975,8 @@ class ScaledInverseChiSquared(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    nu: NUMERIC
-    sigma2: NUMERIC
+    nu: PositiveReal
+    sigma2: PositiveReal
 
     @classmethod
     def from_inverse_gamma(
@@ -1299,8 +1313,8 @@ class LogNormal(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    mu: NUMERIC
-    sigma: NUMERIC
+    mu: Real
+    sigma: PositiveReal
 
     @property
     def dist(self):
@@ -1346,8 +1360,8 @@ class Weibull(ContinuousPlotDistMixin, SliceMixin):
 
     """
 
-    beta: NUMERIC
-    theta: NUMERIC
+    beta: PositiveReal
+    theta: PositiveReal
 
     @property
     def dist(self):

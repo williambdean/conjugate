@@ -73,6 +73,10 @@ class Bernoulli(DiscretePlotMixin, SliceMixin):
 
     p: Probability
 
+    def __post_init__(self):
+        self.min_value = 0
+        self.max_value = 1
+
     @property
     def dist(self):
         return stats.bernoulli(self.p)

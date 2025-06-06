@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.13.7"
+__generated_with = "0.13.15"
 app = marimo.App(width="medium")
 
 
@@ -60,7 +60,7 @@ def _(mo):
 def _(mo):
     def get_parameter_ui(value, name):
         if value is bool:
-            return mo.ui.checkbox(label=name, value=True)
+            return mo.ui.checkbox(value=True)
 
         kwargs = {"show_value": True}
         metadata = value.__metadata__
@@ -119,8 +119,8 @@ def _(dist, is_cdf, mo, parameters_ui, x_max, x_min):
             return getattr(initialize_dist, method)()
         except Exception:
             initialize_dist.set_bounds(
-                default(x_min.value, -10),
-                default(x_max.value, 10),
+                default(x_min.value, getattr(initialize_dist, "_min_value", -10)),
+                default(x_max.value, getattr(initialize_dist, "_max_value", 10)),
             )
             title = f"{dist.__name__} Distribution"
             if is_cdf.value:

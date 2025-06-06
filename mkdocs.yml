@@ -39,6 +39,7 @@ extra:
 
 nav:
   - Overview: index.md
+  - Distribution Explorer: explorer.md
   - Modules:
     - Models: models.md
     - Distributions: distributions.md

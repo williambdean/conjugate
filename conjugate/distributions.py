@@ -422,6 +422,9 @@ class Geometric(DiscretePlotMixin, SliceMixin):
     p: Probability
     one_start: bool = True
 
+    def __post_init__(self):
+        self.min_value = 1 if self.one_start else 0
+
     @property
     def dist(self):
         loc = 0 if self.one_start else -1
@@ -442,6 +445,9 @@ class BetaGeometric(DiscretePlotMixin, SliceMixin):
     alpha: PositiveReal
     beta: PositiveReal
     one_start: bool = True
+
+    def __post_init__(self):
+        self.min_value = 1 if self.one_start else 0
 
     @property
     def dist(self):

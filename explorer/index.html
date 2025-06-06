@@ -1305,7 +1305,7 @@
 >
     <marimo-cell-output>
     </marimo-cell-output>
-    <marimo-cell-code hidden>initialize_dist%20%3D%20dist(**parameters_ui.value)%0A%0Aif%20hasattr(initialize_dist%2C%20%22plot_pmf%22)%3A%0A%20%20%20%20method%20%3D%20%22plot_pmf%22%0Aelif%20hasattr(initialize_dist%2C%20%22plot_pdf%22)%3A%0A%20%20%20%20method%20%3D%20%22plot_pdf%22%0A%0Adef%20default(value%2C%20default_value)%3A%0A%20%20%20%20return%20value%20if%20value%20is%20not%20None%20else%20default_value%0A%0Adef%20plot()%3A%0A%20%20%20%20%22%22%22Plot%20the%20distribution.%22%22%22%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20return%20getattr(initialize_dist%2C%20method)()%0A%20%20%20%20except%20Exception%3A%0A%20%20%20%20%20%20%20%20initialize_dist.set_bounds(%0A%20%20%20%20%20%20%20%20%20%20%20%20default(x_min.value%2C%20-10)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20default(x_max.value%2C%2010)%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20return%20getattr(initialize_dist%2C%20method)()%0A%0Aax%20%3D%20plot()%0Aax.set(title%3Df%22%7Bdist.__name__%7D%20Distribution%22)</marimo-cell-code>
+    <marimo-cell-code hidden>initialize_dist%20%3D%20dist(**parameters_ui.value)%0A%0Aif%20hasattr(initialize_dist%2C%20%22plot_pmf%22)%3A%0A%20%20%20%20method%20%3D%20%22plot_pmf%22%0Aelif%20hasattr(initialize_dist%2C%20%22plot_pdf%22)%3A%0A%20%20%20%20method%20%3D%20%22plot_pdf%22%0A%0Adef%20default(value%2C%20default_value)%3A%0A%20%20%20%20return%20value%20if%20value%20is%20not%20None%20else%20default_value%0A%0Adef%20plot()%3A%0A%20%20%20%20%22%22%22Plot%20the%20distribution.%22%22%22%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20return%20getattr(initialize_dist%2C%20method)()%0A%20%20%20%20except%20Exception%3A%0A%20%20%20%20%20%20%20%20initialize_dist.set_bounds(%0A%20%20%20%20%20%20%20%20%20%20%20%20default(x_min.value%2C%20-10)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20default(x_max.value%2C%2010)%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20return%20getattr(initialize_dist%2C%20method)().set(%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3Df%22%7Bdist.__name__%7D%20Distribution%22%0A%20%20%20%20%20%20%20%20)%0A</marimo-cell-code>
 </marimo-island>
 <marimo-island
     data-app-id="main"
@@ -1323,7 +1323,7 @@
 >
     <marimo-cell-output>
     </marimo-cell-output>
-    <marimo-cell-code hidden>mo.hstack(%0A%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20ax%2C%0A%20%20%20%20%20%20%20%20code%0A%20%20%20%20%20%20%20%20if%20reference%20is%20None%0A%20%20%20%20%20%20%20%20else%20mo.vstack(%5Bcode%2C%20reference%5D%2C%20justify%3D%22start%22)%2C%0A%20%20%20%20%5D%2C%0A%20%20%20%20justify%3D%22start%22%2C%0A)</marimo-cell-code>
+    <marimo-cell-code hidden>mo.hstack(%0A%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20plot()%2C%0A%20%20%20%20%20%20%20%20code%0A%20%20%20%20%20%20%20%20if%20reference%20is%20None%0A%20%20%20%20%20%20%20%20else%20mo.vstack(%5Bcode%2C%20reference%5D%2C%20justify%3D%22start%22)%2C%0A%20%20%20%20%5D%2C%0A%20%20%20%20justify%3D%22start%22%2C%0A)</marimo-cell-code>
 </marimo-island>
 <marimo-island
     data-app-id="main"

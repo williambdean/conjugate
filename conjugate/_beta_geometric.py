@@ -12,7 +12,12 @@ def beta_geometric_pmf(x, a, b, one_start: bool = True):
     if not one_start:
         x = x + 1
 
-    return beta(a + 1, x + b) / beta(a, b)
+    pmf = beta(a + 1, x + b) / beta(a, b)
+
+    start = 0 if one_start else 1
+    below_start = x < start
+    pmf[below_start] = 0
+    return pmf
 
 
 class beta_geometric:

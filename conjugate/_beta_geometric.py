@@ -14,7 +14,7 @@ def beta_geometric_pmf(x, a, b, one_start: bool = True):
 
     pmf = beta(a + 1, x + b) / beta(a, b)
 
-    start = 0 if one_start else 1
+    start = 1 if one_start else 0
     below_start = x < start
     pmf[below_start] = 0
     return pmf

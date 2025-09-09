@@ -17,6 +17,7 @@ pip install conjugate-models
 
 ## Features
 
+- [Interactive Distribution Explorer](https://williambdean.github.io/conjugate/explorer) for exploring probability distributions with real-time parameter adjustment
 - [Connection to Scipy Distributions](https://williambdean.github.io/conjugate/examples/scipy-connection) with `dist` attribute
 - [Built in Plotting](https://williambdean.github.io/conjugate/examples/plotting) with `plot_pdf`, `plot_pmf`, and `plot_cdf` methods
 - [Vectorized Operations](https://williambdean.github.io/conjugate/examples/vectorized-inputs) for parameters and data

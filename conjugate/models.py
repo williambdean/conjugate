@@ -693,7 +693,9 @@ def exponential_gamma_predictive(*, distribution: Gamma) -> Lomax:
         ax = plt.subplot(111)
         prior_predictive.set_bounds(0, 2.5).plot_pdf(ax=ax, label="prior predictive")
         true.set_bounds(0, 2.5).plot_pdf(ax=ax, label="true distribution")
-        posterior_predictive.set_bounds(0, 2.5).plot_pdf(ax=ax, label="posterior predictive")
+        posterior_predictive.set_bounds(0, 2.5).plot_pdf(
+            ax=ax, label="posterior predictive"
+        )
         ax.legend()
         ```
 
@@ -916,7 +918,10 @@ def normal_known_variance_predictive(*, var: NUMERIC, distribution: Normal) -> N
         import matplotlib.pyplot as plt
 
         from conjugate.distributions import Normal
-        from conjugate.models import normal_known_variance, normal_known_variance_predictive
+        from conjugate.models import (
+            normal_known_variance,
+            normal_known_variance_predictive,
+        )
 
         unknown_mu = 0
         known_var = 2.5
@@ -946,7 +951,9 @@ def normal_known_variance_predictive(*, var: NUMERIC, distribution: Normal) -> N
         posterior_predictive.set_bounds(-bound, bound).plot_pdf(
             ax=ax, label="posterior predictive"
         )
-        prior_predictive.set_bounds(-bound, bound).plot_pdf(ax=ax, label="prior predictive")
+        prior_predictive.set_bounds(-bound, bound).plot_pdf(
+            ax=ax, label="prior predictive"
+        )
         ax.legend()
         ```
         <!--
@@ -1053,7 +1060,10 @@ def normal_known_precision_predictive(
         import matplotlib.pyplot as plt
 
         from conjugate.distributions import Normal
-        from conjugate.models import normal_known_precision, normal_known_precision_predictive
+        from conjugate.models import (
+            normal_known_precision,
+            normal_known_precision_predictive,
+        )
 
         unknown_mu = 0
         known_precision = 0.5
@@ -1083,7 +1093,9 @@ def normal_known_precision_predictive(
         posterior_predictive.set_bounds(-bound, bound).plot_pdf(
             ax=ax, label="posterior predictive"
         )
-        prior_predictive.set_bounds(-bound, bound).plot_pdf(ax=ax, label="prior predictive")
+        prior_predictive.set_bounds(-bound, bound).plot_pdf(
+            ax=ax, label="prior predictive"
+        )
         ax.legend()
         ```
         <!--
@@ -1204,7 +1216,9 @@ def normal_known_mean_predictive(
             mu=known_mu,
             distribution=prior,
         )
-        prior_predictive.set_bounds(-bound, bound).plot_pdf(ax=ax, label="prior predictive")
+        prior_predictive.set_bounds(-bound, bound).plot_pdf(
+            ax=ax, label="prior predictive"
+        )
         true.set_bounds(-bound, bound).plot_pdf(ax=ax, label="true distribution")
         posterior_predictive = normal_known_mean_predictive(
             mu=known_mu,
@@ -2153,11 +2167,18 @@ def log_normal(
 
         prior = NormalInverseGamma(mu=1, nu=1, alpha=1, beta=1)
         posterior = log_normal_normal_inverse_gamma(
-            ln_x_total=ln_data.sum(), ln_x2_total=(ln_data**2).sum(), n=n_samples, prior=prior
+            ln_x_total=ln_data.sum(),
+            ln_x2_total=(ln_data**2).sum(),
+            n=n_samples,
+            prior=prior,
         )
 
         fig, axes = plt.subplots(ncols=2)
-        mean, variance = posterior.sample_mean(4000, return_variance=True, random_state=42)
+        mean, variance = posterior.sample_mean(
+            4000,
+            return_variance=True,
+            random_state=42,
+        )
 
         ax = axes[0]
         ax.hist(mean, bins=20)

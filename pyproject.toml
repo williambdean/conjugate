@@ -80,6 +80,12 @@ include = [
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+pydocstyle.convention = "google"
+
 [tool.pytest.ini_options]
 addopts = "--mpl --mpl-baseline-path=tests/example-plots --cov=conjugate --cov-report=xml --cov-report=term-missing"
 

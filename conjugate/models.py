@@ -1699,7 +1699,6 @@ def von_mises_known_concentration(
     *,
     cos_total: NUMERIC,
     sin_total: NUMERIC,
-    n: NUMERIC,
     kappa: NUMERIC,
     prior: VonMisesKnownConcentration,
     sin=np.sin,
@@ -1713,7 +1712,6 @@ def von_mises_known_concentration(
     Args:
         cos_total: sum of all cosines
         sin_total: sum of all sines
-        n: total number of samples in cos_total and sin_total
         kappa: known concentration parameter
         prior: VonMisesKnownConcentration prior
 

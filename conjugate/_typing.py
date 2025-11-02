@@ -1,22 +1,72 @@
-from typing import Protocol, Annotated
+from typing import Annotated, Protocol, runtime_checkable
+
+try:
+    from typing import Self
+except ImportError:
+    from typing_extensions import Self
 
 
+@runtime_checkable
 class NUMERIC(Protocol):
-    def __add__(self, other: "NUMERIC") -> "NUMERIC": ...  # pragma: no cover
+    """Protocol for numeric types that support arithmetic operations.
 
-    def __radd__(self, other: "NUMERIC") -> "NUMERIC": ...  # pragma: no cover
+    This protocol defines the interface for types that behave like numbers,
+    supporting addition, subtraction, multiplication, division, and comparison
+    operations. It is compatible with int, float, complex, numpy arrays, and
+    other numeric types.
 
-    def __sub__(self, other: "NUMERIC") -> "NUMERIC": ...  # pragma: no cover
+    The protocol uses `object` for parameter types to support Python's duck
+    typing behavior (e.g., int + float works). Return types use `Self` to
+    maintain the type of the implementing class.
+    """
 
-    def __rsub__(self, other: "NUMERIC") -> "NUMERIC": ...  # pragma: no cover
+    # Arithmetic operations
+    def __add__(self, other: object) -> Self: ...  # pragma: no cover
 
-    def __mul__(self, other: "NUMERIC") -> "NUMERIC": ...  # pragma: no cover
+    def __radd__(self, other: object) -> Self: ...  # pragma: no cover
 
-    def __rmul__(self, other: "NUMERIC") -> "NUMERIC": ...  # pragma: no cover
+    def __sub__(self, other: object) -> Self: ...  # pragma: no cover
 
-    def __truediv__(self, other: "NUMERIC") -> "NUMERIC": ...  # pragma: no cover
+    def __rsub__(self, other: object) -> Self: ...  # pragma: no cover
 
-    def __rtruediv__(self, other: "NUMERIC") -> "NUMERIC": ...  # pragma: no cover
+    def __mul__(self, other: object) -> Self: ...  # pragma: no cover
+
+    def __rmul__(self, other: object) -> Self: ...  # pragma: no cover
+
+    def __truediv__(self, other: object) -> Self: ...  # pragma: no cover
+
+    def __rtruediv__(self, other: object) -> Self: ...  # pragma: no cover
+
+    def __floordiv__(self, other: object) -> Self: ...  # pragma: no cover
+
+    def __rfloordiv__(self, other: object) -> Self: ...  # pragma: no cover
+
+    def __mod__(self, other: object) -> Self: ...  # pragma: no cover
+
+    def __rmod__(self, other: object) -> Self: ...  # pragma: no cover
+
+    def __pow__(self, other: object) -> Self: ...  # pragma: no cover
+
+    def __rpow__(self, other: object) -> Self: ...  # pragma: no cover
+
+    # Unary operations
+    def __neg__(self) -> Self: ...  # pragma: no cover
+
+    def __pos__(self) -> Self: ...  # pragma: no cover
+
+    def __abs__(self) -> Self: ...  # pragma: no cover
+
+    # Comparison operations
+    def __lt__(self, other: object) -> bool: ...  # pragma: no cover
+
+    def __le__(self, other: object) -> bool: ...  # pragma: no cover
+
+    def __gt__(self, other: object) -> bool: ...  # pragma: no cover
+
+    def __ge__(self, other: object) -> bool: ...  # pragma: no cover
+
+    # Note: __eq__ is defined but __hash__ is intentionally omitted to support
+    # unhashable types like numpy arrays (which have __hash__ = None)
 
 
 Real = Annotated[NUMERIC, "Real"]

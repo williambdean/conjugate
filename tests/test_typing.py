@@ -1,7 +1,6 @@
 """Tests for the NUMERIC protocol and related type aliases."""
 
 import numpy as np
-import pytest
 
 from conjugate._typing import NUMERIC, Natural, PositiveReal, Probability, Real
 

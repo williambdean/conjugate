@@ -27,7 +27,7 @@ pip install conjugate-models
 - [Indexing Parameters](examples/indexing.md) for subsetting and slicing
 - [Generalized Numerical Inputs](examples/generalized-inputs.md) for any inputs that act like numbers
     - Out of box compatibility with `polars`, `pandas`, `numpy`, and more.
-- [Unsupported Distributions](examples/pymc-sampling.md) for sampling from unsupported distributions
+- [Unsupported Distributions](examples/unsupported-distributions.md) for sampling from unsupported distributions
 
 ## Supported Models
 

@@ -31,24 +31,24 @@ unnecessarily complex for common conjugate models. The `conjugate-models`
 package is designed to provide efficient, intuitive, and didactic support for
 Bayesian conjugate workflows across statistics, data science, and education,
 allowing direct use with array-like objects from libraries such as
-numpy,#cite(<harris2020array>)
-pandas,#cite(<The_pandas_development_team_pandas-dev_pandas_Pandas>) and
-polars.#cite(<polars2024>) The project also provides live interactive
+numpy#cite(<harris2020array>),
+pandas#cite(<The_pandas_development_team_pandas-dev_pandas_Pandas>), and
+polars#cite(<polars2024>). The project also provides live interactive
 documentation and a #link("https://williambdean.github.io/conjugate/explorer",
 "online Distribution Explorer") for real-time model investigation.
 
 == Conjugate Priors
 
 A prior distribution is conjugate to a likelihood when the posterior remains in
-the same distribution family after observing data.#cite(<raiffa1961applied>)
+the same distribution family after observing data#cite(<raiffa1961applied>).
 Conjugate priors provide closed-form posterior updates and posterior predictive
 distributions, eliminating the need for numerical
-integration.#cite(<fink1997compendium>) Classic examples include the
+integration#cite(<fink1997compendium>). Classic examples include the
 Beta-Binomial, Gamma-Poisson, and Normal-Normal families, each of which admits
 compact updates for parameters such as success probability, rate, or
-mean.#cite(<murphy2007conjugate>) `conjugate-models` implements the majority of
+mean#cite(<murphy2007conjugate>). `conjugate-models` implements the majority of
 conjugate pairs cataloged in the literature and reference
-tables.#cite(<fink1997compendium>)
+tables#cite(<fink1997compendium>).
 
 == Motivation
 
@@ -65,9 +65,7 @@ users seeking:
   "Wikipedia Conjugate Prior page")
 - Interactive and educational resources, including a
   #link("https://williambdean.github.io/conjugate/explorer", "online
-  Distribution Explorer") and
-  #link("https://williambdean.github.io/conjugate/examples/", "live code
-  examples")
+  Distribution Explorer")
 
 == Problem Statement
 
@@ -79,9 +77,9 @@ for teaching and exploratory work.
 = Features & Capabilities
 `conjugate-models` provides:
 - An intuitive, pipeable API compatible with numpy
-  arrays,#cite(<harris2020array>) pandas
-  DataFrames/Series,#cite(<The_pandas_development_team_pandas-dev_pandas_Pandas>)
-  polars DataFrames,#cite(<polars2024>) and general numerical types
+  arrays#cite(<harris2020array>), pandas
+  DataFrames/Series#cite(<The_pandas_development_team_pandas-dev_pandas_Pandas>),
+  polars DataFrames#cite(<polars2024>) (for element-wise operations), and general numerical types
 - Vectorized and indexable operations for batch and multi-arm inference
 - Built-in plotting for posterior, prior, and predictive distributions
 - Connection to scipy distributions for
@@ -136,8 +134,20 @@ supported models at the
 == Sequential Bayesian Updates
 
 The library supports incremental Bayesian updating where the posterior from one
-batch becomes the prior for the next. The normal likelihood with a
-`NormalInverseGamma` prior offers a compact illustration:
+batch becomes the prior for the next.
+
+Abstractly, the workflow looks like this:
+
+```python
+prior = ...
+
+for batch_size in batch_sizes:
+    data = sample(n=batch_size)
+    posterior = model(data, prior=prior)
+    prior = posterior
+```
+
+The normal likelihood with a `NormalInverseGamma` prior offers a concrete illustration:
 
 ```python
 import numpy as np
@@ -169,6 +179,33 @@ with visualizations is available in the
   image("../docs/images/bayesian-update.png", width: 80%),
   caption: [Sequential posterior samples for the normal-normal model as new data arrive.]
 )
+
+
+== Bayesian Linear Regression
+
+For regression tasks, `conjugate-models` handles the multivariate
+Normal-Inverse-Gamma hierarchy, offering a Bayesian alternative to tools like
+`scikit-learn`'s `BayesianRidge` by yielding full posterior distributions on
+coefficients and variance:
+
+```python
+import numpy as np
+from conjugate.distributions import NormalInverseGamma
+from conjugate.models import linear_regression
+
+# Design matrix X (with intercept) and target y
+X = np.array([[1, 1.5], [1, 2.5], [1, 3.5]])
+y = np.array([4.0, 6.0, 8.0])
+
+prior = NormalInverseGamma(
+    mu=np.zeros(2),
+    alpha=1.0,
+    beta=1.0,
+    delta_inverse=np.eye(2),
+)
+
+posterior = linear_regression(X=X, y=y, prior=prior)
+```
 
 == Beta–Binomial Across Data Backends
 
@@ -253,14 +290,14 @@ print(f"Thompson Sampling selects arm: {chosen_arm}")
 Extended and interactive Thompson Sampling examples are available
 #link("https://williambdean.github.io/conjugate/examples/thompson", "here").
 
-#bibliography("refs.bib")
+#bibliography("paper.bib")
 
 
 = Related Work
 
-Several libraries offer Bayesian modeling, including PyMC,#cite(<pymc2023>)
-Stan/Pystan,#cite(<stan2025reference>) and
-scipy.stats.#cite(<virtanen2020scipy>) These tools provide immense generality
+Several libraries offer Bayesian modeling, including PyMC#cite(<pymc2023>),
+Stan/Pystan#cite(<stan2025reference>), and
+scipy.stats#cite(<virtanen2020scipy>). These tools provide immense generality
 but are typically heavyweight for conjugate cases, prioritizing MCMC and
 broader, non-conjugate models. `conjugate-models` distinguishes itself by
 focusing on a broad and faithful implementation of all classical conjugate

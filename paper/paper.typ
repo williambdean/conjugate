@@ -34,7 +34,7 @@ allowing direct use with array-like objects from libraries such as
 numpy#cite(<harris2020array>),
 pandas#cite(<The_pandas_development_team_pandas-dev_pandas_Pandas>), and
 polars#cite(<polars2024>). The project also provides live interactive
-documentation and a #link("https://williambdean.github.io/conjugate/explorer",
+documentation and an #link("https://williambdean.github.io/conjugate/explorer",
 "online Distribution Explorer") for real-time model investigation.
 
 == Conjugate Priors
@@ -57,15 +57,10 @@ simplicity and tractability of conjugate models. However, tooling for these
 models in Python has lagged behind full-featured—and often
 heavyweight—probabilistic frameworks. `conjugate-models` fills this gap for
 users seeking:
-- A composable API that interoperates smoothly with scientific Python libraries
-  (numpy, pandas, polars, matplotlib, and others)
+- A composable API that interoperates smoothly with scientific Python libraries (numpy, pandas, polars, matplotlib, and others)
 - Minimal cognitive overhead and easy expression of classic Bayesian updates
-- Coverage of most conjugate prior-likelihood pairs outlined in statistical
-  literature and on the #link("https://en.wikipedia.org/wiki/Conjugate_prior",
-  "Wikipedia Conjugate Prior page")
-- Interactive and educational resources, including a
-  #link("https://williambdean.github.io/conjugate/explorer", "online
-  Distribution Explorer")
+- Coverage of most conjugate prior-likelihood pairs outlined in statistical literature and on the #link("https://en.wikipedia.org/wiki/Conjugate_prior", "Wikipedia Conjugate Prior page")
+- Interactive and educational resources, including an #link("https://williambdean.github.io/conjugate/explorer", "online Distribution Explorer")
 
 == Problem Statement
 
@@ -76,20 +71,12 @@ for teaching and exploratory work.
 
 = Features & Capabilities
 `conjugate-models` provides:
-- An intuitive, pipeable API compatible with numpy
-  arrays#cite(<harris2020array>), pandas
-  DataFrames/Series#cite(<The_pandas_development_team_pandas-dev_pandas_Pandas>),
-  polars DataFrames#cite(<polars2024>) (for element-wise operations), and general numerical types
+- An intuitive, pipeable API compatible with numpy arrays#cite(<harris2020array>), pandas DataFrames/Series#cite(<The_pandas_development_team_pandas-dev_pandas_Pandas>), polars DataFrames#cite(<polars2024>) (for element-wise operations), and general numerical types
 - Vectorized and indexable operations for batch and multi-arm inference
 - Built-in plotting for posterior, prior, and predictive distributions
-- Connection to scipy distributions for
-  interoperability#cite(<virtanen2020scipy>)
-- Support for nearly all likelihood-prior pairs listed in statistical
-  literature and Wikipedia
-- An #link("https://williambdean.github.io/conjugate/explorer", "interactive
-  Distribution Explorer") and live, documented
-  #link("https://williambdean.github.io/conjugate/examples/", "examples and use
-  cases")
+- Connection to scipy distributions for interoperability#cite(<virtanen2020scipy>)
+- Support for nearly all likelihood-prior pairs listed in statistical literature and Wikipedia
+- An #link("https://williambdean.github.io/conjugate/explorer", "interactive Distribution Explorer") and live, documented #link("https://williambdean.github.io/conjugate/examples/", "examples and use cases")
 
 == API Overview
 

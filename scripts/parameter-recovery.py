@@ -85,7 +85,7 @@ def negative_binomial():
 
 
 def hypergeometric():
-    """TODO: Correct this example."""
+    """Hypergeometric parameter recovery."""
     from conjugate.distributions import Hypergeometric, BetaBinomial
     from conjugate.models import hypergeometric_beta_binomial
 
@@ -362,12 +362,14 @@ def plot_parameter_recovery(
 
 def main(setup, rng, ns):
     sample_data, get_posterior, true_value = setup()
+    name = setup.__name__
 
     df = parameter_recovery(ns, sample_data, get_posterior, rng)
 
     ax = plot_parameter_recovery(df, true_value=true_value)
     ax.set_xscale("log")
-    plt.savefig("parameter_recovery.png")
+    ax.set_title(f"Parameter Recovery: {name}")
+    plt.savefig(f"parameter_recovery_{name}.png")
     plt.close()
 
 
@@ -375,14 +377,28 @@ if __name__ == "__main__":
     seed = sum(map(ord, "Parameter recovery exercise"))
     rng = np.random.default_rng(seed)
 
-    ns = [5, 10, 25, 50, 100, 250, 500, 1000, 2500]
+    # Evenly spaced in log10 space
+    ns = np.logspace(np.log10(5), np.log10(2500), num=15).astype(int)
+    # Ensure unique
+    ns = sorted(list(set(ns)))
 
-    setup = normal_known_precision
-    setup = normal_known_mean
-    setup = uniform
-    setup = exponential
-    setup = inverse_gamma_known_rate
-    setup = normal_known_mean_alternative
-    setup = weibull_known_shape
-    setup = normal_normal_gamma
-    main(setup, ns=ns, rng=rng)
+    setups = [
+        binomial,
+        geometric,
+        poisson,
+        negative_binomial,
+        hypergeometric,
+        normal_known_variance,
+        normal_known_precision,
+        normal_known_mean,
+        normal_known_mean_alternative,
+        uniform,
+        exponential,
+        inverse_gamma_known_rate,
+        weibull_known_shape,
+        normal_normal_gamma,
+    ]
+
+    for setup in setups:
+        print(f"Running {setup.__name__}...")
+        main(setup, ns=ns, rng=rng)

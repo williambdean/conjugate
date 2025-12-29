@@ -8,7 +8,7 @@ tags:
   - data science
 authors:
   - name: William Dean
-    orcid: 0000-0000-0000-0000
+    orcid: 0009-0003-6510-3545
     affiliation: 1
 affiliations:
  - name: Independent Researcher

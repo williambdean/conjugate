@@ -19,14 +19,14 @@ bibliography: paper.bib
 
 # Summary
 
-`conjugate-models` is a modern Python package for Bayesian conjugate inference that prioritizes a clean, idiomatic API and seamless integration with widely used Python data analysis libraries. It covers the majority of conjugate likelihood-prior pairs found in statistical literature, making rigorous Bayesian updating, exploration, and visualization accessible for practitioners, educators, and researchers. Comprehensive documentation, interactive examples, and an online Distribution Explorer further support flexible application and learning.
+`conjugate-models` is a modern Python package for Bayesian conjugate inference that prioritizes a clean, idiomatic API and seamless integration with widely used Python data analysis libraries. It covers the majority of common conjugate likelihood-prior pairs found in statistical literature, making rigorous Bayesian updating, exploration, and visualization accessible for practitioners, educators, and researchers. Comprehensive documentation, interactive examples, and an online Distribution Explorer further support flexible application and learning.
 
 # Statement of need
 
 Bayesian inference with conjugate priors offers a tractable and interpretable
 approach to updating distributions in light of new evidence. While
-general-purpose probabilistic programming frameworks exist, they can be
-unnecessarily complex for common conjugate models. The `conjugate-models`
+general-purpose probabilistic programming frameworks exist, they can introduce
+significant cognitive and computational overhead for common conjugate models. The `conjugate-models`
 package is designed to provide efficient, intuitive, and didactic support for
 Bayesian conjugate workflows across statistics, data science, and education,
 allowing direct use with array-like objects from libraries such as
@@ -53,7 +53,7 @@ tables[@fink1997compendium].
 Many real-world and educational Bayesian inference tasks benefit from the
 simplicity and tractability of conjugate models. However, tooling for these
 models in Python has lagged behind full-featured—and often
-heavyweight—probabilistic frameworks. `conjugate-models` fills this gap for
+complex—probabilistic frameworks. `conjugate-models` fills this gap for
 users seeking:
 - A composable API that interoperates smoothly with scientific Python libraries (numpy, pandas, polars, matplotlib, and others)
 - Minimal cognitive overhead and easy expression of classic Bayesian updates
@@ -195,7 +195,7 @@ example updates the same Beta–Binomial model across each backend without
 changing the model invocation:
 
 ```python
-from conjugate.distributions import Beta, BetaBinomial
+from conjugate.distributions import Beta
 from conjugate.models import binomial_beta, binomial_beta_predictive
 import numpy as np
 import pandas as pd
@@ -208,13 +208,13 @@ N = 10
 prior = Beta(1, 1)
 
 # builtin
-posterior: BetaBinomial = binomial_beta(n=N, x=x, prior=prior)
+posterior: Beta = binomial_beta(n=N, x=x, prior=prior)
 # numpy
-np_posterior: BetaBinomial = binomial_beta(n=N, x=np.array([x]), prior=prior)
+np_posterior: Beta = binomial_beta(n=N, x=np.array([x]), prior=prior)
 # pandas
-pd_posterior: BetaBinomial = binomial_beta(n=N, x=pd.Series([x]), prior=prior)
+pd_posterior: Beta = binomial_beta(n=N, x=pd.Series([x]), prior=prior)
 # polars
-pl_posterior: BetaBinomial = binomial_beta(n=N, x=pl.Series([x]), prior=prior)
+pl_posterior: Beta = binomial_beta(n=N, x=pl.Series([x]), prior=prior)
 
 # Plotting (identical regardless of backend)
 import matplotlib.pyplot as plt

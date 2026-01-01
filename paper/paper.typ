@@ -277,9 +277,6 @@ print(f"Thompson Sampling selects arm: {chosen_arm}")
 Extended and interactive Thompson Sampling examples are available
 #link("https://williambdean.github.io/conjugate/examples/thompson", "here").
 
-#bibliography("paper.bib")
-
-
 = Related Work
 
 Several libraries offer Bayesian modeling, including PyMC#cite(<pymc2023>),
@@ -293,3 +290,5 @@ researchers who prefer clarity, rapid analysis, integration with common
 scientific ecosystems, and interactive documentation. Its didactic approach and
 extensibility make it an appealing alternative and companion to more complex
 probabilistic frameworks.
+
+#bibliography("paper.bib")

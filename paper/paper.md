@@ -19,7 +19,7 @@ bibliography: paper.bib
 
 # Summary
 
-`conjugate-models` is a modern Python package for Bayesian conjugate inference that prioritizes a clean, idiomatic API and seamless integration with widely used Python data analysis libraries. It covers the majority of common conjugate likelihood-prior pairs found in statistical literature, making rigorous Bayesian updating, exploration, and visualization accessible for practitioners, educators, and researchers. Comprehensive documentation, interactive examples, and an online Distribution Explorer further support flexible application and learning.
+`conjugate-models` is a modern Python package for Bayesian conjugate inference that prioritizes a clean, idiomatic API and seamless integration with widely used Python data analysis libraries. It implements the conjugate likelihood-prior pairs cataloged in Fink's compendium and Wikipedia's conjugate prior table, making rigorous Bayesian updating, exploration, and  visualization accessible for practitioners, educators, and researchers.  Comprehensive documentation, interactive examples, and an online Distribution  Explorer further support flexible application and learning.
 
 # Statement of need
 
@@ -41,12 +41,16 @@ A prior distribution is conjugate to a likelihood when the posterior remains in
 the same distribution family after observing data[@raiffa1961applied].
 Conjugate priors provide closed-form posterior updates and posterior predictive
 distributions, eliminating the need for numerical
-integration[@fink1997compendium]. Classic examples include the
-Beta-Binomial, Gamma-Poisson, and Normal-Normal families, each of which admits
-compact updates for parameters such as success probability, rate, or
-mean[@murphy2007conjugate]. `conjugate-models` implements the majority of
-conjugate pairs cataloged in the literature and reference
-tables[@fink1997compendium].
+integration[@fink1997compendium]. Because these updates are analytic
+rather than iterative, posterior computation is instantaneous regardless of
+data size—enabling real-time interactive exploration and rapid model
+iteration. Classic examples include the Beta-Binomial, Gamma-Poisson, and
+Normal-Normal families, each of which admits compact updates for parameters
+such as success probability, rate, or mean[@murphy2007conjugate].
+`conjugate-models` implements the conjugate pairs cataloged in Fink's
+compendium[@fink1997compendium] and Wikipedia's conjugate prior table.
+The complete list of supported models is maintained at
+[the online documentation](https://williambdean.github.io/conjugate/models/).
 
 ## Motivation
 
@@ -57,15 +61,18 @@ complex—probabilistic frameworks. `conjugate-models` fills this gap for
 users seeking:
 - A composable API that interoperates smoothly with scientific Python libraries (numpy, pandas, polars, matplotlib, and others)
 - Minimal cognitive overhead and easy expression of classic Bayesian updates
-- Coverage of most conjugate prior-likelihood pairs outlined in statistical literature and on the [Wikipedia Conjugate Prior page](https://en.wikipedia.org/wiki/Conjugate_prior)
-- Interactive and educational resources, including an [online Distribution Explorer](https://williambdean.github.io/conjugate/explorer)
+- Coverage of conjugate prior-likelihood pairs outlined in statistical literature, particularly Fink's compendium[@fink1997compendium] and the [Wikipedia Conjugate Prior page](https://en.wikipedia.org/wiki/Conjugate_prior)
+- Interactive and educational resources, including an [online Distribution Explorer](https://williambdean.github.io/conjugate/explorer) that enables real-time exploration of prior-posterior relationships without requiring local installation
 
 ## Problem Statement
 
 Python lacked a dedicated, user-friendly package making Bayesian conjugate
 inference accessible, idiomatic, and didactically powerful—especially one
 offering robust integration with common data tooling and interactive resources
-for teaching and exploratory work.
+for teaching and exploratory work. Existing educational tools for Bayesian
+statistics often lack interactivity or require complex setup, making the
+intuitive nature of conjugate priors difficult to convey to students and
+practitioners new to Bayesian methods.
 
 # Features & Capabilities
 `conjugate-models` provides:
@@ -73,7 +80,7 @@ for teaching and exploratory work.
 - Vectorized and indexable operations for batch and multi-arm inference
 - Built-in plotting for posterior, prior, and predictive distributions
 - Connection to scipy distributions for interoperability[@virtanen2020scipy]
-- Support for nearly all likelihood-prior pairs listed in statistical literature and Wikipedia
+- Support for conjugate likelihood-prior pairs listed in statistical literature and Wikipedia
 - An [interactive Distribution Explorer](https://williambdean.github.io/conjugate/explorer) and live, documented [examples and use cases](https://williambdean.github.io/conjugate/examples/)
 
 ## API Overview
@@ -107,8 +114,8 @@ as needed.
 
 The API is designed for compatibility with a broad array of array-like or
 DataFrame-like objects—numpy, pandas, polars, and more—allowing seamless
-integration in scientific Python workflows. The package covers the majority of
-conjugate pairs commonly found in the literature, and its general design makes
+integration in scientific Python workflows. The package implements the conjugate
+pairs commonly found in the literature, with its general design making
 extension to new models straightforward. Learn more and browse the full list of
 supported models at the
 [documentation](https://williambdean.github.io/conjugate/models/).
@@ -265,13 +272,44 @@ Extended and interactive Thompson Sampling examples are available
 # Related Work
 
 Several libraries offer Bayesian modeling, including PyMC[@pymc2023],
-Stan/Pystan[@stan2025reference], and
-scipy.stats[@virtanen2020scipy]. These tools provide immense generality
-but are typically heavyweight for conjugate cases, prioritizing MCMC and
-broader, non-conjugate models. `conjugate-models` distinguishes itself by
-focusing on a broad and faithful implementation of all classical conjugate
-priors in an accessible API tailored for Python users, educators, and
-researchers who prefer clarity, rapid analysis, integration with common
-scientific ecosystems, and interactive documentation. Its didactic approach and
-extensibility make it an appealing alternative and companion to more complex
-probabilistic frameworks.
+Stan/Pystan[@stan2025reference], scipy.stats[@virtanen2020scipy],
+scikit-learn[@scikit-learn], ArviZ[@Kumar2019], and
+Bambi[@Capretto_Bambi_A_simple_2022]. These tools provide immense generality but are typically
+heavyweight for conjugate cases, prioritizing MCMC and broader, non-conjugate
+models. Notably, scipy.stats provides the foundational distributions that
+`conjugate-models` builds upon—our package wraps scipy's distributions via the
+`dist` attribute while adding conjugate update semantics, intuitive plotting
+interfaces, and seamless integration with the Bayesian workflow. Similarly,
+while PyMC and Stan focus on complex probabilistic programming, and
+scikit-learn emphasizes predictive point estimates, `conjugate-models`
+distinguishes itself by focusing on a broad and faithful implementation of all
+classical conjugate priors in an accessible API tailored for Python users,
+educators, and researchers who prefer clarity, rapid analysis, integration with
+common scientific ecosystems, and interactive documentation. Its didactic
+approach and extensibility make it an appealing alternative and companion to
+more complex probabilistic frameworks.
+
+# Limitations
+
+The `conjugate-models` package focuses exclusively on conjugate models with
+closed-form solutions. Users requiring non-conjugate priors, complex
+hierarchical models, or MCMC sampling should consider PyMC or Stan.
+Additionally, the API expects users to provide summary statistics (e.g., sum
+of observations, counts) rather than raw data arrays, providing flexibility at
+the cost of requiring basic data preprocessing. However, the function
+parameters follow standard naming conventions from the Bayesian literature, and
+extensive [documented examples](https://williambdean.github.io/conjugate/examples/)
+demonstrate proper usage patterns. Community support is available through
+[GitHub Issues](https://github.com/williambdean/conjugate/issues) and
+[Discussions](https://github.com/williambdean/conjugate/discussions).
+
+# Availability
+
+`conjugate-models` is available on PyPI as `conjugate-models` (`pip install conjugate-models`) and distributed
+under the MIT License. The source code, extensive documentation, and
+contribution guidelines are maintained at
+[https://github.com/williambdean/conjugate](https://github.com/williambdean/conjugate).
+Community contributions are encouraged through the project's
+[CONTRIBUTING.md](https://github.com/williambdean/conjugate/blob/main/CONTRIBUTING.md)
+guidelines, and interactive exploration is supported through the
+[online Distribution Explorer](https://williambdean.github.io/conjugate/explorer).

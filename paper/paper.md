@@ -262,9 +262,6 @@ print(f"Thompson Sampling selects arm: {chosen_arm}")
 Extended and interactive Thompson Sampling examples are available
 [here](https://williambdean.github.io/conjugate/examples/thompson).
 
-
-
-
 # Related Work
 
 Several libraries offer Bayesian modeling, including PyMC[@pymc2023],

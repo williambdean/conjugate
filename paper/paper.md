@@ -100,42 +100,52 @@ for successes, trials in observations:
 
 ![Sequential Bayesian updates showing prior, intermediate posterior, and final posterior distributions. Each update incorporates new evidence while maintaining uncertainty.](bayesian-update.png)
 
-## Thompson Sampling with Multi-Armed Bandits
+## Thompson Sampling for Minimizing Wait Times
 
-Thompson sampling for multi-armed bandits becomes straightforward with
-conjugate updates. This example shows exploration-exploitation for three
-bandits with unknown success rates:
+Thompson sampling is effective for exploration-exploitation problems where the
+goal is optimization. This example demonstrates finding the group with minimum
+wait time using exponential-gamma conjugate updates:
 
 ```python
+from conjugate.distributions import Gamma, Exponential
+from conjugate.models import exponential_gamma
 import numpy as np
-from conjugate.distributions import Beta
-from conjugate.models import binomial_beta
 
-# Three bandits with unknown success rates
-n_bandits = 3
-priors = [Beta(1, 1) for _ in range(n_bandits)]  # Uniform priors
-posteriors = priors.copy()
+# Five groups with unknown exponential wait times
+lam = np.array([0.5, 0.55, 0.6, 0.8, 1])  # True rates (hidden)
+n_groups = len(lam)
+true_dist = Exponential(lam=lam)
 
-# Thompson sampling: sample success rate from each posterior,
-# choose highest, observe result, update
-for round in range(100):
-    # Sample from each posterior
-    sampled_rates = [post.rvs(1)[0] for post in posteriors]
+def thompson_step(estimate: Gamma, rng) -> Gamma:
+    # Sample rate from posterior for each group
+    sample = estimate.dist.rvs(random_state=rng)
 
-    # Choose bandit with highest sampled rate
-    chosen_bandit = np.argmax(sampled_rates)
+    # Choose group with minimum expected wait time (highest rate)
+    group_to_sample = np.argmin(sample)
 
-    # Simulate trial (e.g., true rates: [0.3, 0.5, 0.7])
-    true_rates = [0.3, 0.5, 0.7]
-    success = np.random.random() < true_rates[chosen_bandit]
+    # Observe wait time from chosen group
+    group_sample = true_dist[group_to_sample].dist.rvs(random_state=rng)
 
-    # Update posterior for chosen bandit
-    posteriors[chosen_bandit] = binomial_beta(
-        n=1, x=int(success), prior=posteriors[chosen_bandit]
-    )
+    # Prepare statistics for Bayesian update
+    x = np.zeros(n_groups)
+    n = np.zeros(n_groups)
+    x[group_to_sample] = group_sample
+    n[group_to_sample] = 1
+
+    return exponential_gamma(x_total=x, n=n, prior=estimate)
+
+# Initialize with uniform priors
+alpha = beta = np.ones(n_groups)
+estimate = Gamma(alpha, beta)
+
+rng = np.random.default_rng(42)
+
+# Thompson sampling over 250 iterations
+for _ in range(250):
+    estimate = thompson_step(estimate=estimate, rng=rng)
 ```
 
-![Thompson sampling convergence showing how posterior distributions for three bandits evolve as evidence accumulates. The algorithm learns to favor higher-reward bandits while maintaining principled exploration.](thompson.png)
+![Thompson sampling results showing posterior distributions and exploitation rates. The algorithm successfully identifies and favors the group with the lowest wait time (highest rate), demonstrating effective exploration-exploitation balance.](thompson.png)
 
 # Related Work
 

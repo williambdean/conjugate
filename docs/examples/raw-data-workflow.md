@@ -66,6 +66,10 @@ prob_b_better = (posterior_b.rvs(10000) > posterior_a.rvs(10000)).mean()
 print(f"Probability that B > A: {prob_b_better:.3f}")
 ```
 
+![A/B Testing Results](../images/raw-data-ab-testing.png)
+
+The visualization shows the posterior distributions for both variants, with Variant B showing a higher conversion rate probability.
+
 ## Example 2: Website Analytics - Daily Page Views
 
 Analyzing daily page view counts using Poisson-Gamma conjugacy.
@@ -109,6 +113,10 @@ pred_mean = predictive.mean()
 pred_std = predictive.std()
 print(f"Tomorrow's views prediction: {pred_mean:.0f} ± {pred_std:.0f}")
 ```
+
+![Website Analytics](../images/raw-data-website-analytics.png)
+
+The left panel shows daily page views over time, while the right panel displays the posterior distribution of the daily view rate.
 
 ## Example 3: Customer Survey Analysis
 
@@ -157,6 +165,10 @@ for i, cat in enumerate(categories):
     print(f"{cat} probability: {posterior_probs[i]:.3f}")
 ```
 
+![Survey Analysis](../images/raw-data-survey-analysis.png)
+
+The visualization shows the distribution of survey responses and the corresponding posterior probabilities for each satisfaction category.
+
 ## Example 4: Sensor Measurements - Temperature Data
 
 Analyzing continuous measurement data with Normal-Inverse-Gamma conjugacy.
@@ -196,6 +208,10 @@ expected_variance = posterior.beta / (posterior.alpha - 1) if posterior.alpha > 
 print(f"Expected temperature: {expected_temp:.3f}°C")
 print(f"Expected variance: {expected_variance:.6f}")
 ```
+
+![Temperature Analysis](../images/raw-data-temperature.png)
+
+The left panel shows temperature measurements over time with confidence intervals, while the right panel displays the posterior distribution of the temperature.
 
 ## Example 5: Time Between Events - Exponential Model
 
@@ -238,6 +254,10 @@ interval_ci = 1 / rate_ci[::-1]  # Invert and flip for interval CI
 print(f"Rate 95% CI: [{rate_ci[0]:.3f}, {rate_ci[1]:.3f}]")
 print(f"Interval 95% CI: [{interval_ci[0]:.3f}, {interval_ci[1]:.3f}] minutes")
 ```
+
+![Exponential Analysis](../images/raw-data-exponential.png)
+
+The left panel shows customer arrival intervals over time, while the right panel displays the posterior distribution of the arrival rate parameter.
 
 ## Key Benefits of This Workflow
 

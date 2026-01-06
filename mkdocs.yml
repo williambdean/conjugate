@@ -48,6 +48,7 @@ nav:
   - Examples:
       - Case Studies:
           - Binomial Model: examples/binomial.md
+          - Raw Data Workflow: examples/raw-data-workflow.md
           - Bayesian Update: examples/bayesian-update.md
           - Thompson Sampling: examples/thompson.md
           - Multi-armed Bandit: examples/bandit.md

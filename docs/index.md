@@ -21,13 +21,16 @@ pip install conjugate-models
 
 ## Features
 
+- [Interactive Distribution Explorer](explorer.md) for exploring probability distributions with real-time parameter adjustment
+- **[Raw Data Workflow](examples/raw-data-workflow.md)** - Complete examples from raw observational data to posterior distributions with helper functions
+- **Data Input Helper Functions** - Extract sufficient statistics from raw observational data for all supported models
 - [Connection to Scipy Distributions](examples/scipy-connection.md) with `dist` attribute
 - [Built in Plotting](examples/plotting.md) with `plot_pdf`, `plot_pmf`, and `plot_cdf` methods
 - [Vectorized Operations](examples/vectorized-inputs.md) for parameters and data
 - [Indexing Parameters](examples/indexing.md) for subsetting and slicing
 - [Generalized Numerical Inputs](examples/generalized-inputs.md) for any inputs that act like numbers
     - Out of box compatibility with `polars`, `pandas`, `numpy`, and more.
-- [Unsupported Distributions](examples/pymc-sampling.md) for sampling from unsupported distributions
+- [Unsupported Distributions](examples/unsupported-distributions.md) for sampling from unsupported distributions
 
 ## Supported Models
 

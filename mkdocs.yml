@@ -41,40 +41,41 @@ nav:
   - Overview: index.md
   - Distribution Explorer: explorer.md
   - Modules:
-    - Models: models.md
-    - Distributions: distributions.md
-    - Mixins: mixins.md
+      - Models: models.md
+      - Distributions: distributions.md
+      - Helpers: helpers.md
+      - Mixins: mixins.md
   - Examples:
-    - Case Studies:
-      - Binomial Model: examples/binomial.md
-      - Bayesian Update: examples/bayesian-update.md
-      - Thompson Sampling: examples/thompson.md
-      - Multi-armed Bandit: examples/bandit.md
-      - Shortest Path: examples/shortest-path-itt.md
-      - Linear Regression: examples/linear-regression.md
-      - Unsupported Distributions: examples/unsupported-distributions.md
-      - Inference in SQL: examples/sql.md
-      - Bootstrap Comparison: examples/bootstrap.md
-      - Limit Estimation: examples/limit.md
-      - Available Rental Cars: examples/wiki-rental-car.md
-    - Features:
-      - Plotting: examples/plotting.md
-      - SciPy Distributions: examples/scipy-connection.md
-      - Sampling Distributions: examples/sampling-distributions.md
-      - Vectorized Operations: examples/vectorized-inputs.md
-      - Indexing: examples/indexing.md
-      - Generalized Numerical Inputs: examples/generalized-inputs.md
-      - Scaling Distributions: examples/scaling-distributions.md
+      - Case Studies:
+          - Binomial Model: examples/binomial.md
+          - Raw Data Workflow: examples/raw-data-workflow.md
+          - Bayesian Update: examples/bayesian-update.md
+          - Thompson Sampling: examples/thompson.md
+          - Multi-armed Bandit: examples/bandit.md
+          - Shortest Path: examples/shortest-path-itt.md
+          - Linear Regression: examples/linear-regression.md
+          - Unsupported Distributions: examples/unsupported-distributions.md
+          - Inference in SQL: examples/sql.md
+          - Bootstrap Comparison: examples/bootstrap.md
+          - Limit Estimation: examples/limit.md
+          - Available Rental Cars: examples/wiki-rental-car.md
+      - Features:
+          - Plotting: examples/plotting.md
+          - SciPy Distributions: examples/scipy-connection.md
+          - Sampling Distributions: examples/sampling-distributions.md
+          - Vectorized Operations: examples/vectorized-inputs.md
+          - Indexing: examples/indexing.md
+          - Generalized Numerical Inputs: examples/generalized-inputs.md
+          - Scaling Distributions: examples/scaling-distributions.md
 
 plugins:
-- search
-- marimo
-- mkdocstrings:
-    handlers:
-      python:
-        options:
-          docstring_style: google
-
+  - search
+  - marimo
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
 
 markdown_extensions:
   - admonition

@@ -4,16 +4,22 @@ These functions bridge the gap between raw data and the summary statistics
 required by conjugate model functions.
 
 Example:
-    >>> from conjugate.distributions import Gamma
-    >>> from conjugate.models import poisson_gamma
-    >>> from conjugate.helpers import poisson_gamma_inputs
-    >>> observations = [3, 5, 2, 4, 1]
-    >>> prior = Gamma(1, 1)
-    >>> posterior = poisson_gamma(**poisson_gamma_inputs(observations), prior=prior)
+    ```python
+    from conjugate.distributions import Gamma
+    from conjugate.models import poisson_gamma
+    from conjugate.helpers import poisson_gamma_inputs
+
+    observations = [3, 5, 2, 4, 1]
+    prior = Gamma(1, 1)
+    posterior = poisson_gamma(**poisson_gamma_inputs(observations), prior=prior)
+    ```
 
 For PyTensor compatibility:
-    >>> from conjugate.helpers import poisson_gamma_inputs, pytensor_ops
-    >>> inputs = poisson_gamma_inputs(observations, **pytensor_ops)
+    ```python
+    from conjugate.helpers import poisson_gamma_inputs, pytensor_ops
+
+    inputs = poisson_gamma_inputs(observations, **pytensor_ops)
+    ```
 """
 
 import numpy as np
@@ -184,12 +190,15 @@ def poisson_gamma_inputs(
         Dict with keys 'x_total' and 'n' for use with poisson_gamma()
 
     Example:
-        >>> from conjugate.models import poisson_gamma
-        >>> from conjugate.helpers import poisson_gamma_inputs
-        >>> data = [3, 5, 2, 4]
-        >>> inputs = poisson_gamma_inputs(data)
-        >>> # inputs = {'x_total': 14, 'n': 4}
-        >>> posterior = poisson_gamma(**inputs, prior=prior)
+        ```python
+        from conjugate.models import poisson_gamma
+        from conjugate.helpers import poisson_gamma_inputs
+
+        data = [3, 5, 2, 4]
+        inputs = poisson_gamma_inputs(data)
+        # inputs = {'x_total': 14, 'n': 4}
+        posterior = poisson_gamma(**inputs, prior=prior)
+        ```
     """
     if sum_fn is None:
         sum_fn = _default_sum
@@ -284,13 +293,16 @@ def bernoulli_beta_inputs(
         Dict with keys 'x' and 'n' for use with binomial_beta() or bernoulli_beta()
 
     Example:
-        >>> # Multiple Bernoulli trials - use with binomial_beta
-        >>> from conjugate.models import binomial_beta
-        >>> from conjugate.helpers import bernoulli_beta_inputs
-        >>> data = [1, 0, 1, 1, 0]  # 5 trials, 3 successes
-        >>> inputs = bernoulli_beta_inputs(data)
-        >>> # inputs = {'x': 3, 'n': 5}
-        >>> posterior = binomial_beta(**inputs, prior=prior)
+        ```python
+        # Multiple Bernoulli trials - use with binomial_beta
+        from conjugate.models import binomial_beta
+        from conjugate.helpers import bernoulli_beta_inputs
+
+        data = [1, 0, 1, 1, 0]  # 5 trials, 3 successes
+        inputs = bernoulli_beta_inputs(data)
+        # inputs = {'x': 3, 'n': 5}
+        posterior = binomial_beta(**inputs, prior=prior)
+        ```
     """
     if sum_fn is None:
         sum_fn = _default_sum
@@ -322,13 +334,16 @@ def negative_binomial_beta_inputs(
         Dict with keys 'x', 'n', and 'r' for use with negative_binomial_beta()
 
     Example:
-        >>> from conjugate.models import negative_binomial_beta
-        >>> from conjugate.helpers import negative_binomial_beta_inputs
-        >>> successes = [2, 3, 1]  # successes in 3 experiments
-        >>> failures_per_exp = 5  # known failures per experiment
-        >>> inputs = negative_binomial_beta_inputs(successes, failures_per_exp)
-        >>> # inputs = {'x': 6, 'n': 3, 'r': 5}
-        >>> posterior = negative_binomial_beta(**inputs, prior=prior)
+        ```python
+        from conjugate.models import negative_binomial_beta
+        from conjugate.helpers import negative_binomial_beta_inputs
+
+        successes = [2, 3, 1]  # successes in 3 experiments
+        failures_per_exp = 5  # known failures per experiment
+        inputs = negative_binomial_beta_inputs(successes, failures_per_exp)
+        # inputs = {'x': 6, 'n': 3, 'r': 5}
+        posterior = negative_binomial_beta(**inputs, prior=prior)
+        ```
     """
     if sum_fn is None:
         sum_fn = _default_sum

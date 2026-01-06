@@ -1,6 +1,6 @@
 [project]
 name = "conjugate-models"
-version = "0.13.1"
+version = "0.14.0"
 description = "Bayesian Conjugate Models in Python"
 authors = [{ name = "Will Dean", email = "wd60622@gmail.com" }]
 requires-python = ">=3.10,<4.0"
@@ -22,6 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
     "matplotlib",

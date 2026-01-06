@@ -18,27 +18,27 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python-version: ["3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.10", "3.11", "3.13", "3.14"]
         exclude:
           - os: windows-latest
             python-version: "3.13"
 
     steps:
-    - uses: actions/checkout@v6
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install tox tox-gh-actions
-    - name: Test with tox
-      run: tox
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v5.5.2
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        name: ${{ matrix.python-version }}
-        slug: williambdean/conjugate
-        fail_ci_if_error: false
+      - uses: actions/checkout@v6
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox tox-gh-actions
+      - name: Test with tox
+        run: tox
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5.5.2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          name: ${{ matrix.python-version }}
+          slug: williambdean/conjugate
+          fail_ci_if_error: false

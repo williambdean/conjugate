@@ -161,9 +161,56 @@ General probabilistic programming languages like PyMC[@pymc2023] and Stan[@stan2
 
 This package specifically targets conjugate prior-likelihood pairs, so non-conjugate models require other tools like PyMC[@pymc2023] or Stan[@stan2025reference]. Model updates operate on sufficient statistics rather than raw data, requiring users to compute summary statistics beforehand. Distribution and parameter names follow established conventions from statistical literature[@fink1997compendium], which may differ from other packages. Community support is available through GitHub Issues and Discussions.
 
+# Software Design
+
+`conjugate-models` adopts a distribution-centric design where each probability distribution is a first-class object wrapping scipy.stats distributions while adding conjugate-specific functionality. Key design decisions include:
+
+*Compositional API*: Rather than monolithic model classes, the package separates distributions (`conjugate.distributions`) from update logic (`conjugate.models`), allowing users to compose workflows naturally. This mirrors the mathematical structure where conjugate updates transform one distribution into another of the same family.
+
+*Scipy Integration*: The `dist` property on each distribution class provides direct access to scipy.stats objects, enabling interoperability with the broader scientific Python ecosystem without reimplementing standard functionality like PDF computation, sampling, and statistical methods.
+
+*Vectorized Operations*: Parameters accept array-like inputs (numpy arrays, pandas/polars columns), enabling batch inference for multi-arm problems like Thompson sampling without explicit loops. This design choice prioritizes performance for real-world applications involving multiple simultaneous models.
+
+*Mixin Architecture*: Plotting capabilities are added via mixins (e.g., `ContinuousPlotDistMixin`, `DiscretePlotMixin`), keeping core distribution classes focused while enabling rich visualization. The `SliceMixin` provides indexing support for vectorized parameters.
+
+*Helper Function Design*: The `helpers` module provides functions to extract sufficient statistics from raw observational data, bridging the gap between real-world datasets and the mathematical abstractions required for conjugate updates.
+
+These design choices prioritize clarity and composability over abstraction, making the mathematical structure of conjugate inference explicit in the code while maintaining compatibility with the broader scientific Python ecosystem.
+
+# Research Impact Statement
+
+`conjugate-models` addresses a specific gap in the Python ecosystem for lightweight, immediate Bayesian inference without MCMC overhead. Evidence of research impact includes:
+
+*Community Adoption*: The package is available on PyPI with sustained development over 2+ years (270+ commits since June 2023), comprehensive test coverage (94%), and active maintenance demonstrated through regular releases and bug fixes.
+
+*Educational Value*: The package's didactic design supports teaching Bayesian concepts through immediate, interactive feedback. The live Distribution Explorer provides hands-on learning without installation requirements, making Bayesian inference more accessible to students and practitioners.
+
+*Documentation and Examples*: Comprehensive documentation with 15+ worked examples demonstrates real-world applications from A/B testing to Thompson sampling, supporting both educational use and practical implementation.
+
+*Technical Contributions*: The package implements the complete catalog of conjugate pairs from Fink's compendium[@fink1997compendium] with modern Python practices, providing a reference implementation for conjugate Bayesian inference that was previously unavailable in a single, cohesive package.
+
+*Integration Capabilities*: Seamless compatibility with numpy, pandas, polars, and scipy enables integration into existing data science workflows without requiring users to learn new data structures or abandon familiar tools.
+
+The package serves researchers, educators, and practitioners who need rapid, interpretable Bayesian inference for conjugate models, complementing rather than competing with general-purpose probabilistic programming frameworks.
+
 # Acknowledgments
 
 We thank the scientific Python community, particularly the maintainers and contributors of NumPy[@harris2020array], SciPy[@virtanen2020scipy], and Matplotlib, whose foundational libraries make this package possible. The examples showcase integration with pandas[@The_pandas_development_team_pandas-dev_pandas_Pandas], Polars[@polars2024], and PyMC[@pymc2023], demonstrating the collaborative spirit of the open-source ecosystem.
+
+# AI Usage Disclosure
+
+Generative AI tools were used during the development of this software and the preparation of this manuscript. All AI-assisted outputs were reviewed, edited, and validated by the human author, who made all core design decisions.
+
+*Software Development*: GitHub Copilot Pro was used via the GitHub web interface for code suggestions and code review assistance. The majority of the codebase was written directly by the author without AI assistance.
+
+*Documentation*: AI tools assisted with portions of the package documentation. The majority of documentation was written directly by the author.
+
+*Paper Authoring*: opencode (version 1.0.220) with Claude Opus 4.5 was used to:
+- Gather and organize information from existing documentation and the codebase during paper drafting
+- Simulate peer review feedback via agent prompts to identify areas for improvement
+- Iterate on paper structure, content, and clarity
+
+*Human Oversight*: The author made all architectural and design decisions for the software, determined the scientific content and framing of the paper, and reviewed and validated all AI-assisted outputs before inclusion. No AI-generated code or text was included without human verification and editing.
 
 # Availability
 

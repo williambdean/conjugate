@@ -1,3 +1,6 @@
+---
+comments: true
+---
 # Raw Data to Posterior: Complete Workflow
 
 This example demonstrates the complete workflow from raw observational data to Bayesian posterior distributions using the helper functions in `conjugate-models`.

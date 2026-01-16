@@ -1,6 +1,8 @@
 ---
 ci:
   autofix_prs: true
+  skip:
+    - check-docs-frontmatter
 
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit

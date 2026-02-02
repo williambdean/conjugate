@@ -1,6 +1,8 @@
 ---
 ci:
   autofix_prs: true
+  skip:
+    - check-docs-frontmatter
 
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -17,3 +19,12 @@ repos:
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
+  - repo: local
+    hooks:
+      - id: check-docs-frontmatter
+        name: Check docs frontmatter for comments
+        entry: uv run python scripts/check_frontmatter.py
+        language: system
+        files: ^docs/.*\.md$
+        exclude: ^docs/index\.md$
+        pass_filenames: false

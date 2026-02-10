@@ -3,6 +3,8 @@ import pytest
 import numpy as np
 
 import matplotlib.pyplot as plt
+from matplotlib.axes import Axes
+
 
 from conjugate.plot import resolve_label
 from conjugate.distributions import Beta, Binomial
@@ -28,21 +30,24 @@ def test_resolve_label(label, yy, expected):
 
 
 @pytest.fixture(autouse=True)
-def matplotib_cleanup() -> None:
+def matplotib_cleanup():
     yield
     plt.close("all")
 
 
 def test_plot_pdf() -> None:
     dist = Beta(alpha=1, beta=1)
-    dist.plot_pdf()
+    ax = dist.plot_pdf()
+    assert isinstance(ax, Axes)
 
 
 def test_plot_cdf() -> None:
     dist = Beta(alpha=1, beta=1)
-    dist.plot_cdf()
+    ax = dist.plot_cdf()
+    assert isinstance(ax, Axes)
 
 
 def test_plot_pmf() -> None:
     dist = Binomial(n=10, p=0.5)
-    dist.plot_pmf()
+    ax = dist.plot_pmf()
+    assert isinstance(ax, Axes)

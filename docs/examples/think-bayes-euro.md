@@ -79,60 +79,9 @@ print(f"Predicted heads in {n_future} flips: {posterior_predictive.mean():.2f}")
 
 Compare prior, posterior, and predictive distributions:
 
-```python
-# Create visualization
-fig, axes = plt.subplots(2, 1, figsize=(10, 8))
+![Euro Problem](../images/think-bayes/euro.png)
 
-# Top plot: Prior vs Posterior distributions
-ax1 = axes[0]
-p_range = np.linspace(0, 1, 200)
-
-# Plot prior (uniform)
-prior_pdf = prior.dist.pdf(p_range)
-ax1.plot(p_range, prior_pdf, label='Prior (Uniform)', color='blue', linewidth=2)
-
-# Plot posterior
-posterior_pdf = posterior.dist.pdf(p_range)
-ax1.plot(p_range, posterior_pdf, label='Posterior', color='red', linewidth=2)
-
-# Add vertical lines
-ax1.axvline(prior.mean(), color='blue', linestyle='--', alpha=0.7, label=f'Prior mean: {prior.mean():.3f}')
-ax1.axvline(posterior.mean(), color='red', linestyle='--', alpha=0.7, label=f'Posterior mean: {posterior.mean():.3f}')
-ax1.axvline(x/n, color='black', linestyle=':', alpha=0.7, label=f'Observed: {x/n:.3f}')
-
-ax1.set_xlabel('Probability of Heads (p)')
-ax1.set_ylabel('Probability Density')
-ax1.set_title('Prior vs Posterior for Coin Bias')
-ax1.legend()
-ax1.grid(True, alpha=0.3)
-
-# Bottom plot: Predictive distributions
-ax2 = axes[1]
-heads_range = np.arange(0, n_future + 1)
-
-# Plot prior predictive
-prior_predictive = binomial_beta_predictive(n=n_future, distribution=prior)
-prior_pmf = prior_predictive.dist.pmf(heads_range)
-ax2.bar(heads_range - 0.2, prior_pmf, width=0.4, label='Prior Predictive', color='blue', alpha=0.7)
-
-# Plot posterior predictive
-post_pmf = posterior_predictive.dist.pmf(heads_range)
-ax2.bar(heads_range + 0.2, post_pmf, width=0.4, label='Posterior Predictive', color='red', alpha=0.7)
-
-# Add expected value
-ax2.axvline(x * n_future / n, color='black', linestyle=':', linewidth=2,
-            label=f'Expected: {x * n_future / n:.1f} heads')
-
-ax2.set_xlabel(f'Number of Heads in {n_future} Future Flips')
-ax2.set_ylabel('Probability')
-ax2.set_title('Predictive Distribution for Future Flips')
-ax2.set_xticks(heads_range)
-ax2.legend()
-ax2.grid(True, alpha=0.3)
-
-plt.tight_layout()
-plt.show()
-```
+*Figure: Beta-Binomial conjugate analysis showing how observing 140 heads in 250 flips updates from a uniform prior to a Beta(141,111) posterior, with 95% credible interval and predictive distributions.*
 
 ### Credible Interval
 

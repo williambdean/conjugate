@@ -19,7 +19,7 @@ Import the required distributions and functions:
 - `poisson_gamma_predictive`: Predictive distribution function
 
 ```python
-from conjugate.distributions import Gamma, Poisson, GammaPoisson
+from conjugate.distributions import Gamma, Poisson
 from conjugate.models import poisson_gamma, poisson_gamma_predictive
 
 import matplotlib.pyplot as plt

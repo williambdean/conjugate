@@ -65,7 +65,7 @@ Get the predictive distribution for future games using the posterior:
 
 ```python
 # Predictive distribution for next game
-posterior_predictive = poisson_gamma_predictive(
+posterior_predictive = poisson_gamma_predictive
     n=1,
     distribution=posterior
 )

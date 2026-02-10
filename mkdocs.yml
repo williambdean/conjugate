@@ -59,6 +59,9 @@ nav:
           - Bootstrap Comparison: examples/bootstrap.md
           - Limit Estimation: examples/limit.md
           - Available Rental Cars: examples/wiki-rental-car.md
+          - World Cup Problem (Gamma-Poisson): examples/think-bayes-world-cup.md
+          - Euro Problem (Beta-Binomial): examples/think-bayes-euro.md
+          - Lions, Tigers and Bears (Dirichlet-Multinomial): examples/think-bayes-animals.md
       - Features:
           - Plotting: examples/plotting.md
           - SciPy Distributions: examples/scipy-connection.md

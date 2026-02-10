@@ -2,7 +2,10 @@ import pytest
 
 import numpy as np
 
+import matplotlib.pyplot as plt
+
 from conjugate.plot import resolve_label
+from conjugate.distributions import Beta, Binomial
 
 
 @pytest.mark.parametrize(
@@ -22,3 +25,24 @@ from conjugate.plot import resolve_label
 )
 def test_resolve_label(label, yy, expected):
     assert resolve_label(label, yy) == expected
+
+
+@pytest.fixture(autouse=True)
+def matplotib_cleanup() -> None:
+    yield
+    plt.close("all")
+
+
+def test_plot_pdf() -> None:
+    dist = Beta(alpha=1, beta=1)
+    dist.plot_pdf()
+
+
+def test_plot_cdf() -> None:
+    dist = Beta(alpha=1, beta=1)
+    dist.plot_cdf()
+
+
+def test_plot_pmf() -> None:
+    dist = Binomial(n=10, p=0.5)
+    dist.plot_pmf()

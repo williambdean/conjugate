@@ -50,6 +50,7 @@ dev = [
     "polars>=1.29.0",
     "narwhals>=1.39.0",
     "pytest-xdist>=3.8.0",
+    "pytest-env>=1.1.3",
 ]
 docs = [
     "marimo>=0.13.15",
@@ -89,6 +90,7 @@ pydocstyle.convention = "google"
 
 [tool.pytest.ini_options]
 addopts = "--mpl --mpl-baseline-path=tests/example-plots --cov=conjugate --cov-report=xml --cov-report=term-missing"
+env = ["MPLBACKEND=Agg"]
 
 [tool.tox]
 legacy_tox_ini = """

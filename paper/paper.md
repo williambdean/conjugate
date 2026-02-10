@@ -43,7 +43,7 @@ integration[@fink1997compendium]. Because these updates are analytic
 rather than iterative, posterior computation is instantaneous regardless of
 data size—enabling real-time interactive exploration and rapid model
 iteration. `conjugate-models` implements the conjugate pairs cataloged in Fink's
-compendium[@fink1997compendium] and Wikipedia's conjugate prior table.
+compendium[@fink1997compendium] and Wikipedia's conjugate prior table[@wikipedia_conjugate_prior].
 The complete list of supported models is maintained at
 [the online documentation](https://williambdean.github.io/conjugate/models/).
 

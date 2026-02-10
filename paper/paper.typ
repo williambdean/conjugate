@@ -50,7 +50,7 @@ iteration. Classic examples include the Beta-Binomial, Gamma-Poisson, and
 Normal-Normal families, each of which admits compact updates for parameters
 such as success probability, rate, or mean#cite(<murphy2007conjugate>).
 `conjugate-models` implements the conjugate pairs cataloged in Fink's
-compendium#cite(<fink1997compendium>) and Wikipedia's conjugate prior table.
+compendium#cite(<fink1997compendium>) and Wikipedia's conjugate prior table#cite(<wikipedia_conjugate_prior>).
 The complete list of supported models is maintained at
 #link("https://williambdean.github.io/conjugate/models/", "the online documentation").
 

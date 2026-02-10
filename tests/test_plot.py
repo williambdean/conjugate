@@ -2,7 +2,6 @@ import pytest
 
 import numpy as np
 
-import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
 
 
@@ -27,12 +26,6 @@ from conjugate.distributions import Beta, Binomial
 )
 def test_resolve_label(label, yy, expected):
     assert resolve_label(label, yy) == expected
-
-
-@pytest.fixture(autouse=True)
-def matplotib_cleanup():
-    yield
-    plt.close("all")
 
 
 def test_plot_pdf() -> None:

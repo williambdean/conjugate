@@ -2,7 +2,11 @@ import pytest
 
 import numpy as np
 
+from matplotlib.axes import Axes
+
+
 from conjugate.plot import resolve_label
+from conjugate.distributions import Beta, Binomial
 
 
 @pytest.mark.parametrize(
@@ -22,3 +26,21 @@ from conjugate.plot import resolve_label
 )
 def test_resolve_label(label, yy, expected):
     assert resolve_label(label, yy) == expected
+
+
+def test_plot_pdf() -> None:
+    dist = Beta(alpha=1, beta=1)
+    ax = dist.plot_pdf()
+    assert isinstance(ax, Axes)
+
+
+def test_plot_cdf() -> None:
+    dist = Beta(alpha=1, beta=1)
+    ax = dist.plot_cdf()
+    assert isinstance(ax, Axes)
+
+
+def test_plot_pmf() -> None:
+    dist = Binomial(n=10, p=0.5)
+    ax = dist.plot_pmf()
+    assert isinstance(ax, Axes)

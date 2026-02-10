@@ -108,6 +108,7 @@ legacy_tox_ini = """
         pytest
         pytest-cov
         pytest-mpl
+        pytest-env
         pypika
     commands = pytest tests
 """

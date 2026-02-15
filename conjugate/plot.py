@@ -1,7 +1,7 @@
 from collections.abc import Callable, Iterable
 from dataclasses import asdict
 from itertools import zip_longest
-from typing import Protocol
+from typing import Any, Protocol
 
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
@@ -134,7 +134,7 @@ class ContinuousPlotDistMixin(PlotDistMixin):
 
         return self._create_plot_on_axis(x=x, cdf=cdf, ax=ax, **kwargs)
 
-    def plot_pdf(self, ax: Axes | None = None, **kwargs) -> Axes:
+    def plot_pdf(self, ax: Axes | None = None, **kwargs: Any) -> Axes:
         """Plot the PDF of distribution
 
         Args:
@@ -150,7 +150,7 @@ class ContinuousPlotDistMixin(PlotDistMixin):
         """
         return self._plot(ax=ax, cdf=False, **kwargs)
 
-    def plot_cdf(self, ax: Axes | None = None, **kwargs) -> Axes:
+    def plot_cdf(self, ax: Axes | None = None, **kwargs: Any) -> Axes:
         """Plot the CDF of distribution
 
         Args:
@@ -213,8 +213,8 @@ class DirichletPlotDistMixin(ContinuousPlotDistMixin):
         self,
         ax: Axes | None = None,
         samples: int = 1_000,
-        random_state=None,
-        **kwargs,
+        random_state: np.random.RandomState | None = None,
+        **kwargs: Any,
     ) -> Axes:
         """Plots the pdf by sampling from the distribution.
 
@@ -276,7 +276,7 @@ class DiscretePlotMixin(PlotDistMixin):
         ax: Axes | None = None,
         mark: str = "o-",
         conditional: bool = False,
-        **kwargs,
+        **kwargs: Any,
     ) -> Axes:
         """Plot the PMF of distribution
 
@@ -306,7 +306,7 @@ class DiscretePlotMixin(PlotDistMixin):
         ax: Axes | None = None,
         mark: str = "o-",
         conditional: bool = False,
-        **kwargs,
+        **kwargs: Any,
     ) -> Axes:
         """Plot the CDF of distribution
 

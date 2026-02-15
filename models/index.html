@@ -6552,7 +6552,8 @@ plt.close()
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>conjugate/models.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-2124">2124</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-2123">2123</a></span>
+<span class="normal"><a href="#__codelineno-0-2124">2124</a></span>
 <span class="normal"><a href="#__codelineno-0-2125">2125</a></span>
 <span class="normal"><a href="#__codelineno-0-2126">2126</a></span>
 <span class="normal"><a href="#__codelineno-0-2127">2127</a></span>
@@ -6631,88 +6632,87 @@ plt.close()
 <span class="normal"><a href="#__codelineno-0-2200">2200</a></span>
 <span class="normal"><a href="#__codelineno-0-2201">2201</a></span>
 <span class="normal"><a href="#__codelineno-0-2202">2202</a></span>
-<span class="normal"><a href="#__codelineno-0-2203">2203</a></span>
-<span class="normal"><a href="#__codelineno-0-2204">2204</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-2124"><a id="__codelineno-0-2124" name="__codelineno-0-2124"></a><span class="nd">@add_associated_likelihood</span><span class="p">(</span><span class="n">LogNormal</span><span class="p">)</span>
-</span><span id="__span-0-2125"><a id="__codelineno-0-2125" name="__codelineno-0-2125"></a><span class="nd">@validate_prior_type</span>
-</span><span id="__span-0-2126"><a id="__codelineno-0-2126" name="__codelineno-0-2126"></a><span class="k">def</span><span class="w"> </span><span class="nf">log_normal</span><span class="p">(</span>
-</span><span id="__span-0-2127"><a id="__codelineno-0-2127" name="__codelineno-0-2127"></a>    <span class="o">*</span><span class="p">,</span>
-</span><span id="__span-0-2128"><a id="__codelineno-0-2128" name="__codelineno-0-2128"></a>    <span class="n">ln_x_total</span><span class="p">:</span> <span class="n">NUMERIC</span><span class="p">,</span>
-</span><span id="__span-0-2129"><a id="__codelineno-0-2129" name="__codelineno-0-2129"></a>    <span class="n">ln_x2_total</span><span class="p">:</span> <span class="n">NUMERIC</span><span class="p">,</span>
-</span><span id="__span-0-2130"><a id="__codelineno-0-2130" name="__codelineno-0-2130"></a>    <span class="n">n</span><span class="p">:</span> <span class="n">NUMERIC</span><span class="p">,</span>
-</span><span id="__span-0-2131"><a id="__codelineno-0-2131" name="__codelineno-0-2131"></a>    <span class="n">prior</span><span class="p">:</span> <span class="n">NormalInverseGamma</span> <span class="o">|</span> <span class="n">NormalGamma</span><span class="p">,</span>
-</span><span id="__span-0-2132"><a id="__codelineno-0-2132" name="__codelineno-0-2132"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NormalInverseGamma</span> <span class="o">|</span> <span class="n">NormalGamma</span><span class="p">:</span>
-</span><span id="__span-0-2133"><a id="__codelineno-0-2133" name="__codelineno-0-2133"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Log normal likelihood.</span>
-</span><span id="__span-0-2134"><a id="__codelineno-0-2134" name="__codelineno-0-2134"></a>
-</span><span id="__span-0-2135"><a id="__codelineno-0-2135" name="__codelineno-0-2135"></a><span class="sd">    By taking the log of the data, we can use the normal inverse gamma posterior.</span>
-</span><span id="__span-0-2136"><a id="__codelineno-0-2136" name="__codelineno-0-2136"></a>
-</span><span id="__span-0-2137"><a id="__codelineno-0-2137" name="__codelineno-0-2137"></a><span class="sd">    Reference: &lt;a href=https://web.archive.org/web/20090529203101/http://www.people.cornell.edu/pages/df36/CONJINTRnew%20TEX.pdf&gt;Section 1.2.1&lt;/a&gt;</span>
-</span><span id="__span-0-2138"><a id="__codelineno-0-2138" name="__codelineno-0-2138"></a>
-</span><span id="__span-0-2139"><a id="__codelineno-0-2139" name="__codelineno-0-2139"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-2140"><a id="__codelineno-0-2140" name="__codelineno-0-2140"></a><span class="sd">        ln_x_total: sum of the log of all outcomes</span>
-</span><span id="__span-0-2141"><a id="__codelineno-0-2141" name="__codelineno-0-2141"></a><span class="sd">        ln_x2_total: sum of the log of all outcomes squared</span>
-</span><span id="__span-0-2142"><a id="__codelineno-0-2142" name="__codelineno-0-2142"></a><span class="sd">        n: total number of samples in ln_x_total and ln_x2_total</span>
-</span><span id="__span-0-2143"><a id="__codelineno-0-2143" name="__codelineno-0-2143"></a><span class="sd">        prior: NormalInverseGamma or NormalGamma prior</span>
-</span><span id="__span-0-2144"><a id="__codelineno-0-2144" name="__codelineno-0-2144"></a>
-</span><span id="__span-0-2145"><a id="__codelineno-0-2145" name="__codelineno-0-2145"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-2146"><a id="__codelineno-0-2146" name="__codelineno-0-2146"></a><span class="sd">        NormalInverseGamma or NormalGamma posterior distribution</span>
-</span><span id="__span-0-2147"><a id="__codelineno-0-2147" name="__codelineno-0-2147"></a>
-</span><span id="__span-0-2148"><a id="__codelineno-0-2148" name="__codelineno-0-2148"></a><span class="sd">    Example:</span>
-</span><span id="__span-0-2149"><a id="__codelineno-0-2149" name="__codelineno-0-2149"></a><span class="sd">        Constructed example</span>
-</span><span id="__span-0-2150"><a id="__codelineno-0-2150" name="__codelineno-0-2150"></a>
-</span><span id="__span-0-2151"><a id="__codelineno-0-2151" name="__codelineno-0-2151"></a><span class="sd">        ```python</span>
-</span><span id="__span-0-2152"><a id="__codelineno-0-2152" name="__codelineno-0-2152"></a><span class="sd">        import numpy as np</span>
-</span><span id="__span-0-2153"><a id="__codelineno-0-2153" name="__codelineno-0-2153"></a>
-</span><span id="__span-0-2154"><a id="__codelineno-0-2154" name="__codelineno-0-2154"></a><span class="sd">        import matplotlib.pyplot as plt</span>
-</span><span id="__span-0-2155"><a id="__codelineno-0-2155" name="__codelineno-0-2155"></a>
-</span><span id="__span-0-2156"><a id="__codelineno-0-2156" name="__codelineno-0-2156"></a><span class="sd">        from conjugate.distributions import NormalInverseGamma, LogNormal</span>
-</span><span id="__span-0-2157"><a id="__codelineno-0-2157" name="__codelineno-0-2157"></a><span class="sd">        from conjugate.models import log_normal_normal_inverse_gamma</span>
-</span><span id="__span-0-2158"><a id="__codelineno-0-2158" name="__codelineno-0-2158"></a>
-</span><span id="__span-0-2159"><a id="__codelineno-0-2159" name="__codelineno-0-2159"></a><span class="sd">        true_mu = 0</span>
-</span><span id="__span-0-2160"><a id="__codelineno-0-2160" name="__codelineno-0-2160"></a><span class="sd">        true_sigma = 2.5</span>
-</span><span id="__span-0-2161"><a id="__codelineno-0-2161" name="__codelineno-0-2161"></a><span class="sd">        true = LogNormal(true_mu, true_sigma)</span>
-</span><span id="__span-0-2162"><a id="__codelineno-0-2162" name="__codelineno-0-2162"></a>
-</span><span id="__span-0-2163"><a id="__codelineno-0-2163" name="__codelineno-0-2163"></a><span class="sd">        n_samples = 15</span>
-</span><span id="__span-0-2164"><a id="__codelineno-0-2164" name="__codelineno-0-2164"></a><span class="sd">        data = true.dist.rvs(size=n_samples, random_state=42)</span>
-</span><span id="__span-0-2165"><a id="__codelineno-0-2165" name="__codelineno-0-2165"></a>
-</span><span id="__span-0-2166"><a id="__codelineno-0-2166" name="__codelineno-0-2166"></a><span class="sd">        ln_data = np.log(data)</span>
-</span><span id="__span-0-2167"><a id="__codelineno-0-2167" name="__codelineno-0-2167"></a>
-</span><span id="__span-0-2168"><a id="__codelineno-0-2168" name="__codelineno-0-2168"></a><span class="sd">        prior = NormalInverseGamma(mu=1, nu=1, alpha=1, beta=1)</span>
-</span><span id="__span-0-2169"><a id="__codelineno-0-2169" name="__codelineno-0-2169"></a><span class="sd">        posterior = log_normal_normal_inverse_gamma(</span>
-</span><span id="__span-0-2170"><a id="__codelineno-0-2170" name="__codelineno-0-2170"></a><span class="sd">            ln_x_total=ln_data.sum(),</span>
-</span><span id="__span-0-2171"><a id="__codelineno-0-2171" name="__codelineno-0-2171"></a><span class="sd">            ln_x2_total=(ln_data**2).sum(),</span>
-</span><span id="__span-0-2172"><a id="__codelineno-0-2172" name="__codelineno-0-2172"></a><span class="sd">            n=n_samples,</span>
-</span><span id="__span-0-2173"><a id="__codelineno-0-2173" name="__codelineno-0-2173"></a><span class="sd">            prior=prior,</span>
-</span><span id="__span-0-2174"><a id="__codelineno-0-2174" name="__codelineno-0-2174"></a><span class="sd">        )</span>
-</span><span id="__span-0-2175"><a id="__codelineno-0-2175" name="__codelineno-0-2175"></a>
-</span><span id="__span-0-2176"><a id="__codelineno-0-2176" name="__codelineno-0-2176"></a><span class="sd">        fig, axes = plt.subplots(ncols=2)</span>
-</span><span id="__span-0-2177"><a id="__codelineno-0-2177" name="__codelineno-0-2177"></a><span class="sd">        mean, variance = posterior.sample_mean(</span>
-</span><span id="__span-0-2178"><a id="__codelineno-0-2178" name="__codelineno-0-2178"></a><span class="sd">            4000,</span>
-</span><span id="__span-0-2179"><a id="__codelineno-0-2179" name="__codelineno-0-2179"></a><span class="sd">            return_variance=True,</span>
-</span><span id="__span-0-2180"><a id="__codelineno-0-2180" name="__codelineno-0-2180"></a><span class="sd">            random_state=42,</span>
-</span><span id="__span-0-2181"><a id="__codelineno-0-2181" name="__codelineno-0-2181"></a><span class="sd">        )</span>
-</span><span id="__span-0-2182"><a id="__codelineno-0-2182" name="__codelineno-0-2182"></a>
-</span><span id="__span-0-2183"><a id="__codelineno-0-2183" name="__codelineno-0-2183"></a><span class="sd">        ax = axes[0]</span>
-</span><span id="__span-0-2184"><a id="__codelineno-0-2184" name="__codelineno-0-2184"></a><span class="sd">        ax.hist(mean, bins=20)</span>
-</span><span id="__span-0-2185"><a id="__codelineno-0-2185" name="__codelineno-0-2185"></a><span class="sd">        ax.axvline(true_mu, color=&quot;black&quot;, linestyle=&quot;--&quot;, label=&quot;true mu&quot;)</span>
-</span><span id="__span-0-2186"><a id="__codelineno-0-2186" name="__codelineno-0-2186"></a>
-</span><span id="__span-0-2187"><a id="__codelineno-0-2187" name="__codelineno-0-2187"></a><span class="sd">        ax = axes[1]</span>
-</span><span id="__span-0-2188"><a id="__codelineno-0-2188" name="__codelineno-0-2188"></a><span class="sd">        ax.hist(variance, bins=20)</span>
-</span><span id="__span-0-2189"><a id="__codelineno-0-2189" name="__codelineno-0-2189"></a><span class="sd">        ax.axvline(true_sigma**2, color=&quot;black&quot;, linestyle=&quot;--&quot;, label=&quot;true sigma^2&quot;)</span>
-</span><span id="__span-0-2190"><a id="__codelineno-0-2190" name="__codelineno-0-2190"></a><span class="sd">        ```</span>
-</span><span id="__span-0-2191"><a id="__codelineno-0-2191" name="__codelineno-0-2191"></a><span class="sd">        &lt;!--</span>
-</span><span id="__span-0-2192"><a id="__codelineno-0-2192" name="__codelineno-0-2192"></a><span class="sd">        plt.savefig(&quot;./docs/images/docstrings/log_normal_normal_inverse_gamma.png&quot;)</span>
-</span><span id="__span-0-2193"><a id="__codelineno-0-2193" name="__codelineno-0-2193"></a><span class="sd">        plt.close()</span>
-</span><span id="__span-0-2194"><a id="__codelineno-0-2194" name="__codelineno-0-2194"></a><span class="sd">        --&gt;</span>
-</span><span id="__span-0-2195"><a id="__codelineno-0-2195" name="__codelineno-0-2195"></a>
-</span><span id="__span-0-2196"><a id="__codelineno-0-2196" name="__codelineno-0-2196"></a><span class="sd">        ![log_normal_normal_inverse_gamma](./images/docstrings/log_normal_normal_inverse_gamma.png)</span>
-</span><span id="__span-0-2197"><a id="__codelineno-0-2197" name="__codelineno-0-2197"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-2198"><a id="__codelineno-0-2198" name="__codelineno-0-2198"></a>
-</span><span id="__span-0-2199"><a id="__codelineno-0-2199" name="__codelineno-0-2199"></a>    <span class="k">return</span> <span class="n">normal</span><span class="p">(</span>
-</span><span id="__span-0-2200"><a id="__codelineno-0-2200" name="__codelineno-0-2200"></a>        <span class="n">x_total</span><span class="o">=</span><span class="n">ln_x_total</span><span class="p">,</span>
-</span><span id="__span-0-2201"><a id="__codelineno-0-2201" name="__codelineno-0-2201"></a>        <span class="n">x2_total</span><span class="o">=</span><span class="n">ln_x2_total</span><span class="p">,</span>
-</span><span id="__span-0-2202"><a id="__codelineno-0-2202" name="__codelineno-0-2202"></a>        <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
-</span><span id="__span-0-2203"><a id="__codelineno-0-2203" name="__codelineno-0-2203"></a>        <span class="n">prior</span><span class="o">=</span><span class="n">prior</span><span class="p">,</span>
-</span><span id="__span-0-2204"><a id="__codelineno-0-2204" name="__codelineno-0-2204"></a>    <span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-2203">2203</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-2123"><a id="__codelineno-0-2123" name="__codelineno-0-2123"></a><span class="nd">@add_associated_likelihood</span><span class="p">(</span><span class="n">LogNormal</span><span class="p">)</span>
+</span><span id="__span-0-2124"><a id="__codelineno-0-2124" name="__codelineno-0-2124"></a><span class="nd">@validate_prior_type</span>
+</span><span id="__span-0-2125"><a id="__codelineno-0-2125" name="__codelineno-0-2125"></a><span class="k">def</span><span class="w"> </span><span class="nf">log_normal</span><span class="p">(</span>
+</span><span id="__span-0-2126"><a id="__codelineno-0-2126" name="__codelineno-0-2126"></a>    <span class="o">*</span><span class="p">,</span>
+</span><span id="__span-0-2127"><a id="__codelineno-0-2127" name="__codelineno-0-2127"></a>    <span class="n">ln_x_total</span><span class="p">:</span> <span class="n">NUMERIC</span><span class="p">,</span>
+</span><span id="__span-0-2128"><a id="__codelineno-0-2128" name="__codelineno-0-2128"></a>    <span class="n">ln_x2_total</span><span class="p">:</span> <span class="n">NUMERIC</span><span class="p">,</span>
+</span><span id="__span-0-2129"><a id="__codelineno-0-2129" name="__codelineno-0-2129"></a>    <span class="n">n</span><span class="p">:</span> <span class="n">NUMERIC</span><span class="p">,</span>
+</span><span id="__span-0-2130"><a id="__codelineno-0-2130" name="__codelineno-0-2130"></a>    <span class="n">prior</span><span class="p">:</span> <span class="n">NormalInverseGamma</span> <span class="o">|</span> <span class="n">NormalGamma</span><span class="p">,</span>
+</span><span id="__span-0-2131"><a id="__codelineno-0-2131" name="__codelineno-0-2131"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NormalInverseGamma</span> <span class="o">|</span> <span class="n">NormalGamma</span><span class="p">:</span>
+</span><span id="__span-0-2132"><a id="__codelineno-0-2132" name="__codelineno-0-2132"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Log normal likelihood.</span>
+</span><span id="__span-0-2133"><a id="__codelineno-0-2133" name="__codelineno-0-2133"></a>
+</span><span id="__span-0-2134"><a id="__codelineno-0-2134" name="__codelineno-0-2134"></a><span class="sd">    By taking the log of the data, we can use the normal inverse gamma posterior.</span>
+</span><span id="__span-0-2135"><a id="__codelineno-0-2135" name="__codelineno-0-2135"></a>
+</span><span id="__span-0-2136"><a id="__codelineno-0-2136" name="__codelineno-0-2136"></a><span class="sd">    Reference: &lt;a href=https://web.archive.org/web/20090529203101/http://www.people.cornell.edu/pages/df36/CONJINTRnew%20TEX.pdf&gt;Section 1.2.1&lt;/a&gt;</span>
+</span><span id="__span-0-2137"><a id="__codelineno-0-2137" name="__codelineno-0-2137"></a>
+</span><span id="__span-0-2138"><a id="__codelineno-0-2138" name="__codelineno-0-2138"></a><span class="sd">    Args:</span>
+</span><span id="__span-0-2139"><a id="__codelineno-0-2139" name="__codelineno-0-2139"></a><span class="sd">        ln_x_total: sum of the log of all outcomes</span>
+</span><span id="__span-0-2140"><a id="__codelineno-0-2140" name="__codelineno-0-2140"></a><span class="sd">        ln_x2_total: sum of the log of all outcomes squared</span>
+</span><span id="__span-0-2141"><a id="__codelineno-0-2141" name="__codelineno-0-2141"></a><span class="sd">        n: total number of samples in ln_x_total and ln_x2_total</span>
+</span><span id="__span-0-2142"><a id="__codelineno-0-2142" name="__codelineno-0-2142"></a><span class="sd">        prior: NormalInverseGamma or NormalGamma prior</span>
+</span><span id="__span-0-2143"><a id="__codelineno-0-2143" name="__codelineno-0-2143"></a>
+</span><span id="__span-0-2144"><a id="__codelineno-0-2144" name="__codelineno-0-2144"></a><span class="sd">    Returns:</span>
+</span><span id="__span-0-2145"><a id="__codelineno-0-2145" name="__codelineno-0-2145"></a><span class="sd">        NormalInverseGamma or NormalGamma posterior distribution</span>
+</span><span id="__span-0-2146"><a id="__codelineno-0-2146" name="__codelineno-0-2146"></a>
+</span><span id="__span-0-2147"><a id="__codelineno-0-2147" name="__codelineno-0-2147"></a><span class="sd">    Example:</span>
+</span><span id="__span-0-2148"><a id="__codelineno-0-2148" name="__codelineno-0-2148"></a><span class="sd">        Constructed example</span>
+</span><span id="__span-0-2149"><a id="__codelineno-0-2149" name="__codelineno-0-2149"></a>
+</span><span id="__span-0-2150"><a id="__codelineno-0-2150" name="__codelineno-0-2150"></a><span class="sd">        ```python</span>
+</span><span id="__span-0-2151"><a id="__codelineno-0-2151" name="__codelineno-0-2151"></a><span class="sd">        import numpy as np</span>
+</span><span id="__span-0-2152"><a id="__codelineno-0-2152" name="__codelineno-0-2152"></a>
+</span><span id="__span-0-2153"><a id="__codelineno-0-2153" name="__codelineno-0-2153"></a><span class="sd">        import matplotlib.pyplot as plt</span>
+</span><span id="__span-0-2154"><a id="__codelineno-0-2154" name="__codelineno-0-2154"></a>
+</span><span id="__span-0-2155"><a id="__codelineno-0-2155" name="__codelineno-0-2155"></a><span class="sd">        from conjugate.distributions import NormalInverseGamma, LogNormal</span>
+</span><span id="__span-0-2156"><a id="__codelineno-0-2156" name="__codelineno-0-2156"></a><span class="sd">        from conjugate.models import log_normal_normal_inverse_gamma</span>
+</span><span id="__span-0-2157"><a id="__codelineno-0-2157" name="__codelineno-0-2157"></a>
+</span><span id="__span-0-2158"><a id="__codelineno-0-2158" name="__codelineno-0-2158"></a><span class="sd">        true_mu = 0</span>
+</span><span id="__span-0-2159"><a id="__codelineno-0-2159" name="__codelineno-0-2159"></a><span class="sd">        true_sigma = 2.5</span>
+</span><span id="__span-0-2160"><a id="__codelineno-0-2160" name="__codelineno-0-2160"></a><span class="sd">        true = LogNormal(true_mu, true_sigma)</span>
+</span><span id="__span-0-2161"><a id="__codelineno-0-2161" name="__codelineno-0-2161"></a>
+</span><span id="__span-0-2162"><a id="__codelineno-0-2162" name="__codelineno-0-2162"></a><span class="sd">        n_samples = 15</span>
+</span><span id="__span-0-2163"><a id="__codelineno-0-2163" name="__codelineno-0-2163"></a><span class="sd">        data = true.dist.rvs(size=n_samples, random_state=42)</span>
+</span><span id="__span-0-2164"><a id="__codelineno-0-2164" name="__codelineno-0-2164"></a>
+</span><span id="__span-0-2165"><a id="__codelineno-0-2165" name="__codelineno-0-2165"></a><span class="sd">        ln_data = np.log(data)</span>
+</span><span id="__span-0-2166"><a id="__codelineno-0-2166" name="__codelineno-0-2166"></a>
+</span><span id="__span-0-2167"><a id="__codelineno-0-2167" name="__codelineno-0-2167"></a><span class="sd">        prior = NormalInverseGamma(mu=1, nu=1, alpha=1, beta=1)</span>
+</span><span id="__span-0-2168"><a id="__codelineno-0-2168" name="__codelineno-0-2168"></a><span class="sd">        posterior = log_normal_normal_inverse_gamma(</span>
+</span><span id="__span-0-2169"><a id="__codelineno-0-2169" name="__codelineno-0-2169"></a><span class="sd">            ln_x_total=ln_data.sum(),</span>
+</span><span id="__span-0-2170"><a id="__codelineno-0-2170" name="__codelineno-0-2170"></a><span class="sd">            ln_x2_total=(ln_data**2).sum(),</span>
+</span><span id="__span-0-2171"><a id="__codelineno-0-2171" name="__codelineno-0-2171"></a><span class="sd">            n=n_samples,</span>
+</span><span id="__span-0-2172"><a id="__codelineno-0-2172" name="__codelineno-0-2172"></a><span class="sd">            prior=prior,</span>
+</span><span id="__span-0-2173"><a id="__codelineno-0-2173" name="__codelineno-0-2173"></a><span class="sd">        )</span>
+</span><span id="__span-0-2174"><a id="__codelineno-0-2174" name="__codelineno-0-2174"></a>
+</span><span id="__span-0-2175"><a id="__codelineno-0-2175" name="__codelineno-0-2175"></a><span class="sd">        fig, axes = plt.subplots(ncols=2)</span>
+</span><span id="__span-0-2176"><a id="__codelineno-0-2176" name="__codelineno-0-2176"></a><span class="sd">        mean, variance = posterior.sample_mean(</span>
+</span><span id="__span-0-2177"><a id="__codelineno-0-2177" name="__codelineno-0-2177"></a><span class="sd">            4000,</span>
+</span><span id="__span-0-2178"><a id="__codelineno-0-2178" name="__codelineno-0-2178"></a><span class="sd">            return_variance=True,</span>
+</span><span id="__span-0-2179"><a id="__codelineno-0-2179" name="__codelineno-0-2179"></a><span class="sd">            random_state=42,</span>
+</span><span id="__span-0-2180"><a id="__codelineno-0-2180" name="__codelineno-0-2180"></a><span class="sd">        )</span>
+</span><span id="__span-0-2181"><a id="__codelineno-0-2181" name="__codelineno-0-2181"></a>
+</span><span id="__span-0-2182"><a id="__codelineno-0-2182" name="__codelineno-0-2182"></a><span class="sd">        ax = axes[0]</span>
+</span><span id="__span-0-2183"><a id="__codelineno-0-2183" name="__codelineno-0-2183"></a><span class="sd">        ax.hist(mean, bins=20)</span>
+</span><span id="__span-0-2184"><a id="__codelineno-0-2184" name="__codelineno-0-2184"></a><span class="sd">        ax.axvline(true_mu, color=&quot;black&quot;, linestyle=&quot;--&quot;, label=&quot;true mu&quot;)</span>
+</span><span id="__span-0-2185"><a id="__codelineno-0-2185" name="__codelineno-0-2185"></a>
+</span><span id="__span-0-2186"><a id="__codelineno-0-2186" name="__codelineno-0-2186"></a><span class="sd">        ax = axes[1]</span>
+</span><span id="__span-0-2187"><a id="__codelineno-0-2187" name="__codelineno-0-2187"></a><span class="sd">        ax.hist(variance, bins=20)</span>
+</span><span id="__span-0-2188"><a id="__codelineno-0-2188" name="__codelineno-0-2188"></a><span class="sd">        ax.axvline(true_sigma**2, color=&quot;black&quot;, linestyle=&quot;--&quot;, label=&quot;true sigma^2&quot;)</span>
+</span><span id="__span-0-2189"><a id="__codelineno-0-2189" name="__codelineno-0-2189"></a><span class="sd">        ```</span>
+</span><span id="__span-0-2190"><a id="__codelineno-0-2190" name="__codelineno-0-2190"></a><span class="sd">        &lt;!--</span>
+</span><span id="__span-0-2191"><a id="__codelineno-0-2191" name="__codelineno-0-2191"></a><span class="sd">        plt.savefig(&quot;./docs/images/docstrings/log_normal_normal_inverse_gamma.png&quot;)</span>
+</span><span id="__span-0-2192"><a id="__codelineno-0-2192" name="__codelineno-0-2192"></a><span class="sd">        plt.close()</span>
+</span><span id="__span-0-2193"><a id="__codelineno-0-2193" name="__codelineno-0-2193"></a><span class="sd">        --&gt;</span>
+</span><span id="__span-0-2194"><a id="__codelineno-0-2194" name="__codelineno-0-2194"></a>
+</span><span id="__span-0-2195"><a id="__codelineno-0-2195" name="__codelineno-0-2195"></a><span class="sd">        ![log_normal_normal_inverse_gamma](./images/docstrings/log_normal_normal_inverse_gamma.png)</span>
+</span><span id="__span-0-2196"><a id="__codelineno-0-2196" name="__codelineno-0-2196"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-2197"><a id="__codelineno-0-2197" name="__codelineno-0-2197"></a>
+</span><span id="__span-0-2198"><a id="__codelineno-0-2198" name="__codelineno-0-2198"></a>    <span class="k">return</span> <span class="n">normal</span><span class="p">(</span>
+</span><span id="__span-0-2199"><a id="__codelineno-0-2199" name="__codelineno-0-2199"></a>        <span class="n">x_total</span><span class="o">=</span><span class="n">ln_x_total</span><span class="p">,</span>
+</span><span id="__span-0-2200"><a id="__codelineno-0-2200" name="__codelineno-0-2200"></a>        <span class="n">x2_total</span><span class="o">=</span><span class="n">ln_x2_total</span><span class="p">,</span>
+</span><span id="__span-0-2201"><a id="__codelineno-0-2201" name="__codelineno-0-2201"></a>        <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
+</span><span id="__span-0-2202"><a id="__codelineno-0-2202" name="__codelineno-0-2202"></a>        <span class="n">prior</span><span class="o">=</span><span class="n">prior</span><span class="p">,</span>
+</span><span id="__span-0-2203"><a id="__codelineno-0-2203" name="__codelineno-0-2203"></a>    <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -7140,21 +7140,6 @@ plt.close()
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>mu</code>
-            </td>
-            <td>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>known mean</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
                 <code>prior</code>
             </td>
             <td>
@@ -7352,8 +7337,7 @@ plt.close()
 <span class="normal"><a href="#__codelineno-0-2005">2005</a></span>
 <span class="normal"><a href="#__codelineno-0-2006">2006</a></span>
 <span class="normal"><a href="#__codelineno-0-2007">2007</a></span>
-<span class="normal"><a href="#__codelineno-0-2008">2008</a></span>
-<span class="normal"><a href="#__codelineno-0-2009">2009</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1923"><a id="__codelineno-0-1923" name="__codelineno-0-1923"></a><span class="nd">@add_associated_likelihood</span><span class="p">(</span><span class="n">MultivariateNormal</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-2008">2008</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1923"><a id="__codelineno-0-1923" name="__codelineno-0-1923"></a><span class="nd">@add_associated_likelihood</span><span class="p">(</span><span class="n">MultivariateNormal</span><span class="p">)</span>
 </span><span id="__span-0-1924"><a id="__codelineno-0-1924" name="__codelineno-0-1924"></a><span class="nd">@validate_prior_type</span>
 </span><span id="__span-0-1925"><a id="__codelineno-0-1925" name="__codelineno-0-1925"></a><span class="k">def</span><span class="w"> </span><span class="nf">multivariate_normal</span><span class="p">(</span>
 </span><span id="__span-0-1926"><a id="__codelineno-0-1926" name="__codelineno-0-1926"></a>    <span class="o">*</span><span class="p">,</span>
@@ -7365,81 +7349,80 @@ plt.close()
 </span><span id="__span-0-1932"><a id="__codelineno-0-1932" name="__codelineno-0-1932"></a>
 </span><span id="__span-0-1933"><a id="__codelineno-0-1933" name="__codelineno-0-1933"></a><span class="sd">    Args:</span>
 </span><span id="__span-0-1934"><a id="__codelineno-0-1934" name="__codelineno-0-1934"></a><span class="sd">        X: design matrix</span>
-</span><span id="__span-0-1935"><a id="__codelineno-0-1935" name="__codelineno-0-1935"></a><span class="sd">        mu: known mean</span>
-</span><span id="__span-0-1936"><a id="__codelineno-0-1936" name="__codelineno-0-1936"></a><span class="sd">        prior: NormalInverseWishart prior</span>
-</span><span id="__span-0-1937"><a id="__codelineno-0-1937" name="__codelineno-0-1937"></a><span class="sd">        outer: function to take outer product, defaults to np.outer</span>
-</span><span id="__span-0-1938"><a id="__codelineno-0-1938" name="__codelineno-0-1938"></a>
-</span><span id="__span-0-1939"><a id="__codelineno-0-1939" name="__codelineno-0-1939"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-1940"><a id="__codelineno-0-1940" name="__codelineno-0-1940"></a><span class="sd">        NormalInverseWishart posterior distribution</span>
+</span><span id="__span-0-1935"><a id="__codelineno-0-1935" name="__codelineno-0-1935"></a><span class="sd">        prior: NormalInverseWishart prior</span>
+</span><span id="__span-0-1936"><a id="__codelineno-0-1936" name="__codelineno-0-1936"></a><span class="sd">        outer: function to take outer product, defaults to np.outer</span>
+</span><span id="__span-0-1937"><a id="__codelineno-0-1937" name="__codelineno-0-1937"></a>
+</span><span id="__span-0-1938"><a id="__codelineno-0-1938" name="__codelineno-0-1938"></a><span class="sd">    Returns:</span>
+</span><span id="__span-0-1939"><a id="__codelineno-0-1939" name="__codelineno-0-1939"></a><span class="sd">        NormalInverseWishart posterior distribution</span>
+</span><span id="__span-0-1940"><a id="__codelineno-0-1940" name="__codelineno-0-1940"></a>
 </span><span id="__span-0-1941"><a id="__codelineno-0-1941" name="__codelineno-0-1941"></a>
-</span><span id="__span-0-1942"><a id="__codelineno-0-1942" name="__codelineno-0-1942"></a>
-</span><span id="__span-0-1943"><a id="__codelineno-0-1943" name="__codelineno-0-1943"></a><span class="sd">    Examples:</span>
-</span><span id="__span-0-1944"><a id="__codelineno-0-1944" name="__codelineno-0-1944"></a><span class="sd">        Constructed example</span>
-</span><span id="__span-0-1945"><a id="__codelineno-0-1945" name="__codelineno-0-1945"></a>
-</span><span id="__span-0-1946"><a id="__codelineno-0-1946" name="__codelineno-0-1946"></a><span class="sd">        ```python</span>
-</span><span id="__span-0-1947"><a id="__codelineno-0-1947" name="__codelineno-0-1947"></a><span class="sd">        import numpy as np</span>
-</span><span id="__span-0-1948"><a id="__codelineno-0-1948" name="__codelineno-0-1948"></a>
-</span><span id="__span-0-1949"><a id="__codelineno-0-1949" name="__codelineno-0-1949"></a><span class="sd">        import matplotlib.pyplot as plt</span>
-</span><span id="__span-0-1950"><a id="__codelineno-0-1950" name="__codelineno-0-1950"></a>
-</span><span id="__span-0-1951"><a id="__codelineno-0-1951" name="__codelineno-0-1951"></a><span class="sd">        from conjugate.distributions import NormalInverseWishart</span>
-</span><span id="__span-0-1952"><a id="__codelineno-0-1952" name="__codelineno-0-1952"></a><span class="sd">        from conjugate.models import multivariate_normal</span>
-</span><span id="__span-0-1953"><a id="__codelineno-0-1953" name="__codelineno-0-1953"></a>
-</span><span id="__span-0-1954"><a id="__codelineno-0-1954" name="__codelineno-0-1954"></a><span class="sd">        true_mean = np.array([1, 5])</span>
-</span><span id="__span-0-1955"><a id="__codelineno-0-1955" name="__codelineno-0-1955"></a><span class="sd">        true_cov = np.array(</span>
-</span><span id="__span-0-1956"><a id="__codelineno-0-1956" name="__codelineno-0-1956"></a><span class="sd">            [</span>
-</span><span id="__span-0-1957"><a id="__codelineno-0-1957" name="__codelineno-0-1957"></a><span class="sd">                [1, 0.5],</span>
-</span><span id="__span-0-1958"><a id="__codelineno-0-1958" name="__codelineno-0-1958"></a><span class="sd">                [0.5, 1],</span>
-</span><span id="__span-0-1959"><a id="__codelineno-0-1959" name="__codelineno-0-1959"></a><span class="sd">            ]</span>
-</span><span id="__span-0-1960"><a id="__codelineno-0-1960" name="__codelineno-0-1960"></a><span class="sd">        )</span>
-</span><span id="__span-0-1961"><a id="__codelineno-0-1961" name="__codelineno-0-1961"></a>
-</span><span id="__span-0-1962"><a id="__codelineno-0-1962" name="__codelineno-0-1962"></a><span class="sd">        n_samples = 100</span>
-</span><span id="__span-0-1963"><a id="__codelineno-0-1963" name="__codelineno-0-1963"></a><span class="sd">        rng = np.random.default_rng(42)</span>
-</span><span id="__span-0-1964"><a id="__codelineno-0-1964" name="__codelineno-0-1964"></a><span class="sd">        data = rng.multivariate_normal(</span>
-</span><span id="__span-0-1965"><a id="__codelineno-0-1965" name="__codelineno-0-1965"></a><span class="sd">            mean=true_mean,</span>
-</span><span id="__span-0-1966"><a id="__codelineno-0-1966" name="__codelineno-0-1966"></a><span class="sd">            cov=true_cov,</span>
-</span><span id="__span-0-1967"><a id="__codelineno-0-1967" name="__codelineno-0-1967"></a><span class="sd">            size=n_samples,</span>
-</span><span id="__span-0-1968"><a id="__codelineno-0-1968" name="__codelineno-0-1968"></a><span class="sd">        )</span>
-</span><span id="__span-0-1969"><a id="__codelineno-0-1969" name="__codelineno-0-1969"></a>
-</span><span id="__span-0-1970"><a id="__codelineno-0-1970" name="__codelineno-0-1970"></a><span class="sd">        prior = NormalInverseWishart(</span>
-</span><span id="__span-0-1971"><a id="__codelineno-0-1971" name="__codelineno-0-1971"></a><span class="sd">            mu=np.array([0, 0]),</span>
-</span><span id="__span-0-1972"><a id="__codelineno-0-1972" name="__codelineno-0-1972"></a><span class="sd">            kappa=1,</span>
-</span><span id="__span-0-1973"><a id="__codelineno-0-1973" name="__codelineno-0-1973"></a><span class="sd">            nu=3,</span>
-</span><span id="__span-0-1974"><a id="__codelineno-0-1974" name="__codelineno-0-1974"></a><span class="sd">            psi=np.array(</span>
-</span><span id="__span-0-1975"><a id="__codelineno-0-1975" name="__codelineno-0-1975"></a><span class="sd">                [</span>
-</span><span id="__span-0-1976"><a id="__codelineno-0-1976" name="__codelineno-0-1976"></a><span class="sd">                    [1, 0],</span>
-</span><span id="__span-0-1977"><a id="__codelineno-0-1977" name="__codelineno-0-1977"></a><span class="sd">                    [0, 1],</span>
-</span><span id="__span-0-1978"><a id="__codelineno-0-1978" name="__codelineno-0-1978"></a><span class="sd">                ]</span>
-</span><span id="__span-0-1979"><a id="__codelineno-0-1979" name="__codelineno-0-1979"></a><span class="sd">            ),</span>
-</span><span id="__span-0-1980"><a id="__codelineno-0-1980" name="__codelineno-0-1980"></a><span class="sd">        )</span>
-</span><span id="__span-0-1981"><a id="__codelineno-0-1981" name="__codelineno-0-1981"></a>
-</span><span id="__span-0-1982"><a id="__codelineno-0-1982" name="__codelineno-0-1982"></a><span class="sd">        posterior = multivariate_normal(</span>
-</span><span id="__span-0-1983"><a id="__codelineno-0-1983" name="__codelineno-0-1983"></a><span class="sd">            X=data,</span>
-</span><span id="__span-0-1984"><a id="__codelineno-0-1984" name="__codelineno-0-1984"></a><span class="sd">            prior=prior,</span>
-</span><span id="__span-0-1985"><a id="__codelineno-0-1985" name="__codelineno-0-1985"></a><span class="sd">        )</span>
-</span><span id="__span-0-1986"><a id="__codelineno-0-1986" name="__codelineno-0-1986"></a><span class="sd">        ```</span>
-</span><span id="__span-0-1987"><a id="__codelineno-0-1987" name="__codelineno-0-1987"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-1988"><a id="__codelineno-0-1988" name="__codelineno-0-1988"></a>    <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="__span-0-1989"><a id="__codelineno-0-1989" name="__codelineno-0-1989"></a>    <span class="n">X_mean</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</span><span id="__span-0-1990"><a id="__codelineno-0-1990" name="__codelineno-0-1990"></a>    <span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X_mean</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X_mean</span><span class="p">)</span>
-</span><span id="__span-0-1991"><a id="__codelineno-0-1991" name="__codelineno-0-1991"></a>
-</span><span id="__span-0-1992"><a id="__codelineno-0-1992" name="__codelineno-0-1992"></a>    <span class="n">mu_post</span> <span class="o">=</span> <span class="p">(</span><span class="n">prior</span><span class="o">.</span><span class="n">mu</span> <span class="o">*</span> <span class="n">prior</span><span class="o">.</span><span class="n">kappa</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">X_mean</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">prior</span><span class="o">.</span><span class="n">kappa</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span>
-</span><span id="__span-0-1993"><a id="__codelineno-0-1993" name="__codelineno-0-1993"></a>
-</span><span id="__span-0-1994"><a id="__codelineno-0-1994" name="__codelineno-0-1994"></a>    <span class="n">kappa_post</span> <span class="o">=</span> <span class="n">prior</span><span class="o">.</span><span class="n">kappa</span> <span class="o">+</span> <span class="n">n</span>
-</span><span id="__span-0-1995"><a id="__codelineno-0-1995" name="__codelineno-0-1995"></a>    <span class="n">nu_post</span> <span class="o">=</span> <span class="n">prior</span><span class="o">.</span><span class="n">nu</span> <span class="o">+</span> <span class="n">n</span>
-</span><span id="__span-0-1996"><a id="__codelineno-0-1996" name="__codelineno-0-1996"></a>
-</span><span id="__span-0-1997"><a id="__codelineno-0-1997" name="__codelineno-0-1997"></a>    <span class="n">mean_difference</span> <span class="o">=</span> <span class="n">X_mean</span> <span class="o">-</span> <span class="n">prior</span><span class="o">.</span><span class="n">mu</span>
-</span><span id="__span-0-1998"><a id="__codelineno-0-1998" name="__codelineno-0-1998"></a>    <span class="n">psi_post</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-0-1999"><a id="__codelineno-0-1999" name="__codelineno-0-1999"></a>        <span class="n">prior</span><span class="o">.</span><span class="n">psi</span>
-</span><span id="__span-0-2000"><a id="__codelineno-0-2000" name="__codelineno-0-2000"></a>        <span class="o">+</span> <span class="n">C</span>
-</span><span id="__span-0-2001"><a id="__codelineno-0-2001" name="__codelineno-0-2001"></a>        <span class="o">+</span> <span class="n">outer</span><span class="p">(</span><span class="n">mean_difference</span><span class="p">,</span> <span class="n">mean_difference</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">prior</span><span class="o">.</span><span class="n">kappa</span> <span class="o">/</span> <span class="n">kappa_post</span>
-</span><span id="__span-0-2002"><a id="__codelineno-0-2002" name="__codelineno-0-2002"></a>    <span class="p">)</span>
-</span><span id="__span-0-2003"><a id="__codelineno-0-2003" name="__codelineno-0-2003"></a>
-</span><span id="__span-0-2004"><a id="__codelineno-0-2004" name="__codelineno-0-2004"></a>    <span class="k">return</span> <span class="n">NormalInverseWishart</span><span class="p">(</span>
-</span><span id="__span-0-2005"><a id="__codelineno-0-2005" name="__codelineno-0-2005"></a>        <span class="n">mu</span><span class="o">=</span><span class="n">mu_post</span><span class="p">,</span>
-</span><span id="__span-0-2006"><a id="__codelineno-0-2006" name="__codelineno-0-2006"></a>        <span class="n">kappa</span><span class="o">=</span><span class="n">kappa_post</span><span class="p">,</span>
-</span><span id="__span-0-2007"><a id="__codelineno-0-2007" name="__codelineno-0-2007"></a>        <span class="n">nu</span><span class="o">=</span><span class="n">nu_post</span><span class="p">,</span>
-</span><span id="__span-0-2008"><a id="__codelineno-0-2008" name="__codelineno-0-2008"></a>        <span class="n">psi</span><span class="o">=</span><span class="n">psi_post</span><span class="p">,</span>
-</span><span id="__span-0-2009"><a id="__codelineno-0-2009" name="__codelineno-0-2009"></a>    <span class="p">)</span>
+</span><span id="__span-0-1942"><a id="__codelineno-0-1942" name="__codelineno-0-1942"></a><span class="sd">    Examples:</span>
+</span><span id="__span-0-1943"><a id="__codelineno-0-1943" name="__codelineno-0-1943"></a><span class="sd">        Constructed example</span>
+</span><span id="__span-0-1944"><a id="__codelineno-0-1944" name="__codelineno-0-1944"></a>
+</span><span id="__span-0-1945"><a id="__codelineno-0-1945" name="__codelineno-0-1945"></a><span class="sd">        ```python</span>
+</span><span id="__span-0-1946"><a id="__codelineno-0-1946" name="__codelineno-0-1946"></a><span class="sd">        import numpy as np</span>
+</span><span id="__span-0-1947"><a id="__codelineno-0-1947" name="__codelineno-0-1947"></a>
+</span><span id="__span-0-1948"><a id="__codelineno-0-1948" name="__codelineno-0-1948"></a><span class="sd">        import matplotlib.pyplot as plt</span>
+</span><span id="__span-0-1949"><a id="__codelineno-0-1949" name="__codelineno-0-1949"></a>
+</span><span id="__span-0-1950"><a id="__codelineno-0-1950" name="__codelineno-0-1950"></a><span class="sd">        from conjugate.distributions import NormalInverseWishart</span>
+</span><span id="__span-0-1951"><a id="__codelineno-0-1951" name="__codelineno-0-1951"></a><span class="sd">        from conjugate.models import multivariate_normal</span>
+</span><span id="__span-0-1952"><a id="__codelineno-0-1952" name="__codelineno-0-1952"></a>
+</span><span id="__span-0-1953"><a id="__codelineno-0-1953" name="__codelineno-0-1953"></a><span class="sd">        true_mean = np.array([1, 5])</span>
+</span><span id="__span-0-1954"><a id="__codelineno-0-1954" name="__codelineno-0-1954"></a><span class="sd">        true_cov = np.array(</span>
+</span><span id="__span-0-1955"><a id="__codelineno-0-1955" name="__codelineno-0-1955"></a><span class="sd">            [</span>
+</span><span id="__span-0-1956"><a id="__codelineno-0-1956" name="__codelineno-0-1956"></a><span class="sd">                [1, 0.5],</span>
+</span><span id="__span-0-1957"><a id="__codelineno-0-1957" name="__codelineno-0-1957"></a><span class="sd">                [0.5, 1],</span>
+</span><span id="__span-0-1958"><a id="__codelineno-0-1958" name="__codelineno-0-1958"></a><span class="sd">            ]</span>
+</span><span id="__span-0-1959"><a id="__codelineno-0-1959" name="__codelineno-0-1959"></a><span class="sd">        )</span>
+</span><span id="__span-0-1960"><a id="__codelineno-0-1960" name="__codelineno-0-1960"></a>
+</span><span id="__span-0-1961"><a id="__codelineno-0-1961" name="__codelineno-0-1961"></a><span class="sd">        n_samples = 100</span>
+</span><span id="__span-0-1962"><a id="__codelineno-0-1962" name="__codelineno-0-1962"></a><span class="sd">        rng = np.random.default_rng(42)</span>
+</span><span id="__span-0-1963"><a id="__codelineno-0-1963" name="__codelineno-0-1963"></a><span class="sd">        data = rng.multivariate_normal(</span>
+</span><span id="__span-0-1964"><a id="__codelineno-0-1964" name="__codelineno-0-1964"></a><span class="sd">            mean=true_mean,</span>
+</span><span id="__span-0-1965"><a id="__codelineno-0-1965" name="__codelineno-0-1965"></a><span class="sd">            cov=true_cov,</span>
+</span><span id="__span-0-1966"><a id="__codelineno-0-1966" name="__codelineno-0-1966"></a><span class="sd">            size=n_samples,</span>
+</span><span id="__span-0-1967"><a id="__codelineno-0-1967" name="__codelineno-0-1967"></a><span class="sd">        )</span>
+</span><span id="__span-0-1968"><a id="__codelineno-0-1968" name="__codelineno-0-1968"></a>
+</span><span id="__span-0-1969"><a id="__codelineno-0-1969" name="__codelineno-0-1969"></a><span class="sd">        prior = NormalInverseWishart(</span>
+</span><span id="__span-0-1970"><a id="__codelineno-0-1970" name="__codelineno-0-1970"></a><span class="sd">            mu=np.array([0, 0]),</span>
+</span><span id="__span-0-1971"><a id="__codelineno-0-1971" name="__codelineno-0-1971"></a><span class="sd">            kappa=1,</span>
+</span><span id="__span-0-1972"><a id="__codelineno-0-1972" name="__codelineno-0-1972"></a><span class="sd">            nu=3,</span>
+</span><span id="__span-0-1973"><a id="__codelineno-0-1973" name="__codelineno-0-1973"></a><span class="sd">            psi=np.array(</span>
+</span><span id="__span-0-1974"><a id="__codelineno-0-1974" name="__codelineno-0-1974"></a><span class="sd">                [</span>
+</span><span id="__span-0-1975"><a id="__codelineno-0-1975" name="__codelineno-0-1975"></a><span class="sd">                    [1, 0],</span>
+</span><span id="__span-0-1976"><a id="__codelineno-0-1976" name="__codelineno-0-1976"></a><span class="sd">                    [0, 1],</span>
+</span><span id="__span-0-1977"><a id="__codelineno-0-1977" name="__codelineno-0-1977"></a><span class="sd">                ]</span>
+</span><span id="__span-0-1978"><a id="__codelineno-0-1978" name="__codelineno-0-1978"></a><span class="sd">            ),</span>
+</span><span id="__span-0-1979"><a id="__codelineno-0-1979" name="__codelineno-0-1979"></a><span class="sd">        )</span>
+</span><span id="__span-0-1980"><a id="__codelineno-0-1980" name="__codelineno-0-1980"></a>
+</span><span id="__span-0-1981"><a id="__codelineno-0-1981" name="__codelineno-0-1981"></a><span class="sd">        posterior = multivariate_normal(</span>
+</span><span id="__span-0-1982"><a id="__codelineno-0-1982" name="__codelineno-0-1982"></a><span class="sd">            X=data,</span>
+</span><span id="__span-0-1983"><a id="__codelineno-0-1983" name="__codelineno-0-1983"></a><span class="sd">            prior=prior,</span>
+</span><span id="__span-0-1984"><a id="__codelineno-0-1984" name="__codelineno-0-1984"></a><span class="sd">        )</span>
+</span><span id="__span-0-1985"><a id="__codelineno-0-1985" name="__codelineno-0-1985"></a><span class="sd">        ```</span>
+</span><span id="__span-0-1986"><a id="__codelineno-0-1986" name="__codelineno-0-1986"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-1987"><a id="__codelineno-0-1987" name="__codelineno-0-1987"></a>    <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-0-1988"><a id="__codelineno-0-1988" name="__codelineno-0-1988"></a>    <span class="n">X_mean</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-0-1989"><a id="__codelineno-0-1989" name="__codelineno-0-1989"></a>    <span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X_mean</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X_mean</span><span class="p">)</span>
+</span><span id="__span-0-1990"><a id="__codelineno-0-1990" name="__codelineno-0-1990"></a>
+</span><span id="__span-0-1991"><a id="__codelineno-0-1991" name="__codelineno-0-1991"></a>    <span class="n">mu_post</span> <span class="o">=</span> <span class="p">(</span><span class="n">prior</span><span class="o">.</span><span class="n">mu</span> <span class="o">*</span> <span class="n">prior</span><span class="o">.</span><span class="n">kappa</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">X_mean</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">prior</span><span class="o">.</span><span class="n">kappa</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span>
+</span><span id="__span-0-1992"><a id="__codelineno-0-1992" name="__codelineno-0-1992"></a>
+</span><span id="__span-0-1993"><a id="__codelineno-0-1993" name="__codelineno-0-1993"></a>    <span class="n">kappa_post</span> <span class="o">=</span> <span class="n">prior</span><span class="o">.</span><span class="n">kappa</span> <span class="o">+</span> <span class="n">n</span>
+</span><span id="__span-0-1994"><a id="__codelineno-0-1994" name="__codelineno-0-1994"></a>    <span class="n">nu_post</span> <span class="o">=</span> <span class="n">prior</span><span class="o">.</span><span class="n">nu</span> <span class="o">+</span> <span class="n">n</span>
+</span><span id="__span-0-1995"><a id="__codelineno-0-1995" name="__codelineno-0-1995"></a>
+</span><span id="__span-0-1996"><a id="__codelineno-0-1996" name="__codelineno-0-1996"></a>    <span class="n">mean_difference</span> <span class="o">=</span> <span class="n">X_mean</span> <span class="o">-</span> <span class="n">prior</span><span class="o">.</span><span class="n">mu</span>
+</span><span id="__span-0-1997"><a id="__codelineno-0-1997" name="__codelineno-0-1997"></a>    <span class="n">psi_post</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="__span-0-1998"><a id="__codelineno-0-1998" name="__codelineno-0-1998"></a>        <span class="n">prior</span><span class="o">.</span><span class="n">psi</span>
+</span><span id="__span-0-1999"><a id="__codelineno-0-1999" name="__codelineno-0-1999"></a>        <span class="o">+</span> <span class="n">C</span>
+</span><span id="__span-0-2000"><a id="__codelineno-0-2000" name="__codelineno-0-2000"></a>        <span class="o">+</span> <span class="n">outer</span><span class="p">(</span><span class="n">mean_difference</span><span class="p">,</span> <span class="n">mean_difference</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">prior</span><span class="o">.</span><span class="n">kappa</span> <span class="o">/</span> <span class="n">kappa_post</span>
+</span><span id="__span-0-2001"><a id="__codelineno-0-2001" name="__codelineno-0-2001"></a>    <span class="p">)</span>
+</span><span id="__span-0-2002"><a id="__codelineno-0-2002" name="__codelineno-0-2002"></a>
+</span><span id="__span-0-2003"><a id="__codelineno-0-2003" name="__codelineno-0-2003"></a>    <span class="k">return</span> <span class="n">NormalInverseWishart</span><span class="p">(</span>
+</span><span id="__span-0-2004"><a id="__codelineno-0-2004" name="__codelineno-0-2004"></a>        <span class="n">mu</span><span class="o">=</span><span class="n">mu_post</span><span class="p">,</span>
+</span><span id="__span-0-2005"><a id="__codelineno-0-2005" name="__codelineno-0-2005"></a>        <span class="n">kappa</span><span class="o">=</span><span class="n">kappa_post</span><span class="p">,</span>
+</span><span id="__span-0-2006"><a id="__codelineno-0-2006" name="__codelineno-0-2006"></a>        <span class="n">nu</span><span class="o">=</span><span class="n">nu_post</span><span class="p">,</span>
+</span><span id="__span-0-2007"><a id="__codelineno-0-2007" name="__codelineno-0-2007"></a>        <span class="n">psi</span><span class="o">=</span><span class="n">psi_post</span><span class="p">,</span>
+</span><span id="__span-0-2008"><a id="__codelineno-0-2008" name="__codelineno-0-2008"></a>    <span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -8521,7 +8504,8 @@ plt.close()
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>conjugate/models.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-2012">2012</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-2011">2011</a></span>
+<span class="normal"><a href="#__codelineno-0-2012">2012</a></span>
 <span class="normal"><a href="#__codelineno-0-2013">2013</a></span>
 <span class="normal"><a href="#__codelineno-0-2014">2014</a></span>
 <span class="normal"><a href="#__codelineno-0-2015">2015</a></span>
@@ -8629,117 +8613,116 @@ plt.close()
 <span class="normal"><a href="#__codelineno-0-2117">2117</a></span>
 <span class="normal"><a href="#__codelineno-0-2118">2118</a></span>
 <span class="normal"><a href="#__codelineno-0-2119">2119</a></span>
-<span class="normal"><a href="#__codelineno-0-2120">2120</a></span>
-<span class="normal"><a href="#__codelineno-0-2121">2121</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-2012"><a id="__codelineno-0-2012" name="__codelineno-0-2012"></a><span class="nd">@add_associated_likelihood</span><span class="p">(</span><span class="n">MultivariateNormal</span><span class="p">)</span>
-</span><span id="__span-0-2013"><a id="__codelineno-0-2013" name="__codelineno-0-2013"></a><span class="nd">@validate_distribution_type</span>
-</span><span id="__span-0-2014"><a id="__codelineno-0-2014" name="__codelineno-0-2014"></a><span class="k">def</span><span class="w"> </span><span class="nf">multivariate_normal_predictive</span><span class="p">(</span>
-</span><span id="__span-0-2015"><a id="__codelineno-0-2015" name="__codelineno-0-2015"></a>    <span class="o">*</span><span class="p">,</span>
-</span><span id="__span-0-2016"><a id="__codelineno-0-2016" name="__codelineno-0-2016"></a>    <span class="n">distribution</span><span class="p">:</span> <span class="n">NormalInverseWishart</span><span class="p">,</span>
-</span><span id="__span-0-2017"><a id="__codelineno-0-2017" name="__codelineno-0-2017"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MultivariateStudentT</span><span class="p">:</span>
-</span><span id="__span-0-2018"><a id="__codelineno-0-2018" name="__codelineno-0-2018"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Multivariate normal likelihood with normal inverse wishart distribution.</span>
-</span><span id="__span-0-2019"><a id="__codelineno-0-2019" name="__codelineno-0-2019"></a>
-</span><span id="__span-0-2020"><a id="__codelineno-0-2020" name="__codelineno-0-2020"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-2021"><a id="__codelineno-0-2021" name="__codelineno-0-2021"></a><span class="sd">        distribution: NormalInverseWishart distribution</span>
-</span><span id="__span-0-2022"><a id="__codelineno-0-2022" name="__codelineno-0-2022"></a>
-</span><span id="__span-0-2023"><a id="__codelineno-0-2023" name="__codelineno-0-2023"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-2024"><a id="__codelineno-0-2024" name="__codelineno-0-2024"></a><span class="sd">        MultivariateStudentT predictive distribution</span>
-</span><span id="__span-0-2025"><a id="__codelineno-0-2025" name="__codelineno-0-2025"></a>
-</span><span id="__span-0-2026"><a id="__codelineno-0-2026" name="__codelineno-0-2026"></a><span class="sd">    Examples:</span>
-</span><span id="__span-0-2027"><a id="__codelineno-0-2027" name="__codelineno-0-2027"></a><span class="sd">        Constructed example</span>
-</span><span id="__span-0-2028"><a id="__codelineno-0-2028" name="__codelineno-0-2028"></a>
-</span><span id="__span-0-2029"><a id="__codelineno-0-2029" name="__codelineno-0-2029"></a><span class="sd">        ```python</span>
-</span><span id="__span-0-2030"><a id="__codelineno-0-2030" name="__codelineno-0-2030"></a><span class="sd">        import numpy as np</span>
-</span><span id="__span-0-2031"><a id="__codelineno-0-2031" name="__codelineno-0-2031"></a>
-</span><span id="__span-0-2032"><a id="__codelineno-0-2032" name="__codelineno-0-2032"></a><span class="sd">        import matplotlib.pyplot as plt</span>
-</span><span id="__span-0-2033"><a id="__codelineno-0-2033" name="__codelineno-0-2033"></a>
-</span><span id="__span-0-2034"><a id="__codelineno-0-2034" name="__codelineno-0-2034"></a><span class="sd">        from conjugate.distributions import NormalInverseWishart, MultivariateNormal</span>
-</span><span id="__span-0-2035"><a id="__codelineno-0-2035" name="__codelineno-0-2035"></a><span class="sd">        from conjugate.models import multivariate_normal, multivariate_normal_predictive</span>
-</span><span id="__span-0-2036"><a id="__codelineno-0-2036" name="__codelineno-0-2036"></a>
-</span><span id="__span-0-2037"><a id="__codelineno-0-2037" name="__codelineno-0-2037"></a><span class="sd">        mu_1 = 10</span>
-</span><span id="__span-0-2038"><a id="__codelineno-0-2038" name="__codelineno-0-2038"></a><span class="sd">        mu_2 = 5</span>
-</span><span id="__span-0-2039"><a id="__codelineno-0-2039" name="__codelineno-0-2039"></a><span class="sd">        sigma_1 = 2.5</span>
-</span><span id="__span-0-2040"><a id="__codelineno-0-2040" name="__codelineno-0-2040"></a><span class="sd">        sigma_2 = 1.5</span>
-</span><span id="__span-0-2041"><a id="__codelineno-0-2041" name="__codelineno-0-2041"></a><span class="sd">        rho = -0.65</span>
-</span><span id="__span-0-2042"><a id="__codelineno-0-2042" name="__codelineno-0-2042"></a><span class="sd">        true_mean = np.array([mu_1, mu_2])</span>
-</span><span id="__span-0-2043"><a id="__codelineno-0-2043" name="__codelineno-0-2043"></a><span class="sd">        true_cov = np.array(</span>
-</span><span id="__span-0-2044"><a id="__codelineno-0-2044" name="__codelineno-0-2044"></a><span class="sd">            [</span>
-</span><span id="__span-0-2045"><a id="__codelineno-0-2045" name="__codelineno-0-2045"></a><span class="sd">                [sigma_1**2, rho * sigma_1 * sigma_2],</span>
-</span><span id="__span-0-2046"><a id="__codelineno-0-2046" name="__codelineno-0-2046"></a><span class="sd">                [rho * sigma_1 * sigma_2, sigma_2**2],</span>
-</span><span id="__span-0-2047"><a id="__codelineno-0-2047" name="__codelineno-0-2047"></a><span class="sd">            ]</span>
-</span><span id="__span-0-2048"><a id="__codelineno-0-2048" name="__codelineno-0-2048"></a><span class="sd">        )</span>
-</span><span id="__span-0-2049"><a id="__codelineno-0-2049" name="__codelineno-0-2049"></a><span class="sd">        true = MultivariateNormal(true_mean, true_cov)</span>
-</span><span id="__span-0-2050"><a id="__codelineno-0-2050" name="__codelineno-0-2050"></a>
-</span><span id="__span-0-2051"><a id="__codelineno-0-2051" name="__codelineno-0-2051"></a><span class="sd">        n_samples = 100</span>
-</span><span id="__span-0-2052"><a id="__codelineno-0-2052" name="__codelineno-0-2052"></a><span class="sd">        rng = np.random.default_rng(42)</span>
-</span><span id="__span-0-2053"><a id="__codelineno-0-2053" name="__codelineno-0-2053"></a><span class="sd">        data = true.dist.rvs(size=n_samples, random_state=rng)</span>
-</span><span id="__span-0-2054"><a id="__codelineno-0-2054" name="__codelineno-0-2054"></a>
-</span><span id="__span-0-2055"><a id="__codelineno-0-2055" name="__codelineno-0-2055"></a><span class="sd">        prior = NormalInverseWishart(</span>
-</span><span id="__span-0-2056"><a id="__codelineno-0-2056" name="__codelineno-0-2056"></a><span class="sd">            mu=np.array([0, 0]),</span>
-</span><span id="__span-0-2057"><a id="__codelineno-0-2057" name="__codelineno-0-2057"></a><span class="sd">            kappa=1,</span>
-</span><span id="__span-0-2058"><a id="__codelineno-0-2058" name="__codelineno-0-2058"></a><span class="sd">            nu=2,</span>
-</span><span id="__span-0-2059"><a id="__codelineno-0-2059" name="__codelineno-0-2059"></a><span class="sd">            psi=np.array(</span>
-</span><span id="__span-0-2060"><a id="__codelineno-0-2060" name="__codelineno-0-2060"></a><span class="sd">                [</span>
-</span><span id="__span-0-2061"><a id="__codelineno-0-2061" name="__codelineno-0-2061"></a><span class="sd">                    [5**2, 0],</span>
-</span><span id="__span-0-2062"><a id="__codelineno-0-2062" name="__codelineno-0-2062"></a><span class="sd">                    [0, 5**2],</span>
-</span><span id="__span-0-2063"><a id="__codelineno-0-2063" name="__codelineno-0-2063"></a><span class="sd">                ]</span>
-</span><span id="__span-0-2064"><a id="__codelineno-0-2064" name="__codelineno-0-2064"></a><span class="sd">            ),</span>
-</span><span id="__span-0-2065"><a id="__codelineno-0-2065" name="__codelineno-0-2065"></a><span class="sd">        )</span>
-</span><span id="__span-0-2066"><a id="__codelineno-0-2066" name="__codelineno-0-2066"></a>
-</span><span id="__span-0-2067"><a id="__codelineno-0-2067" name="__codelineno-0-2067"></a><span class="sd">        posterior = multivariate_normal(</span>
-</span><span id="__span-0-2068"><a id="__codelineno-0-2068" name="__codelineno-0-2068"></a><span class="sd">            X=data,</span>
-</span><span id="__span-0-2069"><a id="__codelineno-0-2069" name="__codelineno-0-2069"></a><span class="sd">            prior=prior,</span>
-</span><span id="__span-0-2070"><a id="__codelineno-0-2070" name="__codelineno-0-2070"></a><span class="sd">        )</span>
-</span><span id="__span-0-2071"><a id="__codelineno-0-2071" name="__codelineno-0-2071"></a><span class="sd">        prior_predictive = multivariate_normal_predictive(distribution=prior)</span>
-</span><span id="__span-0-2072"><a id="__codelineno-0-2072" name="__codelineno-0-2072"></a><span class="sd">        posterior_predictive = multivariate_normal_predictive(distribution=posterior)</span>
-</span><span id="__span-0-2073"><a id="__codelineno-0-2073" name="__codelineno-0-2073"></a>
-</span><span id="__span-0-2074"><a id="__codelineno-0-2074" name="__codelineno-0-2074"></a><span class="sd">        ax = plt.subplot(111)</span>
-</span><span id="__span-0-2075"><a id="__codelineno-0-2075" name="__codelineno-0-2075"></a>
-</span><span id="__span-0-2076"><a id="__codelineno-0-2076" name="__codelineno-0-2076"></a><span class="sd">        xmax = mu_1 + 3 * sigma_1</span>
-</span><span id="__span-0-2077"><a id="__codelineno-0-2077" name="__codelineno-0-2077"></a><span class="sd">        ymax = mu_2 + 3 * sigma_2</span>
-</span><span id="__span-0-2078"><a id="__codelineno-0-2078" name="__codelineno-0-2078"></a><span class="sd">        x, y = np.mgrid[-xmax:xmax:0.1, -ymax:ymax:0.1]</span>
-</span><span id="__span-0-2079"><a id="__codelineno-0-2079" name="__codelineno-0-2079"></a><span class="sd">        pos = np.dstack((x, y))</span>
-</span><span id="__span-0-2080"><a id="__codelineno-0-2080" name="__codelineno-0-2080"></a><span class="sd">        z = true.dist.pdf(pos)</span>
-</span><span id="__span-0-2081"><a id="__codelineno-0-2081" name="__codelineno-0-2081"></a><span class="sd">        # z = np.where(z &lt; 0.005, np.nan, z)</span>
-</span><span id="__span-0-2082"><a id="__codelineno-0-2082" name="__codelineno-0-2082"></a><span class="sd">        contours = ax.contour(x, y, z, alpha=0.55, color=&quot;black&quot;)</span>
-</span><span id="__span-0-2083"><a id="__codelineno-0-2083" name="__codelineno-0-2083"></a>
-</span><span id="__span-0-2084"><a id="__codelineno-0-2084" name="__codelineno-0-2084"></a><span class="sd">        for label, dist in zip(</span>
-</span><span id="__span-0-2085"><a id="__codelineno-0-2085" name="__codelineno-0-2085"></a><span class="sd">            [&quot;prior&quot;, &quot;posterior&quot;], [prior_predictive, posterior_predictive]</span>
-</span><span id="__span-0-2086"><a id="__codelineno-0-2086" name="__codelineno-0-2086"></a><span class="sd">        ):</span>
-</span><span id="__span-0-2087"><a id="__codelineno-0-2087" name="__codelineno-0-2087"></a><span class="sd">            X = dist.dist.rvs(size=1000)</span>
-</span><span id="__span-0-2088"><a id="__codelineno-0-2088" name="__codelineno-0-2088"></a><span class="sd">            ax.scatter(X[:, 0], X[:, 1], alpha=0.15, label=f&quot;{label} predictive&quot;)</span>
-</span><span id="__span-0-2089"><a id="__codelineno-0-2089" name="__codelineno-0-2089"></a>
-</span><span id="__span-0-2090"><a id="__codelineno-0-2090" name="__codelineno-0-2090"></a><span class="sd">        ax.axvline(0, color=&quot;black&quot;, linestyle=&quot;--&quot;)</span>
-</span><span id="__span-0-2091"><a id="__codelineno-0-2091" name="__codelineno-0-2091"></a><span class="sd">        ax.axhline(0, color=&quot;black&quot;, linestyle=&quot;--&quot;)</span>
-</span><span id="__span-0-2092"><a id="__codelineno-0-2092" name="__codelineno-0-2092"></a><span class="sd">        ax.scatter(data[:, 0], data[:, 1], label=&quot;data&quot;, alpha=0.5)</span>
-</span><span id="__span-0-2093"><a id="__codelineno-0-2093" name="__codelineno-0-2093"></a><span class="sd">        ax.scatter(mu_1, mu_2, color=&quot;black&quot;, marker=&quot;x&quot;, label=&quot;true mean&quot;)</span>
-</span><span id="__span-0-2094"><a id="__codelineno-0-2094" name="__codelineno-0-2094"></a>
-</span><span id="__span-0-2095"><a id="__codelineno-0-2095" name="__codelineno-0-2095"></a><span class="sd">        ax.set(</span>
-</span><span id="__span-0-2096"><a id="__codelineno-0-2096" name="__codelineno-0-2096"></a><span class="sd">            xlabel=&quot;x1&quot;,</span>
-</span><span id="__span-0-2097"><a id="__codelineno-0-2097" name="__codelineno-0-2097"></a><span class="sd">            ylabel=&quot;x2&quot;,</span>
-</span><span id="__span-0-2098"><a id="__codelineno-0-2098" name="__codelineno-0-2098"></a><span class="sd">            title=f&quot;Posterior predictive after {n_samples} samples&quot;,</span>
-</span><span id="__span-0-2099"><a id="__codelineno-0-2099" name="__codelineno-0-2099"></a><span class="sd">            xlim=(-xmax, xmax),</span>
-</span><span id="__span-0-2100"><a id="__codelineno-0-2100" name="__codelineno-0-2100"></a><span class="sd">            ylim=(-ymax, ymax),</span>
-</span><span id="__span-0-2101"><a id="__codelineno-0-2101" name="__codelineno-0-2101"></a><span class="sd">        )</span>
-</span><span id="__span-0-2102"><a id="__codelineno-0-2102" name="__codelineno-0-2102"></a><span class="sd">        ax.legend()</span>
-</span><span id="__span-0-2103"><a id="__codelineno-0-2103" name="__codelineno-0-2103"></a><span class="sd">        ```</span>
-</span><span id="__span-0-2104"><a id="__codelineno-0-2104" name="__codelineno-0-2104"></a><span class="sd">        &lt;!--</span>
-</span><span id="__span-0-2105"><a id="__codelineno-0-2105" name="__codelineno-0-2105"></a><span class="sd">        plt.savefig(&quot;./docs/images/docstrings/multivariate_normal_predictive.png&quot;)</span>
-</span><span id="__span-0-2106"><a id="__codelineno-0-2106" name="__codelineno-0-2106"></a><span class="sd">        plt.close()</span>
-</span><span id="__span-0-2107"><a id="__codelineno-0-2107" name="__codelineno-0-2107"></a><span class="sd">        --&gt;</span>
-</span><span id="__span-0-2108"><a id="__codelineno-0-2108" name="__codelineno-0-2108"></a>
-</span><span id="__span-0-2109"><a id="__codelineno-0-2109" name="__codelineno-0-2109"></a><span class="sd">        ![multivariate_normal_predictive](./images/docstrings/multivariate_normal_predictive.png)</span>
-</span><span id="__span-0-2110"><a id="__codelineno-0-2110" name="__codelineno-0-2110"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-2111"><a id="__codelineno-0-2111" name="__codelineno-0-2111"></a>
-</span><span id="__span-0-2112"><a id="__codelineno-0-2112" name="__codelineno-0-2112"></a>    <span class="n">p</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">psi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="__span-0-2113"><a id="__codelineno-0-2113" name="__codelineno-0-2113"></a>    <span class="n">mu</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">mu</span>
-</span><span id="__span-0-2114"><a id="__codelineno-0-2114" name="__codelineno-0-2114"></a>    <span class="n">nu</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">nu</span> <span class="o">-</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span id="__span-0-2115"><a id="__codelineno-0-2115" name="__codelineno-0-2115"></a>    <span class="n">sigma</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-0-2116"><a id="__codelineno-0-2116" name="__codelineno-0-2116"></a>        <span class="p">(</span><span class="n">distribution</span><span class="o">.</span><span class="n">kappa</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-0-2117"><a id="__codelineno-0-2117" name="__codelineno-0-2117"></a>        <span class="o">*</span> <span class="n">distribution</span><span class="o">.</span><span class="n">psi</span>
-</span><span id="__span-0-2118"><a id="__codelineno-0-2118" name="__codelineno-0-2118"></a>        <span class="o">/</span> <span class="p">(</span><span class="n">distribution</span><span class="o">.</span><span class="n">kappa</span> <span class="o">*</span> <span class="p">(</span><span class="n">distribution</span><span class="o">.</span><span class="n">nu</span> <span class="o">-</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-</span><span id="__span-0-2119"><a id="__codelineno-0-2119" name="__codelineno-0-2119"></a>    <span class="p">)</span>
-</span><span id="__span-0-2120"><a id="__codelineno-0-2120" name="__codelineno-0-2120"></a>
-</span><span id="__span-0-2121"><a id="__codelineno-0-2121" name="__codelineno-0-2121"></a>    <span class="k">return</span> <span class="n">MultivariateStudentT</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">nu</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-2120">2120</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-2011"><a id="__codelineno-0-2011" name="__codelineno-0-2011"></a><span class="nd">@add_associated_likelihood</span><span class="p">(</span><span class="n">MultivariateNormal</span><span class="p">)</span>
+</span><span id="__span-0-2012"><a id="__codelineno-0-2012" name="__codelineno-0-2012"></a><span class="nd">@validate_distribution_type</span>
+</span><span id="__span-0-2013"><a id="__codelineno-0-2013" name="__codelineno-0-2013"></a><span class="k">def</span><span class="w"> </span><span class="nf">multivariate_normal_predictive</span><span class="p">(</span>
+</span><span id="__span-0-2014"><a id="__codelineno-0-2014" name="__codelineno-0-2014"></a>    <span class="o">*</span><span class="p">,</span>
+</span><span id="__span-0-2015"><a id="__codelineno-0-2015" name="__codelineno-0-2015"></a>    <span class="n">distribution</span><span class="p">:</span> <span class="n">NormalInverseWishart</span><span class="p">,</span>
+</span><span id="__span-0-2016"><a id="__codelineno-0-2016" name="__codelineno-0-2016"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MultivariateStudentT</span><span class="p">:</span>
+</span><span id="__span-0-2017"><a id="__codelineno-0-2017" name="__codelineno-0-2017"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Multivariate normal likelihood with normal inverse wishart distribution.</span>
+</span><span id="__span-0-2018"><a id="__codelineno-0-2018" name="__codelineno-0-2018"></a>
+</span><span id="__span-0-2019"><a id="__codelineno-0-2019" name="__codelineno-0-2019"></a><span class="sd">    Args:</span>
+</span><span id="__span-0-2020"><a id="__codelineno-0-2020" name="__codelineno-0-2020"></a><span class="sd">        distribution: NormalInverseWishart distribution</span>
+</span><span id="__span-0-2021"><a id="__codelineno-0-2021" name="__codelineno-0-2021"></a>
+</span><span id="__span-0-2022"><a id="__codelineno-0-2022" name="__codelineno-0-2022"></a><span class="sd">    Returns:</span>
+</span><span id="__span-0-2023"><a id="__codelineno-0-2023" name="__codelineno-0-2023"></a><span class="sd">        MultivariateStudentT predictive distribution</span>
+</span><span id="__span-0-2024"><a id="__codelineno-0-2024" name="__codelineno-0-2024"></a>
+</span><span id="__span-0-2025"><a id="__codelineno-0-2025" name="__codelineno-0-2025"></a><span class="sd">    Examples:</span>
+</span><span id="__span-0-2026"><a id="__codelineno-0-2026" name="__codelineno-0-2026"></a><span class="sd">        Constructed example</span>
+</span><span id="__span-0-2027"><a id="__codelineno-0-2027" name="__codelineno-0-2027"></a>
+</span><span id="__span-0-2028"><a id="__codelineno-0-2028" name="__codelineno-0-2028"></a><span class="sd">        ```python</span>
+</span><span id="__span-0-2029"><a id="__codelineno-0-2029" name="__codelineno-0-2029"></a><span class="sd">        import numpy as np</span>
+</span><span id="__span-0-2030"><a id="__codelineno-0-2030" name="__codelineno-0-2030"></a>
+</span><span id="__span-0-2031"><a id="__codelineno-0-2031" name="__codelineno-0-2031"></a><span class="sd">        import matplotlib.pyplot as plt</span>
+</span><span id="__span-0-2032"><a id="__codelineno-0-2032" name="__codelineno-0-2032"></a>
+</span><span id="__span-0-2033"><a id="__codelineno-0-2033" name="__codelineno-0-2033"></a><span class="sd">        from conjugate.distributions import NormalInverseWishart, MultivariateNormal</span>
+</span><span id="__span-0-2034"><a id="__codelineno-0-2034" name="__codelineno-0-2034"></a><span class="sd">        from conjugate.models import multivariate_normal, multivariate_normal_predictive</span>
+</span><span id="__span-0-2035"><a id="__codelineno-0-2035" name="__codelineno-0-2035"></a>
+</span><span id="__span-0-2036"><a id="__codelineno-0-2036" name="__codelineno-0-2036"></a><span class="sd">        mu_1 = 10</span>
+</span><span id="__span-0-2037"><a id="__codelineno-0-2037" name="__codelineno-0-2037"></a><span class="sd">        mu_2 = 5</span>
+</span><span id="__span-0-2038"><a id="__codelineno-0-2038" name="__codelineno-0-2038"></a><span class="sd">        sigma_1 = 2.5</span>
+</span><span id="__span-0-2039"><a id="__codelineno-0-2039" name="__codelineno-0-2039"></a><span class="sd">        sigma_2 = 1.5</span>
+</span><span id="__span-0-2040"><a id="__codelineno-0-2040" name="__codelineno-0-2040"></a><span class="sd">        rho = -0.65</span>
+</span><span id="__span-0-2041"><a id="__codelineno-0-2041" name="__codelineno-0-2041"></a><span class="sd">        true_mean = np.array([mu_1, mu_2])</span>
+</span><span id="__span-0-2042"><a id="__codelineno-0-2042" name="__codelineno-0-2042"></a><span class="sd">        true_cov = np.array(</span>
+</span><span id="__span-0-2043"><a id="__codelineno-0-2043" name="__codelineno-0-2043"></a><span class="sd">            [</span>
+</span><span id="__span-0-2044"><a id="__codelineno-0-2044" name="__codelineno-0-2044"></a><span class="sd">                [sigma_1**2, rho * sigma_1 * sigma_2],</span>
+</span><span id="__span-0-2045"><a id="__codelineno-0-2045" name="__codelineno-0-2045"></a><span class="sd">                [rho * sigma_1 * sigma_2, sigma_2**2],</span>
+</span><span id="__span-0-2046"><a id="__codelineno-0-2046" name="__codelineno-0-2046"></a><span class="sd">            ]</span>
+</span><span id="__span-0-2047"><a id="__codelineno-0-2047" name="__codelineno-0-2047"></a><span class="sd">        )</span>
+</span><span id="__span-0-2048"><a id="__codelineno-0-2048" name="__codelineno-0-2048"></a><span class="sd">        true = MultivariateNormal(true_mean, true_cov)</span>
+</span><span id="__span-0-2049"><a id="__codelineno-0-2049" name="__codelineno-0-2049"></a>
+</span><span id="__span-0-2050"><a id="__codelineno-0-2050" name="__codelineno-0-2050"></a><span class="sd">        n_samples = 100</span>
+</span><span id="__span-0-2051"><a id="__codelineno-0-2051" name="__codelineno-0-2051"></a><span class="sd">        rng = np.random.default_rng(42)</span>
+</span><span id="__span-0-2052"><a id="__codelineno-0-2052" name="__codelineno-0-2052"></a><span class="sd">        data = true.dist.rvs(size=n_samples, random_state=rng)</span>
+</span><span id="__span-0-2053"><a id="__codelineno-0-2053" name="__codelineno-0-2053"></a>
+</span><span id="__span-0-2054"><a id="__codelineno-0-2054" name="__codelineno-0-2054"></a><span class="sd">        prior = NormalInverseWishart(</span>
+</span><span id="__span-0-2055"><a id="__codelineno-0-2055" name="__codelineno-0-2055"></a><span class="sd">            mu=np.array([0, 0]),</span>
+</span><span id="__span-0-2056"><a id="__codelineno-0-2056" name="__codelineno-0-2056"></a><span class="sd">            kappa=1,</span>
+</span><span id="__span-0-2057"><a id="__codelineno-0-2057" name="__codelineno-0-2057"></a><span class="sd">            nu=2,</span>
+</span><span id="__span-0-2058"><a id="__codelineno-0-2058" name="__codelineno-0-2058"></a><span class="sd">            psi=np.array(</span>
+</span><span id="__span-0-2059"><a id="__codelineno-0-2059" name="__codelineno-0-2059"></a><span class="sd">                [</span>
+</span><span id="__span-0-2060"><a id="__codelineno-0-2060" name="__codelineno-0-2060"></a><span class="sd">                    [5**2, 0],</span>
+</span><span id="__span-0-2061"><a id="__codelineno-0-2061" name="__codelineno-0-2061"></a><span class="sd">                    [0, 5**2],</span>
+</span><span id="__span-0-2062"><a id="__codelineno-0-2062" name="__codelineno-0-2062"></a><span class="sd">                ]</span>
+</span><span id="__span-0-2063"><a id="__codelineno-0-2063" name="__codelineno-0-2063"></a><span class="sd">            ),</span>
+</span><span id="__span-0-2064"><a id="__codelineno-0-2064" name="__codelineno-0-2064"></a><span class="sd">        )</span>
+</span><span id="__span-0-2065"><a id="__codelineno-0-2065" name="__codelineno-0-2065"></a>
+</span><span id="__span-0-2066"><a id="__codelineno-0-2066" name="__codelineno-0-2066"></a><span class="sd">        posterior = multivariate_normal(</span>
+</span><span id="__span-0-2067"><a id="__codelineno-0-2067" name="__codelineno-0-2067"></a><span class="sd">            X=data,</span>
+</span><span id="__span-0-2068"><a id="__codelineno-0-2068" name="__codelineno-0-2068"></a><span class="sd">            prior=prior,</span>
+</span><span id="__span-0-2069"><a id="__codelineno-0-2069" name="__codelineno-0-2069"></a><span class="sd">        )</span>
+</span><span id="__span-0-2070"><a id="__codelineno-0-2070" name="__codelineno-0-2070"></a><span class="sd">        prior_predictive = multivariate_normal_predictive(distribution=prior)</span>
+</span><span id="__span-0-2071"><a id="__codelineno-0-2071" name="__codelineno-0-2071"></a><span class="sd">        posterior_predictive = multivariate_normal_predictive(distribution=posterior)</span>
+</span><span id="__span-0-2072"><a id="__codelineno-0-2072" name="__codelineno-0-2072"></a>
+</span><span id="__span-0-2073"><a id="__codelineno-0-2073" name="__codelineno-0-2073"></a><span class="sd">        ax = plt.subplot(111)</span>
+</span><span id="__span-0-2074"><a id="__codelineno-0-2074" name="__codelineno-0-2074"></a>
+</span><span id="__span-0-2075"><a id="__codelineno-0-2075" name="__codelineno-0-2075"></a><span class="sd">        xmax = mu_1 + 3 * sigma_1</span>
+</span><span id="__span-0-2076"><a id="__codelineno-0-2076" name="__codelineno-0-2076"></a><span class="sd">        ymax = mu_2 + 3 * sigma_2</span>
+</span><span id="__span-0-2077"><a id="__codelineno-0-2077" name="__codelineno-0-2077"></a><span class="sd">        x, y = np.mgrid[-xmax:xmax:0.1, -ymax:ymax:0.1]</span>
+</span><span id="__span-0-2078"><a id="__codelineno-0-2078" name="__codelineno-0-2078"></a><span class="sd">        pos = np.dstack((x, y))</span>
+</span><span id="__span-0-2079"><a id="__codelineno-0-2079" name="__codelineno-0-2079"></a><span class="sd">        z = true.dist.pdf(pos)</span>
+</span><span id="__span-0-2080"><a id="__codelineno-0-2080" name="__codelineno-0-2080"></a><span class="sd">        # z = np.where(z &lt; 0.005, np.nan, z)</span>
+</span><span id="__span-0-2081"><a id="__codelineno-0-2081" name="__codelineno-0-2081"></a><span class="sd">        contours = ax.contour(x, y, z, alpha=0.55, color=&quot;black&quot;)</span>
+</span><span id="__span-0-2082"><a id="__codelineno-0-2082" name="__codelineno-0-2082"></a>
+</span><span id="__span-0-2083"><a id="__codelineno-0-2083" name="__codelineno-0-2083"></a><span class="sd">        for label, dist in zip(</span>
+</span><span id="__span-0-2084"><a id="__codelineno-0-2084" name="__codelineno-0-2084"></a><span class="sd">            [&quot;prior&quot;, &quot;posterior&quot;], [prior_predictive, posterior_predictive]</span>
+</span><span id="__span-0-2085"><a id="__codelineno-0-2085" name="__codelineno-0-2085"></a><span class="sd">        ):</span>
+</span><span id="__span-0-2086"><a id="__codelineno-0-2086" name="__codelineno-0-2086"></a><span class="sd">            X = dist.dist.rvs(size=1000)</span>
+</span><span id="__span-0-2087"><a id="__codelineno-0-2087" name="__codelineno-0-2087"></a><span class="sd">            ax.scatter(X[:, 0], X[:, 1], alpha=0.15, label=f&quot;{label} predictive&quot;)</span>
+</span><span id="__span-0-2088"><a id="__codelineno-0-2088" name="__codelineno-0-2088"></a>
+</span><span id="__span-0-2089"><a id="__codelineno-0-2089" name="__codelineno-0-2089"></a><span class="sd">        ax.axvline(0, color=&quot;black&quot;, linestyle=&quot;--&quot;)</span>
+</span><span id="__span-0-2090"><a id="__codelineno-0-2090" name="__codelineno-0-2090"></a><span class="sd">        ax.axhline(0, color=&quot;black&quot;, linestyle=&quot;--&quot;)</span>
+</span><span id="__span-0-2091"><a id="__codelineno-0-2091" name="__codelineno-0-2091"></a><span class="sd">        ax.scatter(data[:, 0], data[:, 1], label=&quot;data&quot;, alpha=0.5)</span>
+</span><span id="__span-0-2092"><a id="__codelineno-0-2092" name="__codelineno-0-2092"></a><span class="sd">        ax.scatter(mu_1, mu_2, color=&quot;black&quot;, marker=&quot;x&quot;, label=&quot;true mean&quot;)</span>
+</span><span id="__span-0-2093"><a id="__codelineno-0-2093" name="__codelineno-0-2093"></a>
+</span><span id="__span-0-2094"><a id="__codelineno-0-2094" name="__codelineno-0-2094"></a><span class="sd">        ax.set(</span>
+</span><span id="__span-0-2095"><a id="__codelineno-0-2095" name="__codelineno-0-2095"></a><span class="sd">            xlabel=&quot;x1&quot;,</span>
+</span><span id="__span-0-2096"><a id="__codelineno-0-2096" name="__codelineno-0-2096"></a><span class="sd">            ylabel=&quot;x2&quot;,</span>
+</span><span id="__span-0-2097"><a id="__codelineno-0-2097" name="__codelineno-0-2097"></a><span class="sd">            title=f&quot;Posterior predictive after {n_samples} samples&quot;,</span>
+</span><span id="__span-0-2098"><a id="__codelineno-0-2098" name="__codelineno-0-2098"></a><span class="sd">            xlim=(-xmax, xmax),</span>
+</span><span id="__span-0-2099"><a id="__codelineno-0-2099" name="__codelineno-0-2099"></a><span class="sd">            ylim=(-ymax, ymax),</span>
+</span><span id="__span-0-2100"><a id="__codelineno-0-2100" name="__codelineno-0-2100"></a><span class="sd">        )</span>
+</span><span id="__span-0-2101"><a id="__codelineno-0-2101" name="__codelineno-0-2101"></a><span class="sd">        ax.legend()</span>
+</span><span id="__span-0-2102"><a id="__codelineno-0-2102" name="__codelineno-0-2102"></a><span class="sd">        ```</span>
+</span><span id="__span-0-2103"><a id="__codelineno-0-2103" name="__codelineno-0-2103"></a><span class="sd">        &lt;!--</span>
+</span><span id="__span-0-2104"><a id="__codelineno-0-2104" name="__codelineno-0-2104"></a><span class="sd">        plt.savefig(&quot;./docs/images/docstrings/multivariate_normal_predictive.png&quot;)</span>
+</span><span id="__span-0-2105"><a id="__codelineno-0-2105" name="__codelineno-0-2105"></a><span class="sd">        plt.close()</span>
+</span><span id="__span-0-2106"><a id="__codelineno-0-2106" name="__codelineno-0-2106"></a><span class="sd">        --&gt;</span>
+</span><span id="__span-0-2107"><a id="__codelineno-0-2107" name="__codelineno-0-2107"></a>
+</span><span id="__span-0-2108"><a id="__codelineno-0-2108" name="__codelineno-0-2108"></a><span class="sd">        ![multivariate_normal_predictive](./images/docstrings/multivariate_normal_predictive.png)</span>
+</span><span id="__span-0-2109"><a id="__codelineno-0-2109" name="__codelineno-0-2109"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-2110"><a id="__codelineno-0-2110" name="__codelineno-0-2110"></a>
+</span><span id="__span-0-2111"><a id="__codelineno-0-2111" name="__codelineno-0-2111"></a>    <span class="n">p</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">psi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="__span-0-2112"><a id="__codelineno-0-2112" name="__codelineno-0-2112"></a>    <span class="n">mu</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">mu</span>
+</span><span id="__span-0-2113"><a id="__codelineno-0-2113" name="__codelineno-0-2113"></a>    <span class="n">nu</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">nu</span> <span class="o">-</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span id="__span-0-2114"><a id="__codelineno-0-2114" name="__codelineno-0-2114"></a>    <span class="n">sigma</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="__span-0-2115"><a id="__codelineno-0-2115" name="__codelineno-0-2115"></a>        <span class="p">(</span><span class="n">distribution</span><span class="o">.</span><span class="n">kappa</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-0-2116"><a id="__codelineno-0-2116" name="__codelineno-0-2116"></a>        <span class="o">*</span> <span class="n">distribution</span><span class="o">.</span><span class="n">psi</span>
+</span><span id="__span-0-2117"><a id="__codelineno-0-2117" name="__codelineno-0-2117"></a>        <span class="o">/</span> <span class="p">(</span><span class="n">distribution</span><span class="o">.</span><span class="n">kappa</span> <span class="o">*</span> <span class="p">(</span><span class="n">distribution</span><span class="o">.</span><span class="n">nu</span> <span class="o">-</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</span><span id="__span-0-2118"><a id="__codelineno-0-2118" name="__codelineno-0-2118"></a>    <span class="p">)</span>
+</span><span id="__span-0-2119"><a id="__codelineno-0-2119" name="__codelineno-0-2119"></a>
+</span><span id="__span-0-2120"><a id="__codelineno-0-2120" name="__codelineno-0-2120"></a>    <span class="k">return</span> <span class="n">MultivariateStudentT</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">nu</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -12856,7 +12839,8 @@ Can be used to scale the distributions to a different unit of time.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>conjugate/models.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-2207">2207</a></span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-2206">2206</a></span>
+<span class="normal"><a href="#__codelineno-0-2207">2207</a></span>
 <span class="normal"><a href="#__codelineno-0-2208">2208</a></span>
 <span class="normal"><a href="#__codelineno-0-2209">2209</a></span>
 <span class="normal"><a href="#__codelineno-0-2210">2210</a></span>
@@ -12877,30 +12861,29 @@ Can be used to scale the distributions to a different unit of time.</p>
 <span class="normal"><a href="#__codelineno-0-2225">2225</a></span>
 <span class="normal"><a href="#__codelineno-0-2226">2226</a></span>
 <span class="normal"><a href="#__codelineno-0-2227">2227</a></span>
-<span class="normal"><a href="#__codelineno-0-2228">2228</a></span>
-<span class="normal"><a href="#__codelineno-0-2229">2229</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-2207"><a id="__codelineno-0-2207" name="__codelineno-0-2207"></a><span class="nd">@add_associated_likelihood</span><span class="p">(</span><span class="n">Weibull</span><span class="p">)</span>
-</span><span id="__span-0-2208"><a id="__codelineno-0-2208" name="__codelineno-0-2208"></a><span class="nd">@validate_prior_type</span>
-</span><span id="__span-0-2209"><a id="__codelineno-0-2209" name="__codelineno-0-2209"></a><span class="k">def</span><span class="w"> </span><span class="nf">weibull_inverse_gamma_known_shape</span><span class="p">(</span>
-</span><span id="__span-0-2210"><a id="__codelineno-0-2210" name="__codelineno-0-2210"></a>    <span class="o">*</span><span class="p">,</span>
-</span><span id="__span-0-2211"><a id="__codelineno-0-2211" name="__codelineno-0-2211"></a>    <span class="n">n</span><span class="p">:</span> <span class="n">NUMERIC</span><span class="p">,</span>
-</span><span id="__span-0-2212"><a id="__codelineno-0-2212" name="__codelineno-0-2212"></a>    <span class="n">x_beta_total</span><span class="p">:</span> <span class="n">NUMERIC</span><span class="p">,</span>
-</span><span id="__span-0-2213"><a id="__codelineno-0-2213" name="__codelineno-0-2213"></a>    <span class="n">prior</span><span class="p">:</span> <span class="n">InverseGamma</span><span class="p">,</span>
-</span><span id="__span-0-2214"><a id="__codelineno-0-2214" name="__codelineno-0-2214"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InverseGamma</span><span class="p">:</span>
-</span><span id="__span-0-2215"><a id="__codelineno-0-2215" name="__codelineno-0-2215"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Posterior distribution for a Weibull likelihood with an inverse gamma prior on shape.</span>
-</span><span id="__span-0-2216"><a id="__codelineno-0-2216" name="__codelineno-0-2216"></a>
-</span><span id="__span-0-2217"><a id="__codelineno-0-2217" name="__codelineno-0-2217"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-2218"><a id="__codelineno-0-2218" name="__codelineno-0-2218"></a><span class="sd">        n: total number of samples</span>
-</span><span id="__span-0-2219"><a id="__codelineno-0-2219" name="__codelineno-0-2219"></a><span class="sd">        x_beta_total: sum of all x^beta</span>
-</span><span id="__span-0-2220"><a id="__codelineno-0-2220" name="__codelineno-0-2220"></a><span class="sd">        prior: InverseGamma prior</span>
-</span><span id="__span-0-2221"><a id="__codelineno-0-2221" name="__codelineno-0-2221"></a>
-</span><span id="__span-0-2222"><a id="__codelineno-0-2222" name="__codelineno-0-2222"></a><span class="sd">    Returns:</span>
-</span><span id="__span-0-2223"><a id="__codelineno-0-2223" name="__codelineno-0-2223"></a><span class="sd">        InverseGamma posterior distribution</span>
-</span><span id="__span-0-2224"><a id="__codelineno-0-2224" name="__codelineno-0-2224"></a>
-</span><span id="__span-0-2225"><a id="__codelineno-0-2225" name="__codelineno-0-2225"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-2226"><a id="__codelineno-0-2226" name="__codelineno-0-2226"></a>    <span class="n">alpha_post</span> <span class="o">=</span> <span class="n">prior</span><span class="o">.</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">n</span>
-</span><span id="__span-0-2227"><a id="__codelineno-0-2227" name="__codelineno-0-2227"></a>    <span class="n">beta_post</span> <span class="o">=</span> <span class="n">prior</span><span class="o">.</span><span class="n">beta</span> <span class="o">+</span> <span class="n">x_beta_total</span>
-</span><span id="__span-0-2228"><a id="__codelineno-0-2228" name="__codelineno-0-2228"></a>
-</span><span id="__span-0-2229"><a id="__codelineno-0-2229" name="__codelineno-0-2229"></a>    <span class="k">return</span> <span class="n">InverseGamma</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha_post</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta_post</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-2228">2228</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-2206"><a id="__codelineno-0-2206" name="__codelineno-0-2206"></a><span class="nd">@add_associated_likelihood</span><span class="p">(</span><span class="n">Weibull</span><span class="p">)</span>
+</span><span id="__span-0-2207"><a id="__codelineno-0-2207" name="__codelineno-0-2207"></a><span class="nd">@validate_prior_type</span>
+</span><span id="__span-0-2208"><a id="__codelineno-0-2208" name="__codelineno-0-2208"></a><span class="k">def</span><span class="w"> </span><span class="nf">weibull_inverse_gamma_known_shape</span><span class="p">(</span>
+</span><span id="__span-0-2209"><a id="__codelineno-0-2209" name="__codelineno-0-2209"></a>    <span class="o">*</span><span class="p">,</span>
+</span><span id="__span-0-2210"><a id="__codelineno-0-2210" name="__codelineno-0-2210"></a>    <span class="n">n</span><span class="p">:</span> <span class="n">NUMERIC</span><span class="p">,</span>
+</span><span id="__span-0-2211"><a id="__codelineno-0-2211" name="__codelineno-0-2211"></a>    <span class="n">x_beta_total</span><span class="p">:</span> <span class="n">NUMERIC</span><span class="p">,</span>
+</span><span id="__span-0-2212"><a id="__codelineno-0-2212" name="__codelineno-0-2212"></a>    <span class="n">prior</span><span class="p">:</span> <span class="n">InverseGamma</span><span class="p">,</span>
+</span><span id="__span-0-2213"><a id="__codelineno-0-2213" name="__codelineno-0-2213"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InverseGamma</span><span class="p">:</span>
+</span><span id="__span-0-2214"><a id="__codelineno-0-2214" name="__codelineno-0-2214"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Posterior distribution for a Weibull likelihood with an inverse gamma prior on shape.</span>
+</span><span id="__span-0-2215"><a id="__codelineno-0-2215" name="__codelineno-0-2215"></a>
+</span><span id="__span-0-2216"><a id="__codelineno-0-2216" name="__codelineno-0-2216"></a><span class="sd">    Args:</span>
+</span><span id="__span-0-2217"><a id="__codelineno-0-2217" name="__codelineno-0-2217"></a><span class="sd">        n: total number of samples</span>
+</span><span id="__span-0-2218"><a id="__codelineno-0-2218" name="__codelineno-0-2218"></a><span class="sd">        x_beta_total: sum of all x^beta</span>
+</span><span id="__span-0-2219"><a id="__codelineno-0-2219" name="__codelineno-0-2219"></a><span class="sd">        prior: InverseGamma prior</span>
+</span><span id="__span-0-2220"><a id="__codelineno-0-2220" name="__codelineno-0-2220"></a>
+</span><span id="__span-0-2221"><a id="__codelineno-0-2221" name="__codelineno-0-2221"></a><span class="sd">    Returns:</span>
+</span><span id="__span-0-2222"><a id="__codelineno-0-2222" name="__codelineno-0-2222"></a><span class="sd">        InverseGamma posterior distribution</span>
+</span><span id="__span-0-2223"><a id="__codelineno-0-2223" name="__codelineno-0-2223"></a>
+</span><span id="__span-0-2224"><a id="__codelineno-0-2224" name="__codelineno-0-2224"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-2225"><a id="__codelineno-0-2225" name="__codelineno-0-2225"></a>    <span class="n">alpha_post</span> <span class="o">=</span> <span class="n">prior</span><span class="o">.</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">n</span>
+</span><span id="__span-0-2226"><a id="__codelineno-0-2226" name="__codelineno-0-2226"></a>    <span class="n">beta_post</span> <span class="o">=</span> <span class="n">prior</span><span class="o">.</span><span class="n">beta</span> <span class="o">+</span> <span class="n">x_beta_total</span>
+</span><span id="__span-0-2227"><a id="__codelineno-0-2227" name="__codelineno-0-2227"></a>
+</span><span id="__span-0-2228"><a id="__codelineno-0-2228" name="__codelineno-0-2228"></a>    <span class="k">return</span> <span class="n">InverseGamma</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha_post</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta_post</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
             </details>
     </div>

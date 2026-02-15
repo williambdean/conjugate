@@ -8,6 +8,26 @@
 
 Bayesian conjugate models in Python
 
+## Overview
+
+`conjugate-models` is a modern Python package for Bayesian conjugate inference that prioritizes a clean, idiomatic API and seamless integration with widely used Python data analysis libraries. It implements the conjugate likelihood-prior pairs cataloged in [Fink's compendium](https://www.johndcook.com/CompendiumOfConjugatePriors.pdf) and [Wikipedia's conjugate prior table](https://en.wikipedia.org/wiki/Conjugate_prior), making rigorous Bayesian updating, exploration, and visualization accessible for practitioners, educators, and researchers.
+
+### Why Conjugate Priors?
+
+A prior distribution is conjugate to a likelihood when the posterior remains in the same distribution family after observing data. Conjugate priors provide closed-form posterior updates and posterior predictive distributions, eliminating the need for numerical integration or MCMC sampling. Because these updates are analytic rather than iterative, **posterior computation is instantaneous regardless of data size**—enabling real-time interactive exploration and rapid model iteration.
+
+### Key Benefits
+
+- ⚡ **Instant Updates:** No MCMC or optimization required—posterior computation is immediate
+- 🔢 **Vectorized Operations:** Batch inference for multi-arm problems without explicit loops
+- 📊 **Built-in Visualization:** Plot priors, posteriors, and predictive distributions
+- 🔗 **SciPy Integration:** Direct access to scipy.stats distributions via `.dist` property
+- 📦 **Data Library Support:** Works seamlessly with numpy, pandas, polars, and general array-like objects
+- 🪶 **Lightweight Dependencies:** Minimal requirements—no heavy ML frameworks or complex toolchains
+
+### Lightweight & Easy to Install
+
+With minimal dependencies from the scientific Python stack, `conjugate-models` installs quickly without requiring heavyweight probabilistic programming frameworks, MCMC samplers, or complex compilation toolchains.
 
 ## Installation
 

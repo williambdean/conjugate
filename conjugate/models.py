@@ -1932,7 +1932,6 @@ def multivariate_normal(
 
     Args:
         X: design matrix
-        mu: known mean
         prior: NormalInverseWishart prior
         outer: function to take outer product, defaults to np.outer
 

@@ -19,7 +19,7 @@ pip install conjugate-models
 
 - [Interactive Distribution Explorer](https://williambdean.github.io/conjugate/explorer) for exploring probability distributions with real-time parameter adjustment
 - **[Raw Data Workflow](https://williambdean.github.io/conjugate/examples/raw-data-workflow)** - Complete examples from raw observational data to posterior distributions with helper functions
-- **Data Input Helper Functions** - Extract sufficient statistics from raw observational data for all supported models
+- **[Data Input Helper Functions](https://williambdean.github.io/conjugate/helpers)** - Extract sufficient statistics from raw observational data for all supported models
 - [Connection to Scipy Distributions](https://williambdean.github.io/conjugate/examples/scipy-connection) with `dist` attribute
 - [Built in Plotting](https://williambdean.github.io/conjugate/examples/plotting) with `plot_pdf`, `plot_pmf`, and `plot_cdf` methods
 - [Vectorized Operations](https://williambdean.github.io/conjugate/examples/vectorized-inputs) for parameters and data
@@ -38,9 +38,11 @@ Many likelihoods are supported including
 - `Normal` (including linear regression)
 - and [many more](https://williambdean.github.io/conjugate/models/)
 
+See the [Quick Reference](https://williambdean.github.io/conjugate/quick-reference) for a complete table of likelihood → prior/posterior mappings with links to model functions and helper functions.
+
 ## Basic Usage
 
-### Working with Pre-processed Data
+### Pattern 1: Working with Pre-processed Data
 
 1. Define prior distribution from `distributions` module
 1. Pass data and prior into model from `models` modules
@@ -64,7 +66,7 @@ posterior_predictive: BetaBinomial = binomial_beta_predictive(
 )
 ```
 
-### Working with Raw Observational Data
+### Pattern 2: Working with Raw Observational Data
 
 For raw data, use **helper functions** from the `helpers` module to extract sufficient statistics:
 

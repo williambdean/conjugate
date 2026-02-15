@@ -41,6 +41,7 @@ extra:
 
 nav:
   - Overview: index.md
+  - Quick Reference: quick-reference.md
   - Distribution Explorer: explorer.md
   - Modules:
       - Models: models.md

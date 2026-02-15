@@ -25,6 +25,8 @@ For PyTensor compatibility:
 import numpy as np
 from typing import Callable
 
+from conjugate._typing import NUMERIC
+
 # =============================================================================
 # Default Operations (NumPy-compatible, handle scalars)
 # =============================================================================
@@ -174,7 +176,7 @@ pytensor_ops = _PyTensorOpsProxy()
 
 
 def poisson_gamma_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -216,7 +218,7 @@ exponential_gamma_inputs = poisson_gamma_inputs
 
 
 def gamma_known_shape_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -249,8 +251,8 @@ def gamma_known_shape_inputs(
 
 
 def binomial_beta_inputs(
-    x,
-    n,
+    x: NUMERIC,
+    n: NUMERIC,
     *,
     sum_fn: Callable | None = None,
 ) -> dict:
@@ -274,7 +276,7 @@ def binomial_beta_inputs(
 
 
 def bernoulli_beta_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -316,8 +318,8 @@ def bernoulli_beta_inputs(
 
 
 def negative_binomial_beta_inputs(
-    x,
-    r,
+    x: NUMERIC,
+    r: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -358,7 +360,7 @@ def negative_binomial_beta_inputs(
 
 
 def geometric_beta_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -385,7 +387,7 @@ def geometric_beta_inputs(
 
 
 def hypergeometric_beta_binomial_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -417,7 +419,7 @@ def hypergeometric_beta_binomial_inputs(
 # =============================================================================
 
 
-def categorical_dirichlet_inputs(x) -> dict:
+def categorical_dirichlet_inputs(x: NUMERIC) -> dict:
     """Extract sufficient statistics for categorical_dirichlet model.
 
     Args:
@@ -429,7 +431,7 @@ def categorical_dirichlet_inputs(x) -> dict:
     return {"x": x}
 
 
-def multinomial_dirichlet_inputs(x) -> dict:
+def multinomial_dirichlet_inputs(x: NUMERIC) -> dict:
     """Extract sufficient statistics for multinomial_dirichlet model.
 
     Args:
@@ -448,7 +450,7 @@ def multinomial_dirichlet_inputs(x) -> dict:
 
 
 def normal_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -482,7 +484,7 @@ def normal_inputs(
 
 
 def normal_known_mean_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -514,7 +516,7 @@ def normal_known_mean_inputs(
 
 
 def normal_known_variance_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -541,7 +543,7 @@ def normal_known_variance_inputs(
 
 
 def normal_known_precision_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -574,7 +576,7 @@ def normal_known_precision_inputs(
 
 
 def log_normal_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -618,7 +620,7 @@ def log_normal_inputs(
 
 
 def gamma_known_rate_inputs(
-    x,
+    x: NUMERIC,
     *,
     prod_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -651,7 +653,7 @@ def gamma_known_rate_inputs(
 
 
 def gamma_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     prod_fn: Callable | None = None,
@@ -689,7 +691,7 @@ def gamma_inputs(
 
 
 def beta_inputs(
-    x,
+    x: NUMERIC,
     *,
     prod_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -730,7 +732,7 @@ def beta_inputs(
 
 
 def pareto_gamma_inputs(
-    x,
+    x: NUMERIC,
     *,
     x_m: float | None = None,
     sum_fn: Callable | None = None,
@@ -775,7 +777,7 @@ def pareto_gamma_inputs(
 
 
 def uniform_pareto_inputs(
-    x,
+    x: NUMERIC,
     *,
     max_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -808,7 +810,7 @@ def uniform_pareto_inputs(
 
 
 def inverse_gamma_known_rate_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -852,7 +854,7 @@ def inverse_gamma_known_rate_inputs(
 
 
 def von_mises_known_concentration_inputs(
-    x,
+    x: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -894,8 +896,8 @@ def von_mises_known_concentration_inputs(
 
 
 def von_mises_known_direction_inputs(
-    x,
-    mu,
+    x: NUMERIC,
+    mu: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -939,8 +941,8 @@ def von_mises_known_direction_inputs(
 
 
 def weibull_inverse_gamma_known_shape_inputs(
-    x,
-    beta,
+    x: NUMERIC,
+    beta: NUMERIC,
     *,
     sum_fn: Callable | None = None,
     len_fn: Callable | None = None,
@@ -978,7 +980,7 @@ def weibull_inverse_gamma_known_shape_inputs(
 
 
 def multivariate_normal_known_covariance_inputs(
-    X,
+    X: NUMERIC,
     *,
     len_fn: Callable | None = None,
     mean_fn: Callable | None = None,
@@ -1013,7 +1015,7 @@ def multivariate_normal_known_covariance_inputs(
 
 
 def multivariate_normal_known_precision_inputs(
-    X,
+    X: NUMERIC,
     *,
     len_fn: Callable | None = None,
     mean_fn: Callable | None = None,
@@ -1053,7 +1055,7 @@ def multivariate_normal_known_precision_inputs(
 # =============================================================================
 
 
-def linear_regression_inputs(X, y) -> dict:
+def linear_regression_inputs(X: NUMERIC, y: NUMERIC) -> dict:
     """Identity helper for linear_regression model.
 
     Returns X and y unchanged for API consistency.
@@ -1068,7 +1070,7 @@ def linear_regression_inputs(X, y) -> dict:
     return {"X": X, "y": y}
 
 
-def multivariate_normal_inputs(X) -> dict:
+def multivariate_normal_inputs(X: NUMERIC) -> dict:
     """Identity helper for multivariate_normal model.
 
     Args:
@@ -1080,7 +1082,7 @@ def multivariate_normal_inputs(X) -> dict:
     return {"X": X}
 
 
-def multivariate_normal_known_mean_inputs(X, mu) -> dict:
+def multivariate_normal_known_mean_inputs(X: NUMERIC, mu: NUMERIC) -> dict:
     """Identity helper for multivariate_normal_known_mean model.
 
     Args:

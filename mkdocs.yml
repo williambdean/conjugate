@@ -1,4 +1,6 @@
 site_name: Conjugate Models
+site_description: "Fast Python library for Bayesian conjugate priors. 50+ models including Beta-Binomial, Gamma-Poisson, Normal with vectorized updates, sufficient statistic helpers, built-in plotting, and SciPy integration. No MCMC required."
+site_author: "William Dean"
 
 theme:
   name: "material"

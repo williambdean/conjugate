@@ -1,7 +1,7 @@
 [project]
 name = "conjugate-models"
 version = "0.14.0"
-description = "Modern Python package for Bayesian conjugate inference with clean API and seamless integration with numpy, pandas, polars, and scipy"
+description = "Modern, lightweight Python package for Bayesian conjugate inference with minimal dependencies and seamless integration with numpy, pandas, polars, and scipy"
 authors = [{ name = "Will Dean", email = "wd60622@gmail.com" }]
 requires-python = ">=3.10,<4.0"
 readme = "README.md"

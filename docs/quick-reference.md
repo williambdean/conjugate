@@ -11,54 +11,72 @@ A cheat sheet for conjugate model pairs to help you quickly find the right funct
 
 1. Find your **likelihood** (the distribution of your data)
 2. Look up the corresponding **model function** from `conjugate.models`
-3. Check if there's a **helper function** to extract sufficient statistics from raw data
+3. Check the **Functions** column for:
+   - **Helper** functions to extract sufficient statistics from raw data
+   - **Predictive** functions for posterior predictive distributions
 4. See **examples** for practical usage patterns
+
+**Note:** Not all models have closed-form predictive distributions. When available, predictive functions follow the pattern `<model>_predictive`.
+
+---
+
+## Coverage
+
+This reference includes **26 conjugate model pairs** with:
+
+- ✅ **Model functions** for all 26 pairs (posterior updates)
+- ✅ **Helper functions** for 25 pairs (raw data → sufficient statistics)
+- ✅ **Predictive functions** for 18 pairs (posterior predictive distributions)
+
+Predictive functions are available for the most commonly used models, particularly those based on Beta, Gamma, and Normal priors.
+
+**Note:** For models without closed-form predictive distributions, see [Unsupported Distributions] for a guide on generating posterior predictive samples using sampling techniques.
 
 ---
 
 ## Discrete Likelihoods
 
-| Likelihood | Prior / Posterior | Model | Helper | Examples |
-|------------|-------------------|-------|--------|----------|
-| Binomial | [Beta] | [`binomial_beta`][binomial_beta] | [`binomial_beta_inputs`][binomial_beta_inputs] | [Binomial], [Bandit], [Bayesian Update], [Vectorized] |
-| Bernoulli | [Beta] | [`bernoulli_beta`][bernoulli_beta] | [`bernoulli_beta_inputs`][bernoulli_beta_inputs] | [Raw Data Workflow] |
-| Negative Binomial | [Beta] | [`negative_binomial_beta`][negative_binomial_beta] | [`negative_binomial_beta_inputs`][negative_binomial_beta_inputs] | - |
-| Geometric | [Beta] | [`geometric_beta`][geometric_beta] | [`geometric_beta_inputs`][geometric_beta_inputs] | - |
-| Hypergeometric | [BetaBinomial] | [`hypergeometric_beta_binomial`][hypergeometric_beta_binomial] | [`hypergeometric_beta_binomial_inputs`][hypergeometric_beta_binomial_inputs] | - |
-| Categorical | [Dirichlet] | [`categorical_dirichlet`][categorical_dirichlet] | [`categorical_dirichlet_inputs`][categorical_dirichlet_inputs] | - |
-| Multinomial | [Dirichlet] | [`multinomial_dirichlet`][multinomial_dirichlet] | [`multinomial_dirichlet_inputs`][multinomial_dirichlet_inputs] | [Raw Data Workflow] |
-| Poisson | [Gamma] | [`poisson_gamma`][poisson_gamma] | [`poisson_gamma_inputs`][poisson_gamma_inputs] | [Bootstrap], [Limit], [Raw Data Workflow] |
+| Likelihood | Prior / Posterior | Model | Functions | Examples |
+|------------|-------------------|-------|-----------|----------|
+| Binomial | [Beta] | [`binomial_beta`][binomial_beta] | Helper: [`binomial_beta_inputs`][binomial_beta_inputs]<br>Predictive: [`binomial_beta_predictive`][binomial_beta_predictive] | [Binomial], [Bandit], [Bayesian Update], [Vectorized] |
+| Bernoulli | [Beta] | [`bernoulli_beta`][bernoulli_beta] | Helper: [`bernoulli_beta_inputs`][bernoulli_beta_inputs]<br>Predictive: [`bernoulli_beta_predictive`][bernoulli_beta_predictive] | [Raw Data Workflow] |
+| Negative Binomial | [Beta] | [`negative_binomial_beta`][negative_binomial_beta] | Helper: [`negative_binomial_beta_inputs`][negative_binomial_beta_inputs]<br>Predictive: [`negative_binomial_beta_predictive`][negative_binomial_beta_predictive] | - |
+| Geometric | [Beta] | [`geometric_beta`][geometric_beta] | Helper: [`geometric_beta_inputs`][geometric_beta_inputs]<br>Predictive: [`geometric_beta_predictive`][geometric_beta_predictive] | - |
+| Hypergeometric | [BetaBinomial] | [`hypergeometric_beta_binomial`][hypergeometric_beta_binomial] | Helper: [`hypergeometric_beta_binomial_inputs`][hypergeometric_beta_binomial_inputs]<br>Predictive: - | - |
+| Categorical | [Dirichlet] | [`categorical_dirichlet`][categorical_dirichlet] | Helper: [`categorical_dirichlet_inputs`][categorical_dirichlet_inputs]<br>Predictive: [`categorical_dirichlet_predictive`][categorical_dirichlet_predictive] | - |
+| Multinomial | [Dirichlet] | [`multinomial_dirichlet`][multinomial_dirichlet] | Helper: [`multinomial_dirichlet_inputs`][multinomial_dirichlet_inputs]<br>Predictive: [`multinomial_dirichlet_predictive`][multinomial_dirichlet_predictive] | [Raw Data Workflow] |
+| Poisson | [Gamma] | [`poisson_gamma`][poisson_gamma] | Helper: [`poisson_gamma_inputs`][poisson_gamma_inputs]<br>Predictive: [`poisson_gamma_predictive`][poisson_gamma_predictive] | [Bootstrap], [Limit], [Raw Data Workflow] |
 
 ## Continuous Likelihoods
 
-| Likelihood | Prior / Posterior | Model | Helper | Examples |
-|------------|-------------------|-------|--------|----------|
-| Exponential | [Gamma] | [`exponential_gamma`][exponential_gamma] | - | [Thompson], [Raw Data Workflow] |
-| Gamma (known shape) | [Gamma] | [`gamma_known_shape`][gamma_known_shape] | [`gamma_known_shape_inputs`][gamma_known_shape_inputs] | - |
-| Gamma (known rate) | [GammaKnownRateProportional] | [`gamma_known_rate`][gamma_known_rate] | [`gamma_known_rate_inputs`][gamma_known_rate_inputs] | - |
-| Gamma | [GammaProportional] | [`gamma`][gamma] | [`gamma_inputs`][gamma_inputs] | - |
-| Inverse Gamma (known rate) | [Gamma] | [`inverse_gamma_known_rate`][inverse_gamma_known_rate] | [`inverse_gamma_known_rate_inputs`][inverse_gamma_known_rate_inputs] | - |
-| Normal (known variance) | [Normal] | [`normal_known_variance`][normal_known_variance] | [`normal_known_variance_inputs`][normal_known_variance_inputs] | [Shortest Path] |
-| Normal (known precision) | [Normal] | [`normal_known_precision`][normal_known_precision] | [`normal_known_precision_inputs`][normal_known_precision_inputs] | - |
-| Normal (known mean) | [InverseGamma] | [`normal_known_mean`][normal_known_mean] | [`normal_known_mean_inputs`][normal_known_mean_inputs] | - |
-| Normal | [NormalInverseGamma] | [`normal`][normal] | [`normal_inputs`][normal_inputs] | - |
-| Linear Regression | [NormalInverseGamma] | [`linear_regression`][linear_regression] | [`linear_regression_inputs`][linear_regression_inputs] | [Linear Regression] |
-| Log Normal | [NormalInverseGamma] | [`log_normal`][log_normal] | [`log_normal_inputs`][log_normal_inputs] | - |
-| Uniform | [Pareto] | [`uniform_pareto`][uniform_pareto] | [`uniform_pareto_inputs`][uniform_pareto_inputs] | - |
-| Pareto | [Gamma] | [`pareto_gamma`][pareto_gamma] | [`pareto_gamma_inputs`][pareto_gamma_inputs] | [Unsupported Distributions] |
-| Beta | [BetaProportional] | [`beta`][beta] | [`beta_inputs`][beta_inputs] | [Raw Data Workflow] |
-| Von Mises (known κ) | [VonMisesKnownConcentration] | [`von_mises_known_concentration`][von_mises_known_concentration] | [`von_mises_known_concentration_inputs`][von_mises_known_concentration_inputs] | - |
-| Von Mises (known μ) | [VonMisesKnownDirectionProportional] | [`von_mises_known_direction`][von_mises_known_direction] | [`von_mises_known_direction_inputs`][von_mises_known_direction_inputs] | - |
-| Weibull (known shape) | [InverseGamma] | [`weibull_inverse_gamma_known_shape`][weibull_inverse_gamma_known_shape] | [`weibull_inverse_gamma_known_shape_inputs`][weibull_inverse_gamma_known_shape_inputs] | - |
+| Likelihood | Prior / Posterior | Model | Functions | Examples |
+|------------|-------------------|-------|-----------|----------|
+| Exponential | [Gamma] | [`exponential_gamma`][exponential_gamma] | Helper: -<br>Predictive: [`exponential_gamma_predictive`][exponential_gamma_predictive] | [Thompson], [Raw Data Workflow] |
+| Gamma (known shape) | [Gamma] | [`gamma_known_shape`][gamma_known_shape] | Helper: [`gamma_known_shape_inputs`][gamma_known_shape_inputs]<br>Predictive: [`gamma_known_shape_predictive`][gamma_known_shape_predictive] | - |
+| Gamma (known rate) | [GammaKnownRateProportional] | [`gamma_known_rate`][gamma_known_rate] | Helper: [`gamma_known_rate_inputs`][gamma_known_rate_inputs]<br>Predictive: - | - |
+| Gamma | [GammaProportional] | [`gamma`][gamma] | Helper: [`gamma_inputs`][gamma_inputs]<br>Predictive: - | - |
+| Inverse Gamma (known rate) | [Gamma] | [`inverse_gamma_known_rate`][inverse_gamma_known_rate] | Helper: [`inverse_gamma_known_rate_inputs`][inverse_gamma_known_rate_inputs]<br>Predictive: - | - |
+| Normal (known variance) | [Normal] | [`normal_known_variance`][normal_known_variance] | Helper: [`normal_known_variance_inputs`][normal_known_variance_inputs]<br>Predictive: [`normal_known_variance_predictive`][normal_known_variance_predictive] | [Shortest Path] |
+| Normal (known precision) | [Normal] | [`normal_known_precision`][normal_known_precision] | Helper: [`normal_known_precision_inputs`][normal_known_precision_inputs]<br>Predictive: [`normal_known_precision_predictive`][normal_known_precision_predictive] | - |
+| Normal (known mean) | [InverseGamma] | [`normal_known_mean`][normal_known_mean] | Helper: [`normal_known_mean_inputs`][normal_known_mean_inputs]<br>Predictive: [`normal_known_mean_predictive`][normal_known_mean_predictive] | - |
+| Normal | [NormalInverseGamma] | [`normal`][normal] | Helper: [`normal_inputs`][normal_inputs]<br>Predictive: [`normal_predictive`][normal_predictive] | - |
+| Linear Regression | [NormalInverseGamma] | [`linear_regression`][linear_regression] | Helper: [`linear_regression_inputs`][linear_regression_inputs]<br>Predictive: [`linear_regression_predictive`][linear_regression_predictive] | [Linear Regression] |
+| Log Normal | [NormalInverseGamma] | [`log_normal`][log_normal] | Helper: [`log_normal_inputs`][log_normal_inputs]<br>Predictive: - | - |
+| Uniform | [Pareto] | [`uniform_pareto`][uniform_pareto] | Helper: [`uniform_pareto_inputs`][uniform_pareto_inputs]<br>Predictive: - | - |
+| Pareto | [Gamma] | [`pareto_gamma`][pareto_gamma] | Helper: [`pareto_gamma_inputs`][pareto_gamma_inputs]<br>Predictive: - | [Unsupported Distributions] |
+| Beta | [BetaProportional] | [`beta`][beta] | Helper: [`beta_inputs`][beta_inputs]<br>Predictive: - | [Raw Data Workflow] |
+| Von Mises (known κ) | [VonMisesKnownConcentration] | [`von_mises_known_concentration`][von_mises_known_concentration] | Helper: [`von_mises_known_concentration_inputs`][von_mises_known_concentration_inputs]<br>Predictive: - | - |
+| Von Mises (known μ) | [VonMisesKnownDirectionProportional] | [`von_mises_known_direction`][von_mises_known_direction] | Helper: [`von_mises_known_direction_inputs`][von_mises_known_direction_inputs]<br>Predictive: - | - |
+| Weibull (known shape) | [InverseGamma] | [`weibull_inverse_gamma_known_shape`][weibull_inverse_gamma_known_shape] | Helper: [`weibull_inverse_gamma_known_shape_inputs`][weibull_inverse_gamma_known_shape_inputs]<br>Predictive: - | - |
 
 ## Multivariate
 
-| Likelihood | Prior / Posterior | Model | Helper | Examples |
-|------------|-------------------|-------|--------|----------|
-| Multivariate Normal (known cov) | [MultivariateNormal] | [`multivariate_normal_known_covariance`][multivariate_normal_known_covariance] | [`multivariate_normal_known_covariance_inputs`][multivariate_normal_known_covariance_inputs] | - |
-| Multivariate Normal (known precision) | [MultivariateNormal] | [`multivariate_normal_known_precision`][multivariate_normal_known_precision] | [`multivariate_normal_known_precision_inputs`][multivariate_normal_known_precision_inputs] | - |
-| Multivariate Normal (known mean) | [InverseWishart] | [`multivariate_normal_known_mean`][multivariate_normal_known_mean] | [`multivariate_normal_known_mean_inputs`][multivariate_normal_known_mean_inputs] | - |
-| Multivariate Normal | [NormalInverseWishart] | [`multivariate_normal`][multivariate_normal] | [`multivariate_normal_inputs`][multivariate_normal_inputs] | - |
+| Likelihood | Prior / Posterior | Model | Functions | Examples |
+|------------|-------------------|-------|-----------|----------|
+| Multivariate Normal (known cov) | [MultivariateNormal] | [`multivariate_normal_known_covariance`][multivariate_normal_known_covariance] | Helper: [`multivariate_normal_known_covariance_inputs`][multivariate_normal_known_covariance_inputs]<br>Predictive: [`multivariate_normal_known_covariance_predictive`][multivariate_normal_known_covariance_predictive] | - |
+| Multivariate Normal (known precision) | [MultivariateNormal] | [`multivariate_normal_known_precision`][multivariate_normal_known_precision] | Helper: [`multivariate_normal_known_precision_inputs`][multivariate_normal_known_precision_inputs]<br>Predictive: [`multivariate_normal_known_precision_predictive`][multivariate_normal_known_precision_predictive] | - |
+| Multivariate Normal (known mean) | [InverseWishart] | [`multivariate_normal_known_mean`][multivariate_normal_known_mean] | Helper: [`multivariate_normal_known_mean_inputs`][multivariate_normal_known_mean_inputs]<br>Predictive: - | - |
+| Multivariate Normal | [NormalInverseWishart] | [`multivariate_normal`][multivariate_normal] | Helper: [`multivariate_normal_inputs`][multivariate_normal_inputs]<br>Predictive: [`multivariate_normal_predictive`][multivariate_normal_predictive] | - |
 
 ---
 
@@ -148,6 +166,25 @@ A cheat sheet for conjugate model pairs to help you quickly find the right funct
 [multivariate_normal_known_precision_inputs]: helpers.md#conjugate.helpers.multivariate_normal_known_precision_inputs
 [multivariate_normal_known_mean_inputs]: helpers.md#conjugate.helpers.multivariate_normal_known_mean_inputs
 [multivariate_normal_inputs]: helpers.md#conjugate.helpers.multivariate_normal_inputs
+
+<!-- Predictive Function Links -->
+[binomial_beta_predictive]: models.md#conjugate.models.binomial_beta_predictive
+[bernoulli_beta_predictive]: models.md#conjugate.models.bernoulli_beta_predictive
+[negative_binomial_beta_predictive]: models.md#conjugate.models.negative_binomial_beta_predictive
+[geometric_beta_predictive]: models.md#conjugate.models.geometric_beta_predictive
+[categorical_dirichlet_predictive]: models.md#conjugate.models.categorical_dirichlet_predictive
+[multinomial_dirichlet_predictive]: models.md#conjugate.models.multinomial_dirichlet_predictive
+[poisson_gamma_predictive]: models.md#conjugate.models.poisson_gamma_predictive
+[exponential_gamma_predictive]: models.md#conjugate.models.exponential_gamma_predictive
+[gamma_known_shape_predictive]: models.md#conjugate.models.gamma_known_shape_predictive
+[normal_known_variance_predictive]: models.md#conjugate.models.normal_known_variance_predictive
+[normal_known_precision_predictive]: models.md#conjugate.models.normal_known_precision_predictive
+[normal_known_mean_predictive]: models.md#conjugate.models.normal_known_mean_predictive
+[normal_predictive]: models.md#conjugate.models.normal_predictive
+[linear_regression_predictive]: models.md#conjugate.models.linear_regression_predictive
+[multivariate_normal_known_covariance_predictive]: models.md#conjugate.models.multivariate_normal_known_covariance_predictive
+[multivariate_normal_known_precision_predictive]: models.md#conjugate.models.multivariate_normal_known_precision_predictive
+[multivariate_normal_predictive]: models.md#conjugate.models.multivariate_normal_predictive
 
 <!-- Example Links -->
 [Binomial]: examples/binomial.md

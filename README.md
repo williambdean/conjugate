@@ -101,18 +101,18 @@ from conjugate.helpers import (
 # Count data (e.g., website visits per day)
 count_data = [5, 3, 8, 2, 6, 4, 7, 1, 9, 3]
 inputs = poisson_gamma_inputs(count_data)
-# Returns: {'x': sum(count_data), 'n': len(count_data)}
+# Returns: {'x_total': sum(count_data), 'n': len(count_data)}
 
 # Continuous measurements with known variance
 measurements = [2.3, 1.9, 2.7, 2.1, 2.5]
-variance = 0.5
-inputs = normal_known_variance_inputs(measurements, variance=variance)
-# Returns: {'x_mean': mean(measurements), 'n': len(measurements), 'variance': variance}
+inputs = normal_known_variance_inputs(measurements)
+# Returns: {'x_total': sum(measurements), 'n': len(measurements)}
+# Note: variance must be passed separately to the model function
 
 # Time between events (e.g., customer arrivals)
 wait_times = [3.2, 1.8, 4.1, 2.7, 3.9]
 inputs = exponential_gamma_inputs(wait_times)
-# Returns: {'x': sum(wait_times), 'n': len(wait_times)}
+# Returns: {'x_total': sum(wait_times), 'n': len(wait_times)}
 
 # Categorical outcomes (e.g., survey responses A, B, C)
 responses = ['A', 'B', 'A', 'C', 'B', 'A', 'B']

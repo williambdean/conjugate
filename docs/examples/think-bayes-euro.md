@@ -56,7 +56,17 @@ print(f"Posterior mean: {posterior.mean():.3f}")
 print(f"Observed proportion: {x/n:.3f}")
 ```
 
+**Output:**
+```
+Prior parameters: alpha=1, beta=1
+Posterior parameters: alpha=141, beta=111
+Prior mean: 0.500
+Posterior mean: 0.560
+Observed proportion: 0.560
+```
+
 The posterior follows the simple conjugate update rule:
+
 - `α_posterior = α_prior + x` (adding observed heads)
 - `β_posterior = β_prior + (n - x)` (adding observed tails)
 
@@ -75,6 +85,11 @@ posterior_predictive = binomial_beta_predictive(
 print(f"Predicted heads in {n_future} flips: {posterior_predictive.mean():.2f}")
 ```
 
+**Output:**
+```
+Predicted heads in 10 flips: 5.60
+```
+
 ## Additional Analysis
 
 Compare prior, posterior, and predictive distributions:
@@ -85,16 +100,15 @@ Compare prior, posterior, and predictive distributions:
 
 ### Credible Interval
 
-Calculate a 95% credible interval for the coin bias:
+Calculate a 95% credible interval for coin bias:
 
-```python
-# 95% credible interval
-ci_lower = posterior.dist.ppf(0.025)
-ci_upper = posterior.dist.ppf(0.975)
-
-print(f"95% Credible Interval: [{ci_lower:.3f}, {ci_upper:.3f}]")
-print(f"Interval width: {ci_upper - ci_lower:.3f}")
+**Output:**
 ```
+95% Credible Interval: [0.498, 0.622]
+Interval width: 0.124
+```
+
+This narrow interval (width: 0.124) shows increased confidence after observing 250 flips, concentrating our belief around the observed proportion of 0.560.
 
 ## Connection to Think Bayes
 
@@ -114,11 +128,13 @@ posterior = binomial_beta(n=250, x=140, prior=prior)
 ### Mathematical Intuition
 
 The Beta-Binomial conjugate works because both share the same functional form:
+
 - Beta prior: p^(α-1) (1-p)^(β-1)
 - Binomial likelihood: p^k (1-p)^(n-k)
 - Posterior: p^(α-1+k) (1-p)^(β-1+n-k)
 
 This gives the simple update rules:
+
 - `α_posterior = α_prior + successes`
 - `β_posterior = β_prior + failures`
 

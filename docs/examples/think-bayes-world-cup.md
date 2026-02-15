@@ -14,7 +14,6 @@ Import the required distributions and functions:
 
 - `Gamma`: Prior distribution for Poisson rate parameter
 - `Poisson`: Likelihood function for goal counts
-- `GammaPoisson`: Predictive distribution for Poisson model
 - `poisson_gamma`: Posterior update function
 - `poisson_gamma_predictive`: Predictive distribution function
 
@@ -48,14 +47,13 @@ prior = Gamma(alpha=1.4, beta=1)
 
 # Posterior update using conjugate relationship
 posterior = poisson_gamma(x_total=x_total, n=n_games, prior=prior)
-
-print(f"Prior parameters: alpha={prior.alpha}, beta={prior.beta}")
-print(f"Posterior parameters: alpha={posterior.alpha}, beta={posterior.beta}")
-print(f"Prior mean: {prior.mean():.3f}")
-print(f"Posterior mean: {posterior.mean():.3f}")
 ```
 
+- Prior parameters: α=1.4, β=1 (mean: 1.400)
+- Posterior parameters: α=5.4, β=2.0 (mean: 2.700)
+
 The posterior parameters follow the simple conjugate update rule:
+
 - `α_posterior = α_prior + x_total` (adding observed goals)
 - `β_posterior = β_prior + n_games` (adding observed time)
 
@@ -65,13 +63,47 @@ Get the predictive distribution for future games using the posterior:
 
 ```python
 # Predictive distribution for next game
-posterior_predictive = poisson_gamma_predictive
+posterior_predictive = poisson_gamma_predictive(
     n=1,
     distribution=posterior
 )
 
 print(f"Predicted goals in next game: {posterior_predictive.mean():.2f}")
 ```
+
+**Output:**
+```
+Predicted goals in next game: 2.70
+```
+
+The posterior parameters follow the simple conjugate update rule:
+
+- `α_posterior = α_prior + x_total` (adding observed goals)
+- `β_posterior = β_prior + n_games` (adding observed time)
+
+### Predictive Distribution
+
+Get the predictive distribution for future games using the posterior:
+
+```python
+print(f"Prior parameters: alpha={prior.alpha}, beta={prior.beta}")
+print(f"Posterior parameters: alpha={posterior.alpha}, beta={posterior.beta}")
+print(f"Prior mean: {prior.mean():.3f}")
+print(f"Posterior mean: {posterior.mean():.3f}")
+```
+
+**Output:**
+```
+Prior parameters: alpha=1.4, beta=1
+Posterior parameters: alpha=5.4, beta=2.0
+Prior mean: 1.400
+Posterior mean: 2.700
+```
+
+The posterior parameters follow the simple conjugate update rule:
+
+- `α_posterior = α_prior + x_total` (adding observed goals)
+- `β_posterior = β_prior + n_games` (adding observed time)
 
 ## Additional Analysis
 
@@ -86,6 +118,7 @@ Compare prior and posterior distributions to see how the data updates our belief
 ### The Conjugate Advantage
 
 In Think Bayes, Allen Downey shows the grid method requiring:
+
 1. Creating a grid of λ values
 2. Computing Poisson likelihood for each λ
 3. Multiplying prior × likelihood and normalizing
@@ -99,11 +132,13 @@ posterior = poisson_gamma(x_total=4, n=1, prior=prior)
 ### Mathematical Intuition
 
 The Gamma-Poisson conjugate relationship works because both distributions share the same functional form:
+
 - Gamma prior: λ^(α-1) e^(-βλ)
 - Poisson likelihood: λ^k e^(-λt)
 - Posterior: λ^(α-1+k) e^(-λ(β+t))
 
 This elegant mathematical property gives us the simple update rules:
+
 - `α_posterior = α_prior + observed_goals`
 - `β_posterior = β_prior + observed_time`
 

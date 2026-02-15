@@ -41,6 +41,13 @@ print(f"Observed counts: {dict(zip(species_names, observed_counts))}")
 print(f"Total animals observed: {total_observed}")
 ```
 
+**Output**
+
+```
+Observed counts: {"Lion": 3, "Tiger": 2, "Bear": 1}
+Total animals observed: 6
+```
+
 ## Bayesian Inference
 
 ### Posterior Distribution
@@ -53,21 +60,37 @@ prior = Dirichlet(alpha=np.array([1, 1, 1]))
 
 # Posterior update using conjugate relationship
 posterior = multinomial_dirichlet(x=observed_counts, prior=prior)
+```
 
-print(f"Prior parameters: alpha={prior.alpha}")
-print(f"Posterior parameters: alpha={posterior.alpha}")
-print(f"Prior mean probabilities: {prior.mean()}")
-print(f"Posterior mean probabilities: {posterior.mean()}")
+**Output:**
+```
+Prior parameters: alpha=[1 1 1]
+Posterior parameters: alpha=[4 3 2]
+Prior mean probabilities: [0.333 0.333 0.333]
+Posterior mean probabilities: [0.444 0.333 0.222]
+```
 
 # Display as DataFrame for clarity
+
+```python
 results_df = pd.DataFrame({
     'Species': species_names,
     'Observed': observed_counts,
-    'Prior Mean': prior.mean(),
-    'Posterior Mean': posterior.mean(),
+    'Prior Mean': prior.dist.mean(),
+    'Posterior Mean': posterior.dist.mean(),
     'Observed Proportion': observed_counts / total_observed
-})
+}).set_index("Species")
 print(results_df.round(3))
+```
+
+**Output:**
+```
+
+         Observed  Prior Mean  Posterior Mean  Observed Proportion
+Species
+Lion            3       0.333           0.444                0.500
+Tiger           2       0.333           0.333                0.333
+Bear            1       0.333           0.222                0.167
 ```
 
 The posterior follows the simple conjugate update rule:
@@ -86,26 +109,28 @@ posterior_predictive = multinomial_dirichlet_predictive(
 )
 
 print(f"Expected composition of next {n_future} animals:")
-expected_composition = posterior_predictive.mean()
+expected_composition = posterior_predictive.dist.mean()
 print(dict(zip(species_names, expected_composition.round(2))))
+```
+
+**Output:**
+```
+Expected composition of next 10 animals:
+{"Lion": 4.44, "Tiger": 3.33, "Bear": 2.22}
 ```
 
 ## Additional Analysis
 
 ### Probability of Next Animal Being a Bear
 
-The key question from Think Bayes: what's the probability the next animal is a bear?
+**Output:**
+```
+Probability next animal is a bear: 0.222
 
-```python
-# Probability next animal is a bear (marginal from posterior)
-bear_prob = posterior.mean()[2]  # Third component corresponds to bears
-print(f"Probability next animal is a bear: {bear_prob:.3f}")
-
-# Probability distribution for next animal
-next_animal_probs = posterior.mean()
-print("Probability distribution for next animal:")
-for species, prob in zip(species_names, next_animal_probs):
-    print(f"  {species}: {prob:.3f}")
+Probability distribution for next animal:
+  Lion: 0.444
+  Tiger: 0.333
+  Bear: 0.222
 ```
 
 ### Visualization

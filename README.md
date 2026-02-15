@@ -8,6 +8,26 @@
 
 Bayesian conjugate models in Python
 
+## Overview
+
+`conjugate-models` is a modern Python package for Bayesian conjugate inference that prioritizes a clean, idiomatic API and seamless integration with widely used Python data analysis libraries. It implements the conjugate likelihood-prior pairs cataloged in [Fink's compendium](https://www.johndcook.com/CompendiumOfConjugatePriors.pdf) and [Wikipedia's conjugate prior table](https://en.wikipedia.org/wiki/Conjugate_prior), making rigorous Bayesian updating, exploration, and visualization accessible for practitioners, educators, and researchers.
+
+### Why Conjugate Priors?
+
+A prior distribution is conjugate to a likelihood when the posterior remains in the same distribution family after observing data. Conjugate priors provide closed-form posterior updates and posterior predictive distributions, eliminating the need for numerical integration or MCMC sampling. Because these updates are analytic rather than iterative, **posterior computation is instantaneous regardless of data size**—enabling real-time interactive exploration and rapid model iteration.
+
+### Key Benefits
+
+- ⚡ **Instant Updates:** No MCMC or optimization required—posterior computation is immediate
+- 🔢 **Vectorized Operations:** Batch inference for multi-arm problems without explicit loops
+- 📊 **Built-in Visualization:** Plot priors, posteriors, and predictive distributions
+- 🔗 **SciPy Integration:** Direct access to scipy.stats distributions via `.dist` property
+- 📦 **Data Library Support:** Works seamlessly with numpy, pandas, polars, and general array-like objects
+- 🪶 **Lightweight Dependencies:** Minimal requirements—no heavy ML frameworks or complex toolchains
+
+### Lightweight & Easy to Install
+
+With minimal dependencies from the scientific Python stack, `conjugate-models` installs quickly without requiring heavyweight probabilistic programming frameworks, MCMC samplers, or complex compilation toolchains.
 
 ## Installation
 
@@ -19,7 +39,7 @@ pip install conjugate-models
 
 - [Interactive Distribution Explorer](https://williambdean.github.io/conjugate/explorer) for exploring probability distributions with real-time parameter adjustment
 - **[Raw Data Workflow](https://williambdean.github.io/conjugate/examples/raw-data-workflow)** - Complete examples from raw observational data to posterior distributions with helper functions
-- **Data Input Helper Functions** - Extract sufficient statistics from raw observational data for all supported models
+- **[Data Input Helper Functions](https://williambdean.github.io/conjugate/helpers)** - Extract sufficient statistics from raw observational data for all supported models
 - [Connection to Scipy Distributions](https://williambdean.github.io/conjugate/examples/scipy-connection) with `dist` attribute
 - [Built in Plotting](https://williambdean.github.io/conjugate/examples/plotting) with `plot_pdf`, `plot_pmf`, and `plot_cdf` methods
 - [Vectorized Operations](https://williambdean.github.io/conjugate/examples/vectorized-inputs) for parameters and data
@@ -38,9 +58,11 @@ Many likelihoods are supported including
 - `Normal` (including linear regression)
 - and [many more](https://williambdean.github.io/conjugate/models/)
 
+See the [Quick Reference](https://williambdean.github.io/conjugate/quick-reference) for a complete table of likelihood → prior/posterior mappings with links to model functions and helper functions.
+
 ## Basic Usage
 
-### Working with Pre-processed Data
+### Pattern 1: Working with Pre-processed Data
 
 1. Define prior distribution from `distributions` module
 1. Pass data and prior into model from `models` modules
@@ -64,7 +86,7 @@ posterior_predictive: BetaBinomial = binomial_beta_predictive(
 )
 ```
 
-### Working with Raw Observational Data
+### Pattern 2: Working with Raw Observational Data
 
 For raw data, use **helper functions** from the `helpers` module to extract sufficient statistics:
 
@@ -99,18 +121,18 @@ from conjugate.helpers import (
 # Count data (e.g., website visits per day)
 count_data = [5, 3, 8, 2, 6, 4, 7, 1, 9, 3]
 inputs = poisson_gamma_inputs(count_data)
-# Returns: {'x': sum(count_data), 'n': len(count_data)}
+# Returns: {'x_total': sum(count_data), 'n': len(count_data)}
 
 # Continuous measurements with known variance
 measurements = [2.3, 1.9, 2.7, 2.1, 2.5]
-variance = 0.5
-inputs = normal_known_variance_inputs(measurements, variance=variance)
-# Returns: {'x_mean': mean(measurements), 'n': len(measurements), 'variance': variance}
+inputs = normal_known_variance_inputs(measurements)
+# Returns: {'x_total': sum(measurements), 'n': len(measurements)}
+# Note: variance must be passed separately to the model function
 
 # Time between events (e.g., customer arrivals)
 wait_times = [3.2, 1.8, 4.1, 2.7, 3.9]
 inputs = exponential_gamma_inputs(wait_times)
-# Returns: {'x': sum(wait_times), 'n': len(wait_times)}
+# Returns: {'x_total': sum(wait_times), 'n': len(wait_times)}
 
 # Categorical outcomes (e.g., survey responses A, B, C)
 responses = ['A', 'B', 'A', 'C', 'B', 'A', 'B']

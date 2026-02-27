@@ -1,4 +1,6 @@
 site_name: Conjugate Models
+site_description: "Fast Python library for Bayesian conjugate priors. 50+ models including Beta-Binomial, Gamma-Poisson, Normal with vectorized updates, sufficient statistic helpers, built-in plotting, and SciPy integration. No MCMC required."
+site_author: "William Dean"
 
 theme:
   name: "material"
@@ -39,6 +41,7 @@ extra:
 
 nav:
   - Overview: index.md
+  - Quick Reference: quick-reference.md
   - Distribution Explorer: explorer.md
   - Modules:
       - Models: models.md
@@ -78,6 +81,7 @@ plugins:
             docstring_style: google
 
 markdown_extensions:
+  - md_in_html
   - admonition
   - pymdownx.details
   - pymdownx.highlight:

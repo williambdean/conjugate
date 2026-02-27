@@ -358,7 +358,13 @@ def hypergeometric_beta_binomial(
 
 @add_associated_likelihood(Geometric)
 @validate_prior_type
-def geometric_beta(*, x_total, n, prior: Beta, one_start: bool = True) -> Beta:
+def geometric_beta(
+    *,
+    x_total: NUMERIC,
+    n: NUMERIC,
+    prior: Beta,
+    one_start: bool = True,
+) -> Beta:
     """Posterior distribution for a geometric likelihood with a beta prior.
 
     Args:
@@ -1409,7 +1415,7 @@ def linear_regression(
     X: NUMERIC,
     y: NUMERIC,
     prior: NormalInverseGamma,
-    inv=np.linalg.inv,
+    inv: Callable = np.linalg.inv,
 ) -> NormalInverseGamma:
     """Posterior distribution for a linear regression model with a normal inverse gamma prior.
 
@@ -1462,7 +1468,7 @@ def linear_regression_predictive(
     *,
     distribution: NormalInverseGamma,
     X: NUMERIC,
-    eye=np.eye,
+    eye: Callable = np.eye,
 ) -> MultivariateStudentT:
     """Predictive distribution for a linear regression model with a normal inverse gamma prior.
 
@@ -1495,7 +1501,7 @@ def uniform_pareto(
     x_max: NUMERIC,
     n: NUMERIC,
     prior: Pareto,
-    max_fn=np.maximum,
+    max_fn: Callable = np.maximum,
 ) -> Pareto:
     """Posterior distribution for a uniform likelihood with a pareto prior.
 
@@ -1541,7 +1547,7 @@ def pareto_gamma(
     ln_x_total: NUMERIC,
     x_m: NUMERIC,
     prior: Gamma,
-    ln=np.log,
+    ln: Callable = np.log,
 ) -> Gamma:
     """Posterior distribution for a pareto likelihood with a gamma prior.
 
@@ -1760,7 +1766,7 @@ def _multivariate_normal_known_precision(
     precision_0: NUMERIC,
     x_bar: NUMERIC,
     precision: NUMERIC,
-    inv=np.linalg.inv,
+    inv: Callable = np.linalg.inv,
 ) -> tuple[NUMERIC, NUMERIC]:
     mu_post = inv(precision_0 + n * precision) @ (
         (precision_0 @ x_bar_0) + (n * (precision @ x_bar))
@@ -1778,7 +1784,7 @@ def multivariate_normal_known_covariance(
     x_bar: NUMERIC,
     cov: NUMERIC,
     prior: MultivariateNormal,
-    inv=np.linalg.inv,
+    inv: Callable = np.linalg.inv,
 ) -> MultivariateNormal:
     """Multivariate normal likelihood with known covariance and multivariate normal prior.
 
@@ -1839,7 +1845,7 @@ def multivariate_normal_known_precision(
     x_bar: NUMERIC,
     precision: NUMERIC,
     prior: MultivariateNormal,
-    inv=np.linalg.inv,
+    inv: Callable = np.linalg.inv,
 ) -> MultivariateNormal:
     """Multivariate normal likelihood with known precision and multivariate normal prior.
 
@@ -1926,13 +1932,12 @@ def multivariate_normal(
     *,
     X: NUMERIC,
     prior: NormalInverseWishart,
-    outer=np.outer,
+    outer: Callable = np.outer,
 ) -> NormalInverseWishart:
     """Multivariate normal likelihood with normal inverse wishart prior.
 
     Args:
         X: design matrix
-        mu: known mean
         prior: NormalInverseWishart prior
         outer: function to take outer product, defaults to np.outer
 

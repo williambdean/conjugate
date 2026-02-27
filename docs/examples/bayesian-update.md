@@ -75,11 +75,11 @@ for batch_size in batch_sizes:
 
 ax.scatter(sigma, mu, color="black", label="true")
 ax.set(
-    xlabel="$\sigma$",
-    ylabel="$\mu$",
+    xlabel=r"$\sigma$",
+    ylabel=r"$\mu$",
     xlim=(0, None),
     ylim=(0, None),
-    title="Updated posterior samples of $\mu$ and $\sigma$",
+    title=r"Updated posterior samples of $\mu$ and $\sigma$",
 )
 ax.legend()
 

@@ -52,8 +52,8 @@ print(f"Variant B: Beta({posterior_b.alpha}, {posterior_b.beta})")
 fig, ax = plt.subplots(figsize=(10, 6))
 x = np.linspace(0, 1, 1000)
 
-ax.plot(x, posterior_a.pdf(x), label=f'Variant A (8/15)', linewidth=2)
-ax.plot(x, posterior_b.pdf(x), label=f'Variant B (13/20)', linewidth=2)
+ax.plot(x, posterior_a.dist.pdf(x), label=f'Variant A (8/15)', linewidth=2)
+ax.plot(x, posterior_b.dist.pdf(x), label=f'Variant B (13/20)', linewidth=2)
 ax.axvline(inputs_a['x'] / inputs_a['n'], color='blue', alpha=0.5, linestyle='--', label='A MLE')
 ax.axvline(inputs_b['x'] / inputs_b['n'], color='orange', alpha=0.5, linestyle='--', label='B MLE')
 
@@ -103,17 +103,17 @@ posterior = poisson_gamma(**inputs, prior=prior)
 print(f"Posterior: Gamma({posterior.alpha:.1f}, {posterior.beta:.4f})")
 
 # Expected daily views (posterior mean)
-expected_daily_views = posterior.mean()
+expected_daily_views = posterior.dist.mean()
 print(f"Expected daily views: {expected_daily_views:.0f}")
 
 # 95% credible interval
-lower, upper = posterior.ppf([0.025, 0.975])
+lower, upper = posterior.dist.ppf([0.025, 0.975])
 print(f"95% credible interval: [{lower:.0f}, {upper:.0f}]")
 
 # Predictive distribution for tomorrow's views
 predictive = poisson_gamma_predictive(distribution=posterior)
-pred_mean = predictive.mean()
-pred_std = predictive.std()
+pred_mean = predictive.dist.mean()
+pred_std = predictive.dist.std()
 print(f"Tomorrow's views prediction: {pred_mean:.0f} ± {pred_std:.0f}")
 ```
 
@@ -156,7 +156,7 @@ posterior = multinomial_dirichlet(x=response_counts, prior=prior)
 print(f"Posterior parameters: {posterior.alpha}")
 
 # Posterior probabilities
-posterior_probs = posterior.mean()
+posterior_probs = posterior.dist.mean()
 print("\nPosterior probabilities:")
 for cat, prob in zip(categories, posterior_probs):
     print(f"{cat}: {prob:.3f}")
@@ -224,6 +224,7 @@ Analyzing time intervals using Exponential-Gamma conjugacy.
 from conjugate.distributions import Gamma
 from conjugate.models import exponential_gamma
 from conjugate.helpers import exponential_gamma_inputs
+import numpy as np
 
 # Raw data: time between customer arrivals (in minutes)
 arrival_intervals = [
@@ -250,7 +251,7 @@ print(f"Posterior rate (λ): {rate:.3f} arrivals/minute")
 print(f"Expected interval: {expected_interval:.3f} minutes")
 
 # 95% credible interval for rate
-rate_samples = posterior.rvs(10000)
+rate_samples = posterior.dist.rvs(10000)
 rate_ci = np.percentile(rate_samples, [2.5, 97.5])
 interval_ci = 1 / rate_ci[::-1]  # Invert and flip for interval CI
 

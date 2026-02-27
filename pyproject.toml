@@ -1,7 +1,7 @@
 [project]
 name = "conjugate-models"
 version = "0.14.0"
-description = "Bayesian Conjugate Models in Python"
+description = "Modern, lightweight Python package for Bayesian conjugate inference with minimal dependencies and seamless integration with numpy, pandas, polars, and scipy"
 authors = [{ name = "Will Dean", email = "wd60622@gmail.com" }]
 requires-python = ">=3.10,<4.0"
 readme = "README.md"
@@ -9,8 +9,11 @@ license = "MIT"
 classifiers = [
     "Intended Audience :: Science/Research",
     "Intended Audience :: Developers",
+    "Intended Audience :: Education",
     "Topic :: Software Development :: Libraries",
     "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Information Analysis",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX :: Linux",
     "Operating System :: POSIX",
@@ -35,6 +38,9 @@ dependencies = [
 Homepage = "https://williambdean.github.io/conjugate/"
 Repository = "https://github.com/williambdean/conjugate"
 Documentation = "https://williambdean.github.io/conjugate/"
+"Bug Tracker" = "https://github.com/williambdean/conjugate/issues"
+"Quick Reference" = "https://williambdean.github.io/conjugate/quick-reference"
+Examples = "https://williambdean.github.io/conjugate/examples/bayesian-update"
 
 [dependency-groups]
 dev = [
@@ -50,6 +56,7 @@ dev = [
     "polars>=1.29.0",
     "narwhals>=1.39.0",
     "pytest-xdist>=3.8.0",
+    "pytest-env>=1.1.3",
 ]
 docs = [
     "marimo>=0.13.15",
@@ -89,6 +96,7 @@ pydocstyle.convention = "google"
 
 [tool.pytest.ini_options]
 addopts = "--mpl --mpl-baseline-path=tests/example-plots --cov=conjugate --cov-report=xml --cov-report=term-missing"
+env = ["MPLBACKEND=Agg"]
 
 [tool.tox]
 legacy_tox_ini = """
@@ -106,6 +114,7 @@ legacy_tox_ini = """
         pytest
         pytest-cov
         pytest-mpl
+        pytest-env
         pypika
     commands = pytest tests
 """

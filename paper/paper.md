@@ -30,20 +30,20 @@ significant cognitive and computational overhead for common conjugate models. Th
 package is designed to provide efficient, intuitive, and didactic support for
 Bayesian conjugate workflows across statistics, data science, and education,
 allowing direct use with array-like objects from libraries such as
-numpy[@harris2020array],
-pandas[@The_pandas_development_team_pandas-dev_pandas_Pandas], and
-polars[@polars2024]. The project also provides live interactive
+numpy [@harris2020array],
+pandas [@The_pandas_development_team_pandas-dev_pandas_Pandas], and
+polars [@polars2024]. The project also provides live interactive
 documentation and an [online Distribution Explorer](https://williambdean.github.io/conjugate/explorer) for real-time model investigation.
 
 A prior distribution is conjugate to a likelihood when the posterior remains in
-the same distribution family after observing data[@raiffa1961applied].
+the same distribution family after observing data [@raiffa1961applied].
 Conjugate priors provide closed-form posterior updates and posterior predictive
 distributions, eliminating the need for numerical
-integration[@fink1997compendium]. Because these updates are analytic
+integration [@fink1997compendium]. Because these updates are analytic
 rather than iterative, posterior computation is instantaneous regardless of
 data size—enabling real-time interactive exploration and rapid model
 iteration. `conjugate-models` implements the conjugate pairs cataloged in Fink's
-compendium[@fink1997compendium] and Wikipedia's conjugate prior table[@wikipedia_conjugate_prior].
+compendium [@fink1997compendium] and Wikipedia's conjugate prior table [@wikipedia_conjugate_prior].
 The complete list of supported models is maintained at
 [the online documentation](https://williambdean.github.io/conjugate/models/).
 
@@ -57,7 +57,7 @@ practitioners new to Bayesian methods.
 
 # Features & API Overview
 
-`conjugate-models` provides an intuitive, pipeable API compatible with numpy arrays[@harris2020array], pandas DataFrames/Series[@The_pandas_development_team_pandas-dev_pandas_Pandas], polars DataFrames[@polars2024] (for element-wise operations), and general numerical types. The package includes vectorized and indexable operations for batch and multi-arm inference, built-in plotting for posterior, prior, and predictive distributions, and connection to scipy distributions for interoperability[@virtanen2020scipy].
+`conjugate-models` provides an intuitive, pipeable API compatible with numpy arrays [@harris2020array], pandas DataFrames/Series [@The_pandas_development_team_pandas-dev_pandas_Pandas], polars DataFrames [@polars2024] (for element-wise operations), and general numerical types. The package includes vectorized and indexable operations for batch and multi-arm inference, built-in plotting for posterior, prior, and predictive distributions, and connection to scipy distributions for interoperability [@virtanen2020scipy].
 
 A typical workflow follows a consistent pattern:
 
@@ -92,16 +92,16 @@ Thompson sampling is effective for exploration-exploitation problems where the g
 # Related Work
 
 Several Python packages address aspects of Bayesian inference.
-ArviZ[@Kumar2019] excels at posterior analysis and visualization but focuses on MCMC/variational inference outputs rather than conjugate models.
-Bambi[@Capretto_Bambi_A_simple_2022] provides a high-level interface for Bayesian linear models via PyMC but targets more complex model specifications.
-scikit-learn[@scikit-learn] includes some Bayesian methods but emphasizes frequentist machine learning.
-General probabilistic programming languages like PyMC[@pymc2023] and Stan[@stan2025reference] offer comprehensive modeling capabilities but introduce substantial overhead for simple conjugate updates.
+ArviZ [@Kumar2019] excels at posterior analysis and visualization but focuses on MCMC/variational inference outputs rather than conjugate models.
+Bambi [@Capretto_Bambi_A_simple_2022] provides a high-level interface for Bayesian linear models via PyMC but targets more complex model specifications.
+scikit-learn [@scikit-learn] includes some Bayesian methods but emphasizes frequentist machine learning.
+General probabilistic programming languages like PyMC [@pymc2023] and Stan [@stan2025reference] offer comprehensive modeling capabilities but introduce substantial overhead for simple conjugate updates.
 
-`conjugate-models` distinguishes itself by wrapping scipy.stats distributions with conjugate update semantics, plotting interfaces, and seamless integration into standard Bayesian workflows[@gelman2020workflow]. Its focused scope enables immediate posterior computation without MCMC or optimization, making it ideal for interactive exploration, education, and rapid prototyping of conjugate models.
+`conjugate-models` distinguishes itself by wrapping scipy.stats distributions with conjugate update semantics, plotting interfaces, and seamless integration into standard Bayesian workflows [@gelman2020workflow]. Its focused scope enables immediate posterior computation without MCMC or optimization, making it ideal for interactive exploration, education, and rapid prototyping of conjugate models.
 
 # Limitations
 
-This package specifically targets conjugate prior-likelihood pairs, so non-conjugate models require other tools like PyMC[@pymc2023] or Stan[@stan2025reference]. Model updates operate on sufficient statistics rather than raw data, requiring users to compute summary statistics beforehand. Distribution and parameter names follow established conventions from statistical literature[@fink1997compendium], which may differ from other packages. Community support is available through GitHub Issues and Discussions.
+This package specifically targets conjugate prior-likelihood pairs, so non-conjugate models require other tools like PyMC [@pymc2023] or Stan [@stan2025reference]. Model updates operate on sufficient statistics rather than raw data, requiring users to compute summary statistics beforehand. Distribution and parameter names follow established conventions from statistical literature [@fink1997compendium], which may differ from other packages. Community support is available through GitHub Issues and Discussions.
 
 # Software Design
 
@@ -129,7 +129,7 @@ These design choices prioritize clarity and composability over abstraction, maki
 
 *Documentation and Examples*: Comprehensive documentation with 15+ worked examples demonstrates real-world applications from A/B testing to Thompson sampling, supporting both educational use and practical implementation.
 
-*Technical Contributions*: The package implements the complete catalog of conjugate pairs from Fink's compendium[@fink1997compendium] with modern Python practices, providing a reference implementation for conjugate Bayesian inference that was previously unavailable in a single, cohesive package.
+*Technical Contributions*: The package implements the complete catalog of conjugate pairs from Fink's compendium [@fink1997compendium] with modern Python practices, providing a reference implementation for conjugate Bayesian inference that was previously unavailable in a single, cohesive package.
 
 *Integration Capabilities*: Seamless compatibility with numpy, pandas, polars, and scipy enables integration into existing data science workflows without requiring users to learn new data structures or abandon familiar tools.
 
@@ -137,7 +137,7 @@ The package serves researchers, educators, and practitioners who need rapid, int
 
 # Acknowledgments
 
-We thank the scientific Python community, particularly the maintainers and contributors of NumPy[@harris2020array], SciPy[@virtanen2020scipy], and Matplotlib, whose foundational libraries make this package possible. The examples showcase integration with pandas[@The_pandas_development_team_pandas-dev_pandas_Pandas], Polars[@polars2024], and PyMC[@pymc2023], demonstrating the collaborative spirit of the open-source ecosystem.
+We thank the scientific Python community, particularly the maintainers and contributors of NumPy [@harris2020array], SciPy [@virtanen2020scipy], and Matplotlib, whose foundational libraries make this package possible. The examples showcase integration with pandas [@The_pandas_development_team_pandas-dev_pandas_Pandas], Polars [@polars2024], and PyMC [@pymc2023], demonstrating the collaborative spirit of the open-source ecosystem.
 
 # AI Usage Disclosure
 

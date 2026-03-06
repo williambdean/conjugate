@@ -9,7 +9,24 @@ on:
   pull_request:
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      src: ${{ steps.filter.outputs.src }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            src:
+              - "conjugate/**"
+              - "pyproject.toml"
+              - "tests/**"
+
   test:
+    needs: [changes]
+    if: needs.changes.outputs.src == 'true'
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:

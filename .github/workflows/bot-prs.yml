@@ -3,10 +3,11 @@ name: Bot PRs
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
 
 permissions:
   pull-requests: write
+  contents: write
 
 jobs:
   label-no-releasenotes:
@@ -20,5 +21,44 @@ jobs:
           if [[ $is_bot == "true" ]]; then
             gh pr edit $number --add-label "no releasenotes"
           fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  auto-merge-bot-prs:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.type == 'Bot'
+    steps:
+      - uses: actions/checkout@v6
+      - name: Wait for checks to pass
+        run: |
+          number=${{ github.event.pull_request.number }}
+          max_attempts=180
+          attempt=0
+
+          while [ $attempt -lt $max_attempts ]; do
+            status=$(gh pr view $number --json statusCheckRollup --jq '.statusCheckRollup[].state' | sort | uniq)
+
+            if [[ "$status" == "SUCCESS" ]]; then
+              echo "All checks passed"
+              exit 0
+            elif [[ "$status" == *"FAILURE"* ]]; then
+              echo "Checks failed, will not auto-merge"
+              exit 1
+            fi
+
+            echo "Checks still running... attempt $((attempt + 1))/$max_attempts"
+            sleep 10
+            attempt=$((attempt + 1))
+          done
+
+          echo "Timeout waiting for checks"
+          exit 1
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Auto-merge PR
+        run: |
+          number=${{ github.event.pull_request.number }}
+          gh pr merge $number --squash --auto --delete-branch
         env:
           GH_TOKEN: ${{ github.token }}

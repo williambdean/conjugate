@@ -59,6 +59,6 @@ jobs:
       - name: Auto-merge PR
         run: |
           number=${{ github.event.pull_request.number }}
-          gh pr merge $number --squash --auto
+          gh pr merge $number --squash --auto --delete-branch
         env:
           GH_TOKEN: ${{ github.token }}

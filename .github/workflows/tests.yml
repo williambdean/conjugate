@@ -6,11 +6,15 @@ on:
       - "conjugate/**"
       - "pyproject.toml"
       - "tests/**"
+      - "uv.lock"
+      - ".pre-commit-config.yaml"
   pull_request:
     paths:
       - "conjugate/**"
       - "pyproject.toml"
       - "tests/**"
+      - "uv.lock"
+      - ".pre-commit-config.yaml"
 
 jobs:
   test:

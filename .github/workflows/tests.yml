@@ -6,17 +6,7 @@ on:
       - "conjugate/**"
       - "pyproject.toml"
       - "tests/**"
-      - "uv.lock"
-      - ".pre-commit-config.yaml"
-      - ".github/workflows/tests.yml"
   pull_request:
-    paths:
-      - "conjugate/**"
-      - "pyproject.toml"
-      - "tests/**"
-      - "uv.lock"
-      - ".pre-commit-config.yaml"
-      - ".github/workflows/tests.yml"
 
 jobs:
   test:
@@ -48,3 +38,19 @@ jobs:
         name: ${{ matrix.python-version }}
         slug: williambdean/conjugate
         fail_ci_if_error: false
+
+  tests-result:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [test]
+    steps:
+      - name: Tests passed or skipped
+        run: |
+          result="${{ needs.test.result }}"
+          if [[ "$result" == "success" || "$result" == "skipped" ]]; then
+            echo "Tests passed or were skipped"
+            exit 0
+          else
+            echo "Tests failed: $result"
+            exit 1
+          fi

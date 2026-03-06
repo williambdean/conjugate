@@ -8,6 +8,7 @@ on:
       - "tests/**"
       - "uv.lock"
       - ".pre-commit-config.yaml"
+      - ".github/workflows/tests.yml"
   pull_request:
     paths:
       - "conjugate/**"
@@ -15,6 +16,7 @@ on:
       - "tests/**"
       - "uv.lock"
       - ".pre-commit-config.yaml"
+      - ".github/workflows/tests.yml"
 
 jobs:
   test:

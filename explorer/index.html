@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -63,9 +63,9 @@
 
     
     
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.20.4/dist/main.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.0/dist/main.js"></script>
 <link
-    href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.20.4/dist/style.css"
+    href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.0/dist/style.css"
     rel="stylesheet"
     crossorigin="anonymous"
 />
@@ -1483,146 +1483,14 @@
 
 
 <h1 id="distribution-explorer">Distribution Explorer</h1>
-<div style="margin: auto; max-width: none;">
-                  <marimo-island
-        data-app-id="main"
-        data-cell-id="Hstk"
-        data-reactive="false"
-    >
-        <marimo-cell-output>
-
-<div class="marimo">
-  <div class="flex flex-col flex-1 items-center justify-center">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="size-20 animate-spin text-primary"
-    >
-      <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
-    </svg>
-    <div>Initializing...</div>
-  </div>
-</div>
-
-        </marimo-cell-output>
-        <marimo-cell-code hidden></marimo-cell-code>
-    </marimo-island>
-<marimo-island
-    data-app-id="main"
-    data-cell-id="Hbol"
-    data-reactive="true"
->
-    <marimo-cell-output>
-    </marimo-cell-output>
-    <marimo-cell-code hidden>import%20marimo%20as%20mo%0A%0Aimport%20micropip%0A%0Aawait%20micropip.install(%22conjugate-models%22)%0A%0Afrom%20conjugate.interactive%20import%20(%0A%20%20%20%20supported_distributions%2C%0A%20%20%20%20lookup_model%2C%0A%20%20%20%20lookup_model_by_predictive%2C%0A)</marimo-cell-code>
-</marimo-island>
-<marimo-island
-    data-app-id="main"
-    data-cell-id="MJUe"
-    data-reactive="true"
->
-    <marimo-cell-output>
-    </marimo-cell-output>
-    <marimo-cell-code hidden>def%20create_model_documentation_url(model_name%3A%20str)%20-%3E%20str%3A%0A%20%20%20%20return%20f%22https%3A%2F%2Fwilliambdean.github.io%2Fconjugate%2Fmodels%2F%23conjugate.models.%7Bmodel_name%7D%22</marimo-cell-code>
-</marimo-island>
-<marimo-island
-    data-app-id="main"
-    data-cell-id="vblA"
-    data-reactive="true"
->
-    <marimo-cell-output>
-    </marimo-cell-output>
-    <marimo-cell-code hidden>names%20%3D%20list(supported_distributions.keys())%0Adistribution%20%3D%20mo.ui.dropdown(%0A%20%20%20%20options%3Dnames%2C%0A%20%20%20%20label%3D%22Distribution%3A%22%2C%0A%20%20%20%20value%3Dnames%5B0%5D%2C%0A)%0Ais_cdf%20%3D%20mo.ui.checkbox(label%3D%22Plot%20CDF%22%2C%20value%3DFalse)%0Amo.hstack(%5Bdistribution%2C%20is_cdf%5D%2C%20justify%3D%22start%22)</marimo-cell-code>
-</marimo-island>
-<marimo-island
-    data-app-id="main"
-    data-cell-id="bkHC"
-    data-reactive="true"
->
-    <marimo-cell-output>
-    </marimo-cell-output>
-    <marimo-cell-code hidden>x_min%20%3D%20mo.ui.number(label%3D%22x%20min%22)%0Ax_max%20%3D%20mo.ui.number(label%3D%22x%20max%22)%0A%0Amo.hstack(%0A%20%20%20%20%5Bx_min%2C%20x_max%5D%2C%0A%20%20%20%20justify%3D%22start%22%2C%0A)</marimo-cell-code>
-</marimo-island>
-<marimo-island
-    data-app-id="main"
-    data-cell-id="lEQa"
-    data-reactive="true"
->
-    <marimo-cell-output>
-    </marimo-cell-output>
-    <marimo-cell-code hidden>def%20get_parameter_ui(value%2C%20name)%3A%0A%20%20%20%20if%20value%20is%20bool%3A%0A%20%20%20%20%20%20%20%20return%20mo.ui.checkbox(value%3DTrue)%0A%0A%20%20%20%20kwargs%20%3D%20%7B%22show_value%22%3A%20True%7D%0A%20%20%20%20metadata%20%3D%20value.__metadata__%0A%20%20%20%20if%20metadata%20%3D%3D%20(%22Real%22%2C)%3A%0A%20%20%20%20%20%20%20%20return%20mo.ui.slider(start%3D-10%2C%20value%3D0.0%2C%20stop%3D10%2C%20step%3D0.01%2C%20**kwargs)%0A%20%20%20%20elif%20metadata%20%3D%3D%20(%22Positive%22%2C%20%22Real%22)%3A%0A%20%20%20%20%20%20%20%20return%20mo.ui.slider(start%3D0.01%2C%20value%3D1.0%2C%20step%3D0.01%2C%20stop%3D10%2C%20**kwargs)%0A%20%20%20%20elif%20metadata%20%3D%3D%20(%22Natural%22%2C)%3A%0A%20%20%20%20%20%20%20%20return%20mo.ui.slider(start%3D1%2C%20value%3D10%2C%20stop%3D30%2C%20step%3D1%2C%20**kwargs)%0A%20%20%20%20elif%20metadata%20%3D%3D%20(%22Probability%22%2C)%3A%0A%20%20%20%20%20%20%20%20return%20mo.ui.slider(start%3D0%2C%20value%3D0.5%2C%20stop%3D1%2C%20step%3D0.01%2C%20**kwargs)</marimo-cell-code>
-</marimo-island>
-<marimo-island
-    data-app-id="main"
-    data-cell-id="PKri"
-    data-reactive="true"
->
-    <marimo-cell-output>
-    </marimo-cell-output>
-    <marimo-cell-code hidden>dist%20%3D%20supported_distributions%5Bdistribution.value%5D%0Aparameters%20%3D%20dist.__annotations__%0Aparameters_meta%20%3D%20%7Bname%3A%20value%20for%20name%2C%20value%20in%20parameters.items()%7D</marimo-cell-code>
-</marimo-island>
-<marimo-island
-    data-app-id="main"
-    data-cell-id="Xref"
-    data-reactive="true"
->
-    <marimo-cell-output>
-    </marimo-cell-output>
-    <marimo-cell-code hidden>parameters_ui%20%3D%20mo.ui.dictionary(%0A%20%20%20%20%7Bname%3A%20get_parameter_ui(value%2C%20name)%20for%20name%2C%20value%20in%20parameters_meta.items()%7D%0A)</marimo-cell-code>
-</marimo-island>
-<marimo-island
-    data-app-id="main"
-    data-cell-id="SFPL"
-    data-reactive="true"
->
-    <marimo-cell-output>
-    </marimo-cell-output>
-    <marimo-cell-code hidden>parameters_ui</marimo-cell-code>
-</marimo-island>
-<marimo-island
-    data-app-id="main"
-    data-cell-id="BYtC"
-    data-reactive="true"
->
-    <marimo-cell-output>
-    </marimo-cell-output>
-    <marimo-cell-code hidden>initialize_dist%20%3D%20dist(**parameters_ui.value)%0A%0Aif%20is_cdf.value%3A%0A%20%20%20%20method%20%3D%20%22plot_cdf%22%0Aelif%20hasattr(initialize_dist%2C%20%22plot_pmf%22)%3A%0A%20%20%20%20method%20%3D%20%22plot_pmf%22%0Aelif%20hasattr(initialize_dist%2C%20%22plot_pdf%22)%3A%0A%20%20%20%20method%20%3D%20%22plot_pdf%22%0A%0Adef%20default(value%2C%20default_value)%3A%0A%20%20%20%20return%20value%20if%20value%20is%20not%20None%20else%20default_value%0A%0Adef%20plot()%3A%0A%20%20%20%20%22%22%22Plot%20the%20distribution.%22%22%22%0A%20%20%20%20title%20%3D%20f%22%7Bdist.__name__%7D%20Distribution%22%0A%20%20%20%20if%20is_cdf.value%3A%0A%20%20%20%20%20%20%20%20title%20%3D%20f%22%7Bdist.__name__%7D%20Distribution%20CDF%22%0A%0A%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20return%20getattr(initialize_dist%2C%20method)().set(title%3Dtitle)%0A%20%20%20%20except%20Exception%3A%0A%20%20%20%20%20%20%20%20initialize_dist.set_bounds(%0A%20%20%20%20%20%20%20%20%20%20%20%20default(x_min.value%2C%20getattr(initialize_dist%2C%20%22_min_value%22%2C%20-10))%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20default(x_max.value%2C%20getattr(initialize_dist%2C%20%22_max_value%22%2C%2010))%2C%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20try%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20getattr(initialize_dist%2C%20method)().set(title%3Dtitle)%0A%20%20%20%20%20%20%20%20except%20Exception%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20mo.md(%22The%20distribution%20couldn't%20be%20plotted.%22)</marimo-cell-code>
-</marimo-island>
-<marimo-island
-    data-app-id="main"
-    data-cell-id="RGSE"
-    data-reactive="true"
->
-    <marimo-cell-output>
-    </marimo-cell-output>
-    <marimo-cell-code hidden>from%20conjugate.plot%20import%20DiscretePlotMixin%0A%0Aformatted_parameters%20%3D%20%22%2C%20%22.join(%0A%20%20%20%20f%22%7Bkey%7D%3D%7Bvalue%7D%22%20for%20key%2C%20value%20in%20parameters_ui.value.items()%0A)%0A%0Aif%20is_cdf.value%3A%0A%20%20%20%20plot_method%20%3D%20%22plot_cdf%22%0Aelif%20isinstance(initialize_dist%2C%20DiscretePlotMixin)%3A%0A%20%20%20%20plot_method%20%3D%20%22plot_pmf%22%0Aelse%3A%0A%20%20%20%20plot_method%20%3D%20%22plot_pdf%22%0A%0Aactual_min_value%20%3D%20initialize_dist.min_value%0Atry%3A%0A%20%20%20%20actual_max_value%20%3D%20initialize_dist.max_value%0Aexcept%20ValueError%3A%0A%20%20%20%20actual_max_value%20%3D%20getattr(initialize_dist%2C%20%22_max_value%22%2C%20x_max.value)%0A%0Acode%20%3D%20mo.md(f%22%22%22%0ARecreate%20the%20plot%20with%20the%20following%20code%3A%0A%0A%60%60%60python%0Afrom%20conjugate.distributions%20import%20%7Bdistribution.value%7D%0A%0Adistribution%20%3D%20%7Bdistribution.value%7D(%7Bformatted_parameters%7D)%0Adistribution.set_bounds(%7Bactual_min_value%7D%2C%20%7Bactual_max_value%7D)%0A%0Aax%20%3D%20distribution.%7Bplot_method%7D()%0Aax.set(title%3D%22%7Bdistribution.value%7D%20Distribution%22)%0A%60%60%60%0A%22%22%22)%0A%0Adef%20create_bullet_points(models%2C%20links)%3A%0A%20%20%20%20model_list%20%3D%20%22%5Cn%22.join(%0A%20%20%20%20%20%20%20%20f%22-%20%5B%60%7Bmodel%7D%60%5D(%7Blink%7D)%5Cn%22%20for%20model%2C%20link%20in%20zip(models%2C%20links)%0A%20%20%20%20)%0A%20%20%20%20return%20f%22%5Cn%7Bmodel_list%7D%22%0A%0Amodels%20%3D%20lookup_model(distribution.value)%0Amodels_from_predictive%20%3D%20lookup_model_by_predictive(distribution.value)%0Aif%20isinstance(models%2C%20list)%3A%0A%20%20%20%20links%20%3D%20%5Bcreate_model_documentation_url(model)%20for%20model%20in%20models%5D%0A%20%20%20%20model_list%20%3D%20create_bullet_points(models%2C%20links)%0A%20%20%20%20reference%20%3D%20mo.md(f%22%22%22%0A%20%20%20%20Model%20this%20distribution%20using%3A%0A%0A%20%20%20%20%7Bmodel_list%7D%0A%20%20%20%20%22%22%22)%0Aelif%20models%3A%0A%20%20%20%20link%20%3D%20create_model_documentation_url(models)%0A%20%20%20%20reference%20%3D%20mo.md(f%22%22%22%0A%0A%20%20%20%20Model%20this%20distribution%20using%20the%20%5B%60%7Bmodels%7D%60%5D(%7Blink%7D)%20function.%0A%0A%20%20%20%20%22%22%22)%0Aelif%20isinstance(models_from_predictive%2C%20list)%3A%0A%20%20%20%20links%20%3D%20%5B%0A%20%20%20%20%20%20%20%20create_model_documentation_url(model)%20for%20model%20in%20models_from_predictive%0A%20%20%20%20%5D%0A%20%20%20%20model_list%20%3D%20create_bullet_points(models_from_predictive%2C%20links)%0A%20%20%20%20reference%20%3D%20mo.md(f%22%22%22%0A%20%20%20%20Find%20this%20distribution%20as%20the%20predictive%20distribution%20of%3A%0A%0A%20%20%20%20%7Bmodel_list%7D%0A%20%20%20%20%22%22%22)%0Aelif%20models_from_predictive%3A%0A%20%20%20%20link%20%3D%20create_model_documentation_url(models_from_predictive)%0A%20%20%20%20reference%20%3D%20mo.md(f%22%22%22%0A%0A%20%20%20%20Find%20this%20distribution%20as%20the%20predictive%20distribution%20of%20%5B%60%7Bmodels_from_predictive%7D%60%5D(%7Blink%7D)%20function.%0A%0A%20%20%20%20%22%22%22)%0Aelse%3A%0A%20%20%20%20reference%20%3D%20None</marimo-cell-code>
-</marimo-island>
-<marimo-island
-    data-app-id="main"
-    data-cell-id="Kclp"
-    data-reactive="true"
->
-    <marimo-cell-output>
-    </marimo-cell-output>
-    <marimo-cell-code hidden>mo.hstack(%0A%20%20%20%20%5B%0A%20%20%20%20%20%20%20%20plot()%2C%0A%20%20%20%20%20%20%20%20code%0A%20%20%20%20%20%20%20%20if%20reference%20is%20None%0A%20%20%20%20%20%20%20%20else%20mo.vstack(%5Bcode%2C%20reference%5D%2C%20justify%3D%22start%22)%2C%0A%20%20%20%20%5D%2C%0A)</marimo-cell-code>
-</marimo-island>
-<marimo-island
-    data-app-id="main"
-    data-cell-id="emfo"
-    data-reactive="true"
->
-    <marimo-cell-output>
-    </marimo-cell-output>
-    <marimo-cell-code hidden></marimo-cell-code>
-</marimo-island>
-                </div>
+<blockquote>
+<p><strong>Temporarily unavailable.</strong> The interactive explorer is currently disabled due to rendering issues in the upstream <code>mkdocs-marimo</code> plugin:</p>
+<ul>
+<li>Spinner never resolves on load (<a href="https://github.com/marimo-team/mkdocs-marimo/issues/30">mkdocs-marimo#30</a>)</li>
+<li>Distribution parameter sliders not rendering (<a href="https://github.com/marimo-team/mkdocs-marimo/issues/45">mkdocs-marimo#45</a>)</li>
+</ul>
+<p>The explorer will be re-enabled once these upstream issues are resolved. Progress is tracked in <a href="https://github.com/williambdean/conjugate/issues/324">issue #324</a>.</p>
+</blockquote>
 
 
 

@@ -19,9 +19,9 @@ bibliography: paper.bib
 
 # Summary
 
-`conjugate-models` is a modern Python package for Bayesian conjugate inference that prioritizes a clean, idiomatic API and seamless integration with widely used Python data analysis libraries. It implements the conjugate likelihood-prior pairs cataloged in Fink's compendium and Wikipedia's conjugate prior table, making rigorous Bayesian updating, exploration, and visualization accessible for practitioners, educators, and researchers. Comprehensive documentation, interactive examples, and an online Distribution Explorer further support flexible application and learning.
+`conjugate-models` is a modern Python package for Bayesian conjugate inference that prioritizes a clean, idiomatic application programming interface (API) and seamless integration with widely used Python data analysis libraries. It implements the conjugate likelihood-prior pairs cataloged in Fink's compendium and Wikipedia's conjugate prior table, making rigorous Bayesian updating, exploration, and visualization accessible for practitioners, educators, and researchers. Comprehensive documentation, interactive examples, and an online Distribution Explorer further support flexible application and learning.
 
-# Statement of need
+# Statement of Need
 
 Bayesian inference with conjugate priors offers a tractable and interpretable
 approach to updating distributions in light of new evidence. While
@@ -30,9 +30,9 @@ significant cognitive and computational overhead for common conjugate models. Th
 package is designed to provide efficient, intuitive, and didactic support for
 Bayesian conjugate workflows across statistics, data science, and education,
 allowing direct use with array-like objects from libraries such as
-numpy [@harris2020array],
+NumPy [@harris2020array],
 pandas [@The_pandas_development_team_pandas-dev_pandas_Pandas], and
-polars [@polars2024]. The project also provides live interactive
+Polars [@polars2024]. The project also provides live interactive
 documentation and an [online Distribution Explorer](https://williambdean.github.io/conjugate/explorer) for real-time model investigation.
 
 A prior distribution is conjugate to a likelihood when the posterior remains in
@@ -40,8 +40,7 @@ the same distribution family after observing data [@raiffa1961applied].
 Conjugate priors provide closed-form posterior updates and posterior predictive
 distributions, eliminating the need for numerical
 integration [@fink1997compendium]. Because these updates are analytic
-rather than iterative, posterior computation is instantaneous regardless of
-data size—enabling real-time interactive exploration and rapid model
+rather than iterative, posterior computation cost is independent of dataset size once summary statistics have been computed—enabling real-time interactive exploration and rapid model
 iteration. `conjugate-models` implements the conjugate pairs cataloged in Fink's
 compendium [@fink1997compendium] and Wikipedia's conjugate prior table [@wikipedia_conjugate_prior].
 The complete list of supported models is maintained at
@@ -57,7 +56,7 @@ practitioners new to Bayesian methods.
 
 # Features & API Overview
 
-`conjugate-models` provides an intuitive, pipeable API compatible with numpy arrays [@harris2020array], pandas DataFrames/Series [@The_pandas_development_team_pandas-dev_pandas_Pandas], polars DataFrames [@polars2024] (for element-wise operations), and general numerical types. The package includes vectorized and indexable operations for batch and multi-arm inference, built-in plotting for posterior, prior, and predictive distributions, and connection to scipy distributions for interoperability [@virtanen2020scipy].
+`conjugate-models` provides an intuitive, pipeable API compatible with NumPy arrays [@harris2020array], pandas DataFrames/Series [@The_pandas_development_team_pandas-dev_pandas_Pandas], Polars DataFrames [@polars2024] (for element-wise operations), and general numerical types. The package includes vectorized and indexable operations for batch and multi-arm inference, built-in plotting for posterior, prior, and predictive distributions, and connection to SciPy distributions for interoperability [@virtanen2020scipy].
 
 A typical workflow follows a consistent pattern:
 
@@ -85,19 +84,19 @@ The package naturally supports sequential Bayesian learning, where each posterio
 
 ## Thompson Sampling for Minimizing Wait Times
 
-Thompson sampling is effective for exploration-exploitation problems where the goal is optimization. The package's vectorized operations and scipy integration enable sophisticated applications such as multi-armed bandit problems, where posterior samples from conjugate updates guide exploration-exploitation decisions across multiple arms simultaneously. For instance, exponential-gamma conjugate pairs can model wait times across different service options, with Thompson sampling using posterior rate samples to balance exploration of uncertain options with exploitation of promising ones. A complete implementation demonstrating Thompson sampling with exponential-gamma conjugate updates for wait time minimization is available in the [online documentation](https://williambdean.github.io/conjugate/examples/thompson/).
+Thompson sampling is effective for exploration-exploitation problems where the goal is optimization. The package's vectorized operations and SciPy integration enable sophisticated applications such as multi-armed bandit problems, where posterior samples from conjugate updates guide exploration-exploitation decisions across multiple arms simultaneously. For instance, exponential-gamma conjugate pairs can model wait times across different service options, with Thompson sampling using posterior rate samples to balance exploration of uncertain options with exploitation of promising ones. A complete implementation demonstrating Thompson sampling with exponential-gamma conjugate updates for wait time minimization is available in the [online documentation](https://williambdean.github.io/conjugate/examples/thompson/).
 
 ![Thompson sampling results showing posterior distributions and exploitation rates. The algorithm successfully identifies and favors the group with the lowest wait time (highest rate), demonstrating effective exploration-exploitation balance.](thompson.png)
 
 # Related Work
 
 Several Python packages address aspects of Bayesian inference.
-ArviZ [@Kumar2019] excels at posterior analysis and visualization but focuses on MCMC/variational inference outputs rather than conjugate models.
+ArviZ [@Kumar2019] excels at posterior analysis and visualization but focuses on Markov chain Monte Carlo (MCMC)/variational inference outputs rather than conjugate models.
 Bambi [@Capretto_Bambi_A_simple_2022] provides a high-level interface for Bayesian linear models via PyMC but targets more complex model specifications.
 scikit-learn [@scikit-learn] includes some Bayesian methods but emphasizes frequentist machine learning.
 General probabilistic programming languages like PyMC [@pymc2023] and Stan [@stan2025reference] offer comprehensive modeling capabilities but introduce substantial overhead for simple conjugate updates.
 
-`conjugate-models` distinguishes itself by wrapping scipy.stats distributions with conjugate update semantics, plotting interfaces, and seamless integration into standard Bayesian workflows [@gelman2020workflow]. Its focused scope enables immediate posterior computation without MCMC or optimization, making it ideal for interactive exploration, education, and rapid prototyping of conjugate models.
+`conjugate-models` distinguishes itself by wrapping `scipy.stats` distributions with conjugate update semantics, plotting interfaces, and seamless integration into standard Bayesian workflows [@gelman2020workflow]. Its focused scope enables immediate posterior computation without MCMC or optimization, making it ideal for interactive exploration, education, and rapid prototyping of conjugate models.
 
 # Limitations
 
@@ -105,13 +104,13 @@ This package specifically targets conjugate prior-likelihood pairs, so non-conju
 
 # Software Design
 
-`conjugate-models` adopts a distribution-centric design where each probability distribution is a first-class object wrapping scipy.stats distributions while adding conjugate-specific functionality. Key design decisions include:
+`conjugate-models` adopts a distribution-centric design where each probability distribution is a first-class object wrapping `scipy.stats` distributions while adding conjugate-specific functionality. Key design decisions include:
 
 *Compositional API*: Rather than monolithic model classes, the package separates distributions (`conjugate.distributions`) from update logic (`conjugate.models`), allowing users to compose workflows naturally. This mirrors the mathematical structure where conjugate updates transform one distribution into another of the same family.
 
-*Scipy Integration*: The `dist` property on each distribution class provides direct access to scipy.stats objects, enabling interoperability with the broader scientific Python ecosystem without reimplementing standard functionality like PDF computation, sampling, and statistical methods.
+*SciPy Integration*: The `dist` property on each distribution class provides direct access to `scipy.stats` objects, enabling interoperability with the broader scientific Python ecosystem without reimplementing standard functionality like probability density function (PDF) computation, sampling, and statistical methods.
 
-*Vectorized Operations*: Parameters accept array-like inputs (numpy arrays, pandas/polars columns), enabling batch inference for multi-arm problems like Thompson sampling without explicit loops. This design choice prioritizes performance for real-world applications involving multiple simultaneous models.
+*Vectorized Operations*: Parameters accept array-like inputs (NumPy arrays, pandas/Polars columns), enabling batch inference for multi-arm problems like Thompson sampling without explicit loops. This design choice prioritizes performance for real-world applications involving multiple simultaneous models.
 
 *Mixin Architecture*: Plotting capabilities are added via mixins (e.g., `ContinuousPlotDistMixin`, `DiscretePlotMixin`), keeping core distribution classes focused while enabling rich visualization. The `SliceMixin` provides indexing support for vectorized parameters.
 
@@ -131,7 +130,7 @@ These design choices prioritize clarity and composability over abstraction, maki
 
 *Technical Contributions*: The package implements the complete catalog of conjugate pairs from Fink's compendium [@fink1997compendium] with modern Python practices, providing a reference implementation for conjugate Bayesian inference that was previously unavailable in a single, cohesive package.
 
-*Integration Capabilities*: Seamless compatibility with numpy, pandas, polars, and scipy enables integration into existing data science workflows without requiring users to learn new data structures or abandon familiar tools.
+*Integration Capabilities*: Seamless compatibility with NumPy, pandas, Polars, and SciPy enables integration into existing data science workflows without requiring users to learn new data structures or abandon familiar tools.
 
 The package serves researchers, educators, and practitioners who need rapid, interpretable Bayesian inference for conjugate models, complementing rather than competing with general-purpose probabilistic programming frameworks.
 
@@ -148,6 +147,7 @@ Generative AI tools were used during the development of this software and the pr
 *Documentation*: AI tools assisted with portions of the package documentation. The majority of documentation was written directly by the author.
 
 *Paper Authoring*: opencode (version 1.0.220) with Claude Opus 4.5 was used to:
+
 - Gather and organize information from existing documentation and the codebase during paper drafting
 - Simulate peer review feedback via agent prompts to identify areas for improvement
 - Iterate on paper structure, content, and clarity

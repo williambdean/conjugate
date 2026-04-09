@@ -7,13 +7,26 @@ on:
       - "pyproject.toml"
       - "tests/**"
   pull_request:
-    paths:
-      - "conjugate/**"
-      - "pyproject.toml"
-      - "tests/**"
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      src: ${{ steps.filter.outputs.src }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            src:
+              - "conjugate/**"
+              - "pyproject.toml"
+              - "tests/**"
+
   test:
+    needs: [changes]
+    if: needs.changes.outputs.src == 'true'
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -36,9 +49,25 @@ jobs:
     - name: Test with tox
       run: tox
     - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v5.5.2
+      uses: codecov/codecov-action@v6.0.0
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         name: ${{ matrix.python-version }}
         slug: williambdean/conjugate
         fail_ci_if_error: false
+
+  tests-result:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [test]
+    steps:
+      - name: Tests passed or skipped
+        run: |
+          result="${{ needs.test.result }}"
+          if [[ "$result" == "success" || "$result" == "skipped" ]]; then
+            echo "Tests passed or were skipped"
+            exit 0
+          else
+            echo "Tests failed: $result"
+            exit 1
+          fi

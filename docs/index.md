@@ -41,7 +41,7 @@ pip install conjugate-models
 
 ## Features
 
-- [Interactive Distribution Explorer](explorer.md) for exploring probability distributions with real-time parameter adjustment
+- [Interactive Distribution Explorer](explorer.md) for exploring probability distributions with real-time parameter adjustment *(temporarily unavailable — see [#324](https://github.com/williambdean/conjugate/issues/324))*
 - **[Raw Data Workflow](examples/raw-data-workflow.md)** - Complete examples from raw observational data to posterior distributions with helper functions
 - **[Data Input Helper Functions](helpers.md)** - Extract sufficient statistics from raw observational data for all supported models
 - [Connection to Scipy Distributions](examples/scipy-connection.md) with `dist` attribute

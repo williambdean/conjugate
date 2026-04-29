@@ -19,7 +19,7 @@ bibliography: paper.bib
 
 # Summary
 
-`conjugate-models` is a modern Python package for Bayesian conjugate inference that prioritizes a clean, idiomatic application programming interface (API) and seamless integration with widely used Python data analysis libraries. It implements the conjugate likelihood-prior pairs cataloged in Fink's compendium and Wikipedia's conjugate prior table, making rigorous Bayesian updating, exploration, and visualization accessible for practitioners, educators, and researchers. Comprehensive documentation, interactive examples, and an online Distribution Explorer further support flexible application and learning.
+`conjugate-models` is a modern Python package for Bayesian conjugate inference that prioritizes a clean, idiomatic application programming interface (API) and seamless integration with widely used Python data analysis libraries. It implements the conjugate likelihood-prior pairs cataloged in Fink's compendium and Wikipedia's conjugate prior table, making rigorous Bayesian updating, exploration, and visualization accessible for practitioners, educators, and researchers. Comprehensive documentation and interactive examples support flexible application and learning.
 
 # Statement of Need
 
@@ -32,8 +32,7 @@ Bayesian conjugate workflows across statistics, data science, and education,
 allowing direct use with array-like objects from libraries such as
 NumPy [@harris2020array],
 pandas [@The_pandas_development_team_pandas-dev_pandas_Pandas], and
-Polars [@polars2024]. The project also provides live interactive
-documentation and an [online Distribution Explorer](https://williambdean.github.io/conjugate/explorer) for real-time model investigation.
+Polars [@polars2024].
 
 A prior distribution is conjugate to a likelihood when the posterior remains in
 the same distribution family after observing data [@raiffa1961applied].
@@ -124,7 +123,7 @@ These design choices prioritize clarity and composability over abstraction, maki
 
 *Community Adoption*: The package is available on PyPI with sustained development over 2+ years (270+ commits since June 2023), comprehensive test coverage (94%), and active maintenance demonstrated through regular releases and bug fixes.
 
-*Educational Value*: The package's didactic design supports teaching Bayesian concepts through immediate, interactive feedback. The live Distribution Explorer provides hands-on learning without installation requirements, making Bayesian inference more accessible to students and practitioners.
+*Educational Value*: The package's didactic design supports teaching Bayesian concepts through immediate, interactive feedback, making Bayesian inference more accessible to students and practitioners.
 
 *Documentation and Examples*: Comprehensive documentation with 15+ worked examples demonstrates real-world applications from A/B testing to Thompson sampling, supporting both educational use and practical implementation.
 
@@ -156,6 +155,6 @@ Generative AI tools were used during the development of this software and the pr
 
 # Availability
 
-`conjugate-models` is available on PyPI: `pip install conjugate-models`. The package is open-source under the MIT license at [https://github.com/williambdean/conjugate](https://github.com/williambdean/conjugate), with contribution guidelines at [CONTRIBUTING.md](https://github.com/williambdean/conjugate/blob/main/CONTRIBUTING.md). Live documentation and an interactive Distribution Explorer are available at [https://williambdean.github.io/conjugate/](https://williambdean.github.io/conjugate/).
+`conjugate-models` is available on PyPI: `pip install conjugate-models`. The package is open-source under the MIT license at [https://github.com/williambdean/conjugate](https://github.com/williambdean/conjugate), with contribution guidelines at [CONTRIBUTING.md](https://github.com/williambdean/conjugate/blob/main/CONTRIBUTING.md). Live documentation is available at [https://williambdean.github.io/conjugate/](https://williambdean.github.io/conjugate/).
 
 # References

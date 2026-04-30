@@ -5,6 +5,7 @@
 [![PyPI version](https://badge.fury.io/py/conjugate-models.svg)](https://badge.fury.io/py/conjugate-models)
 [![docs](https://github.com/williambdean/conjugate/actions/workflows/docs.yml/badge.svg)](https://williambdean.github.io/conjugate/)
 [![codecov](https://codecov.io/github/williambdean/conjugate/branch/main/graph/badge.svg)](https://app.codecov.io/github/williambdean/conjugate)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.09890/status.svg)](https://doi.org/10.21105/joss.09890)
 
 Bayesian conjugate models in Python
 
@@ -173,3 +174,23 @@ More examples on in the [documentation](https://williambdean.github.io/conjugate
 ## Contributing
 
 If you are interested in contributing, check out the [contributing guidelines](https://github.com/williambdean/conjugate/blob/main/CONTRIBUTING.md)
+
+## Citation
+
+If you use `conjugate-models` in your research, please cite:
+
+```bibtex
+@article{Dean2026,
+  author  = {Dean, William},
+  title   = {conjugate-models: Conjugate Models in Python},
+  journal = {Journal of Open Source Software},
+  year    = {2026},
+  volume  = {11},
+  number  = {120},
+  pages   = {9890},
+  doi     = {10.21105/joss.09890},
+  url     = {https://joss.theoj.org/papers/10.21105/joss.09890}
+}
+```
+
+The software is also archived on Zenodo: https://doi.org/10.5281/zenodo.19488125

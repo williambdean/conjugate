@@ -1,0 +1,26 @@
+cff-version: "1.2.0"
+authors:
+- family-names: Dean
+  given-names: William
+  orcid: "https://orcid.org/0009-0003-6510-3545"
+doi: 10.5281/zenodo.19488126
+message: If you use this software, please cite our article in the
+  Journal of Open Source Software.
+preferred-citation:
+  authors:
+  - family-names: Dean
+    given-names: William
+    orcid: "https://orcid.org/0009-0003-6510-3545"
+  date-published: 2026-04-29
+  doi: 10.21105/joss.09890
+  issn: 2475-9066
+  issue: 120
+  journal: Journal of Open Source Software
+  publisher:
+    name: Open Journals
+  start: 9890
+  title: "conjugate-models: Conjugate Models in Python"
+  type: article
+  url: "https://joss.theoj.org/papers/10.21105/joss.09890"
+  volume: 11
+title: "conjugate-models: Conjugate Models in Python"

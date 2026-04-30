@@ -61,10 +61,11 @@
 
     
     
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.0/dist/main.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.4/dist/main.js"></script>
 <link
-    href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.0/dist/style.css"
+    href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.4/dist/style.css"
     rel="stylesheet"
+    title="marimo-islands"
     crossorigin="anonymous"
 />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -620,6 +621,17 @@
     <span class="md-ellipsis">
       
         Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#citation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Citation
       
     </span>
   </a>
@@ -1825,6 +1837,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#citation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Citation
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1852,7 +1875,8 @@
 <a href="https://github.com/williambdean/conjugate/actions/workflows/tests.yml"><img alt="Tests" src="https://github.com/williambdean/conjugate/actions/workflows/tests.yml/badge.svg" /></a>
 <a href="https://badge.fury.io/py/conjugate-models"><img alt="PyPI version" src="https://badge.fury.io/py/conjugate-models.svg" /></a>
 <a href="https://williambdean.github.io/conjugate/"><img alt="docs" src="https://github.com/williambdean/conjugate/actions/workflows/docs.yml/badge.svg" /></a>
-<a href="https://app.codecov.io/github/williambdean/conjugate"><img alt="codecov" src="https://codecov.io/github/williambdean/conjugate/branch/main/graph/badge.svg" /></a></p>
+<a href="https://app.codecov.io/github/williambdean/conjugate"><img alt="codecov" src="https://codecov.io/github/williambdean/conjugate/branch/main/graph/badge.svg" /></a>
+<a href="https://doi.org/10.21105/joss.09890"><img alt="DOI" src="https://joss.theoj.org/papers/10.21105/joss.09890/status.svg" /></a></p>
 <p>Bayesian conjugate models in Python</p>
 <h2 id="overview">Overview</h2>
 <p><code>conjugate-models</code> is a modern Python package for Bayesian conjugate inference that prioritizes a clean, idiomatic API and seamless integration with widely used Python data analysis libraries. It implements the conjugate likelihood-prior pairs cataloged in <a href="https://www.johndcook.com/CompendiumOfConjugatePriors.pdf">Fink's compendium</a> and <a href="https://en.wikipedia.org/wiki/Conjugate_prior">Wikipedia's conjugate prior table</a>, making rigorous Bayesian updating, exploration, and visualization accessible for practitioners, educators, and researchers.</p>
@@ -2045,6 +2069,21 @@
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Conjugate_prior">Conjugate Priors</a></li>
 </ul>
+<h2 id="citation">Citation</h2>
+<p>If you use <code>conjugate-models</code> in your research, please cite:</p>
+<div class="language-bibtex highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nc">@article</span><span class="p">{</span><span class="nl">Dean2026</span><span class="p">,</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="na">author</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Dean, William}</span><span class="p">,</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="na">title</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{conjugate-models: Conjugate Models in Python}</span><span class="p">,</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Journal of Open Source Software}</span><span class="p">,</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="na">year</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{2026}</span><span class="p">,</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="na">volume</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{11}</span><span class="p">,</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="na">number</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{120}</span><span class="p">,</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="na">pages</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{9890}</span><span class="p">,</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">  </span><span class="na">doi</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{10.21105/joss.09890}</span><span class="p">,</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">  </span><span class="na">url</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{https://joss.theoj.org/papers/10.21105/joss.09890}</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>The software is also archived on Zenodo: https://doi.org/10.5281/zenodo.19488125</p>
 
 
 

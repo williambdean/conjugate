@@ -753,6 +753,12 @@ def test_normal(prior) -> None:
     assert isinstance(posterior, prior.__class__)
 
 
+def test_normal_wrong_prior_type() -> None:
+    prior = Gamma(1, 1)
+    with pytest.raises(ValueError, match="NormalInverseGamma | NormalGamma"):
+        normal(x_total=0, x2_total=1, n=1, prior=prior)
+
+
 def test_normal_normal_inverse_gamma_deprecation() -> None:
     prior = NormalInverseGamma(mu=0, nu=1, alpha=1, beta=1)
     match = "This function is deprecated"

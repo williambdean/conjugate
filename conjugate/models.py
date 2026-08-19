@@ -33,6 +33,7 @@ Below are the supported models:
 """
 
 from functools import wraps
+from types import UnionType
 from typing import Callable
 
 import numpy as np
@@ -99,8 +100,12 @@ def validate_type(func, parameter: str):
             parameter_value = kwargs.get(parameter, None)
             recieved_type = type(parameter_value)
             if not isinstance(parameter_value, expected_type):
+                if isinstance(expected_type, UnionType):
+                    type_name = str(expected_type)
+                else:
+                    type_name = expected_type.__name__
                 msg = (
-                    f"Expected {parameter} to be of type {expected_type.__name__!r}, "
+                    f"Expected {parameter} to be of type {type_name!r}, "
                     f"got {recieved_type.__name__!r} instead."
                 )
                 raise ValueError(msg)

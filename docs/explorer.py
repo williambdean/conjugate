@@ -7,15 +7,14 @@ app = marimo.App(width="medium")
 @app.cell
 async def _():
     import marimo as mo
-
     import micropip
 
     await micropip.install("conjugate-models")
 
     from conjugate.interactive import (
-        supported_distributions,
         lookup_model,
         lookup_model_by_predictive,
+        supported_distributions,
     )
 
     return (
@@ -96,7 +95,6 @@ def _(get_parameter_ui, mo, parameters_meta):
 @app.cell
 def _(parameters_ui):
     parameters_ui
-    return
 
 
 @app.cell
@@ -234,7 +232,6 @@ def _(code, mo, plot, reference):
             else mo.vstack([code, reference], justify="start"),
         ],
     )
-    return
 
 
 @app.cell

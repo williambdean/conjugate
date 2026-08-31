@@ -79,7 +79,7 @@ from conjugate.models import binomial_beta, binomial_beta_predictive
 
 # Observed Data (sufficient statistics)
 x = 4  # successes
-N = 10 # trials
+N = 10  # trials
 
 # Analytics
 prior = Beta(1, 1)
@@ -117,7 +117,7 @@ posterior = binomial_beta(prior=prior, **inputs)
 
 ```python
 from conjugate.helpers import (
-    poisson_gamma_inputs,      # For count data
+    poisson_gamma_inputs,  # For count data
     normal_known_variance_inputs,  # For continuous measurements
     exponential_gamma_inputs,  # For time-between-events data
     multinomial_dirichlet_inputs,  # For categorical data
@@ -140,7 +140,7 @@ inputs = exponential_gamma_inputs(wait_times)
 # Returns: {'x_total': sum(wait_times), 'n': len(wait_times)}
 
 # Categorical outcomes (e.g., survey responses A, B, C)
-responses = ['A', 'B', 'A', 'C', 'B', 'A', 'B']
+responses = ["A", "B", "A", "C", "B", "A", "B"]
 inputs = multinomial_dirichlet_inputs(responses)
 # Returns: {'x': [3, 3, 1]} - counts for each category
 ```

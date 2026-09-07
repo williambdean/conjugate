@@ -1,50 +1,50 @@
 """Tests for conjugate.helpers module."""
 
-import pytest
 import numpy as np
+import pytest
 
 from conjugate.helpers import (
-    # Simple sum/count
-    poisson_gamma_inputs,
-    exponential_gamma_inputs,
-    gamma_known_shape_inputs,
+    bernoulli_beta_inputs,
+    beta_inputs,
     # Success/trial counts
     binomial_beta_inputs,
-    bernoulli_beta_inputs,
-    negative_binomial_beta_inputs,
-    geometric_beta_inputs,
     categorical_dirichlet_inputs,
+    exponential_gamma_inputs,
+    gamma_inputs,
+    # Products
+    gamma_known_rate_inputs,
+    gamma_known_shape_inputs,
+    geometric_beta_inputs,
+    # Reciprocals
+    inverse_gamma_known_rate_inputs,
+    # Identity
+    linear_regression_inputs,
+    log_normal_inputs,
     multinomial_dirichlet_inputs,
+    multivariate_normal_inputs,
+    # Multivariate
+    multivariate_normal_known_covariance_inputs,
+    multivariate_normal_known_mean_inputs,
+    multivariate_normal_known_precision_inputs,
+    negative_binomial_beta_inputs,
     # Normal variants
     normal_inputs,
     normal_known_mean_inputs,
     normal_known_variance_inputs,
-    log_normal_inputs,
-    # Products
-    gamma_known_rate_inputs,
-    gamma_inputs,
-    beta_inputs,
+    # Operation bundles
+    numpy_ops,
     # Log sums
     pareto_gamma_inputs,
+    # Simple sum/count
+    poisson_gamma_inputs,
+    pytensor_ops,
     # Max/min
     uniform_pareto_inputs,
-    # Reciprocals
-    inverse_gamma_known_rate_inputs,
     # Von Mises
     von_mises_known_concentration_inputs,
     von_mises_known_direction_inputs,
     # Weibull
     weibull_inverse_gamma_known_shape_inputs,
-    # Multivariate
-    multivariate_normal_known_covariance_inputs,
-    multivariate_normal_known_precision_inputs,
-    # Identity
-    linear_regression_inputs,
-    multivariate_normal_inputs,
-    multivariate_normal_known_mean_inputs,
-    # Operation bundles
-    numpy_ops,
-    pytensor_ops,
 )
 
 
@@ -417,8 +417,8 @@ class TestIntegrationWithModels:
     def test_poisson_gamma_integration(self):
         """Test full workflow: data -> helper -> model."""
         # Import here to avoid circular imports in test discovery
-        from conjugate.models import poisson_gamma
         from conjugate.distributions import Gamma
+        from conjugate.models import poisson_gamma
 
         data = [3, 5, 2, 4]
         prior = Gamma(1, 1)
@@ -435,8 +435,8 @@ class TestIntegrationWithModels:
 
     def test_binomial_beta_integration(self):
         """Test binomial beta integration."""
-        from conjugate.models import binomial_beta
         from conjugate.distributions import Beta
+        from conjugate.models import binomial_beta
 
         successes = [5, 3]
         trials = [10, 8]
@@ -450,8 +450,8 @@ class TestIntegrationWithModels:
 
     def test_bernoulli_beta_integration_with_binomial(self):
         """Test that bernoulli helper works correctly with binomial_beta model."""
-        from conjugate.models import binomial_beta
         from conjugate.distributions import Beta
+        from conjugate.models import binomial_beta
 
         data = [1, 0, 1, 1, 0]  # 5 Bernoulli trials, 3 successes
         prior = Beta(2, 3)
@@ -464,8 +464,8 @@ class TestIntegrationWithModels:
 
     def test_negative_binomial_beta_integration(self):
         """Test negative binomial beta integration."""
-        from conjugate.models import negative_binomial_beta
         from conjugate.distributions import Beta
+        from conjugate.models import negative_binomial_beta
 
         successes = [2, 3, 1]
         failures_per_exp = 5
@@ -482,8 +482,8 @@ class TestIntegrationWithModels:
 
     def test_geometric_beta_integration(self):
         """Test geometric beta integration."""
-        from conjugate.models import geometric_beta
         from conjugate.distributions import Beta
+        from conjugate.models import geometric_beta
 
         data = [3, 1, 4, 2]
         prior = Beta(1, 1)
@@ -499,8 +499,8 @@ class TestIntegrationWithModels:
 
     def test_normal_integration(self):
         """Test normal inputs with normal model."""
-        from conjugate.models import normal
         from conjugate.distributions import NormalInverseGamma
+        from conjugate.models import normal
 
         data = [1, 2, 3, 4]
         prior = NormalInverseGamma(mu=0, nu=1, alpha=1, beta=1)
@@ -516,9 +516,10 @@ class TestIntegrationWithModels:
 
     def test_multinomial_dirichlet_integration(self):
         """Test multinomial dirichlet integration."""
-        from conjugate.models import multinomial_dirichlet
-        from conjugate.distributions import Dirichlet
         import numpy as np
+
+        from conjugate.distributions import Dirichlet
+        from conjugate.models import multinomial_dirichlet
 
         counts = np.array([5, 3, 8, 2])
         prior = Dirichlet(np.array([1, 1, 1, 1]))

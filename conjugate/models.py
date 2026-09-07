@@ -32,39 +32,35 @@ Below are the supported models:
 
 """
 
+import warnings
+from collections.abc import Callable
 from functools import wraps
-from typing import Callable
 
 import numpy as np
 
-import warnings
-
+from conjugate._typing import NUMERIC
 from conjugate.distributions import (
-    Multinomial,
-    Poisson,
-    Exponential,
-    Binomial,
-    Uniform,
-    VonMises,
-    LogNormal,
-    Weibull,
     Bernoulli,
     Beta,
-    Geometric,
     BetaBinomial,
     BetaGeometric,
     BetaNegativeBinomial,
     BetaProportional,
+    Binomial,
     CompoundGamma,
     Dirichlet,
     DirichletMultinomial,
+    Exponential,
     Gamma,
     GammaKnownRateProportional,
     GammaProportional,
+    Geometric,
     Hypergeometric,
     InverseGamma,
     InverseWishart,
+    LogNormal,
     Lomax,
+    Multinomial,
     MultivariateNormal,
     MultivariateStudentT,
     NegativeBinomial,
@@ -73,18 +69,21 @@ from conjugate.distributions import (
     NormalInverseGamma,
     NormalInverseWishart,
     Pareto,
+    Poisson,
     ScaledInverseChiSquared,
     StudentT,
+    Uniform,
+    VonMises,
     VonMisesKnownConcentration,
     VonMisesKnownDirectionProportional,
+    Weibull,
 )
-from conjugate._typing import NUMERIC
 
 
 def add_associated_likelihood(name):
     def decorator(func: Callable) -> Callable:
         """Decorator to add an associated distribution to the function."""
-        setattr(func, "associated_likelihood", name)
+        func.associated_likelihood = name
         return func
 
     return decorator

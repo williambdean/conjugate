@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-
 import numpy as np
 import pandas as pd
 
@@ -86,7 +85,7 @@ def negative_binomial():
 
 def hypergeometric():
     """TODO: Correct this example."""
-    from conjugate.distributions import Hypergeometric, BetaBinomial
+    from conjugate.distributions import BetaBinomial, Hypergeometric
     from conjugate.models import hypergeometric_beta_binomial
 
     N = 100
@@ -160,7 +159,7 @@ def normal_known_precision():
 
 
 def normal_known_mean():
-    from conjugate.distributions import Normal, InverseGamma
+    from conjugate.distributions import InverseGamma, Normal
     from conjugate.models import normal_known_mean
 
     known_mu = 5
@@ -212,7 +211,7 @@ def normal_known_mean_alternative():
 
 
 def uniform():
-    from conjugate.distributions import Uniform, Pareto
+    from conjugate.distributions import Pareto, Uniform
     from conjugate.models import uniform_pareto
 
     true_theta = 3.5
@@ -248,7 +247,7 @@ def exponential():
 
 
 def inverse_gamma_known_rate():
-    from conjugate.distributions import InverseGamma, Gamma
+    from conjugate.distributions import Gamma, InverseGamma
     from conjugate.models import inverse_gamma_known_rate
 
     alpha = 1
@@ -273,7 +272,7 @@ def inverse_gamma_known_rate():
 
 
 def weibull_known_shape():
-    from conjugate.distributions import Weibull, InverseGamma
+    from conjugate.distributions import InverseGamma, Weibull
     from conjugate.models import weibull_inverse_gamma_known_shape
 
     beta = 0.5

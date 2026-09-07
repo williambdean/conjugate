@@ -5,15 +5,13 @@ the few data points I have from my posts. Then, use the model to make some visua
 
 """
 
-import pandas as pd
+import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+from matplotlib.ticker import PercentFormatter
 
 from conjugate.distributions import Beta
 from conjugate.models import binomial_beta
-
-import matplotlib.pyplot as plt
-from matplotlib.ticker import PercentFormatter
-
 
 # Data from my LinkedIn posts
 df = pd.DataFrame(

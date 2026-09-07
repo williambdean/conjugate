@@ -1,12 +1,9 @@
-import pytest
-
 from dataclasses import dataclass
 
-from pypika import Field
-
-import numpy as np
-
 import matplotlib.pyplot as plt
+import numpy as np
+import pytest
+from pypika import Field
 
 from conjugate.distributions import (
     Beta,
@@ -17,7 +14,6 @@ from conjugate.distributions import (
     CompoundGamma,
     Dirichlet,
     Gamma,
-    ScaledInverseChiSquared,
     GammaKnownRateProportional,
     GammaProportional,
     InverseGamma,
@@ -31,6 +27,7 @@ from conjugate.distributions import (
     NormalInverseGamma,
     NormalInverseWishart,
     Pareto,
+    ScaledInverseChiSquared,
     StudentT,
 )
 from conjugate.models import (
@@ -62,13 +59,13 @@ from conjugate.models import (
     negative_binomial_beta,
     negative_binomial_beta_predictive,
     normal,
-    normal_predictive,
     normal_known_mean,
     normal_known_mean_predictive,
     normal_known_variance,
     normal_known_variance_predictive,
     normal_normal_inverse_gamma,
     normal_normal_inverse_gamma_predictive,
+    normal_predictive,
     pareto_gamma,
     poisson_gamma,
     poisson_gamma_predictive,

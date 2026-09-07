@@ -1,4 +1,4 @@
-from typing import Protocol, Annotated
+from typing import Annotated, Protocol
 
 
 class NUMERIC(Protocol):

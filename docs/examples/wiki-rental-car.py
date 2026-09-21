@@ -34,7 +34,6 @@ def _(mo):
     ```
     """
     )
-    return
 
 
 @app.cell
@@ -42,7 +41,6 @@ async def _():
     import micropip
 
     await micropip.install("conjugate-models")
-    return
 
 
 @app.cell
@@ -74,7 +72,6 @@ def _(mo, np, x):
     p(x > 0 | \lambda \approx {lam:.2f}) = 1 - p(x=0 | \lambda \approx {lam:.2f}) = 1 - \frac{{ {lam:.2f}^0 e^{{ -{lam:.2f} }} }}{{0!}} \approx {at_least_one:.2f}
     $$
     """)
-    return
 
 
 @app.cell
@@ -113,7 +110,6 @@ def _(parameters, x):
 @app.cell
 def _(build_up, mo, parameters):
     mo.vstack([build_up, parameters])
-    return
 
 
 @app.cell
@@ -124,7 +120,6 @@ def _(prior, parameters):
         title=f"Prior distribution for average\nGamma(alpha={parameters.value['alpha']}, beta={parameters.value['beta']})",
         xlabel="Average number of cars",
     )
-    return
 
 
 @app.cell
@@ -149,7 +144,6 @@ def _(mo, parameters):
     """)
 
     mo.vstack([posterior_section, conjugate_posterior_section])
-    return
 
 
 @app.cell
@@ -186,7 +180,6 @@ def _(mo, posterior, posterior_predictive):
             posterior_predictive_section,
         ]
     )
-    return
 
 
 if __name__ == "__main__":

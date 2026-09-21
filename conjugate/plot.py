@@ -4,10 +4,9 @@ from itertools import zip_longest
 from typing import Any, Protocol
 
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.projections.polar import PolarAxes
-
-import numpy as np
 from scipy.stats import gaussian_kde
 
 

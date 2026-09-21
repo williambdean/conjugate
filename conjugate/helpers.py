@@ -22,8 +22,9 @@ For PyTensor compatibility:
     ```
 """
 
+from collections.abc import Callable
+
 import numpy as np
-from typing import Callable
 
 from conjugate._typing import NUMERIC
 

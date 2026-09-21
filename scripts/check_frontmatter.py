@@ -11,9 +11,9 @@ Usage:
     python scripts/check_frontmatter.py
 """
 
-from pathlib import Path
 import re
 import sys
+from pathlib import Path
 
 # Files to exclude from validation
 EXCLUDED_FILES = {

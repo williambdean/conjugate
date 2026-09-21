@@ -28,8 +28,45 @@ from conjugate.helpers import bernoulli_beta_inputs
 
 # Raw observational data - user conversion outcomes
 # 1 = converted, 0 = did not convert
-variant_a = [1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1]  # 8 conversions out of 15 users
-variant_b = [1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1]  # 13 conversions out of 20 users
+variant_a = [
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+]  # 8 conversions out of 15 users
+variant_b = [
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+]  # 13 conversions out of 20 users
 
 # Extract sufficient statistics automatically
 inputs_a = bernoulli_beta_inputs(variant_a)
@@ -52,14 +89,26 @@ print(f"Variant B: Beta({posterior_b.alpha}, {posterior_b.beta})")
 fig, ax = plt.subplots(figsize=(10, 6))
 x = np.linspace(0, 1, 1000)
 
-ax.plot(x, posterior_a.dist.pdf(x), label=f'Variant A (8/15)', linewidth=2)
-ax.plot(x, posterior_b.dist.pdf(x), label=f'Variant B (13/20)', linewidth=2)
-ax.axvline(inputs_a['x'] / inputs_a['n'], color='blue', alpha=0.5, linestyle='--', label='A MLE')
-ax.axvline(inputs_b['x'] / inputs_b['n'], color='orange', alpha=0.5, linestyle='--', label='B MLE')
+ax.plot(x, posterior_a.dist.pdf(x), label=f"Variant A (8/15)", linewidth=2)
+ax.plot(x, posterior_b.dist.pdf(x), label=f"Variant B (13/20)", linewidth=2)
+ax.axvline(
+    inputs_a["x"] / inputs_a["n"],
+    color="blue",
+    alpha=0.5,
+    linestyle="--",
+    label="A MLE",
+)
+ax.axvline(
+    inputs_b["x"] / inputs_b["n"],
+    color="orange",
+    alpha=0.5,
+    linestyle="--",
+    label="B MLE",
+)
 
-ax.set_xlabel('Conversion Rate')
-ax.set_ylabel('Density')
-ax.set_title('A/B Test Results: Posterior Distributions')
+ax.set_xlabel("Conversion Rate")
+ax.set_ylabel("Density")
+ax.set_title("A/B Test Results: Posterior Distributions")
 ax.legend()
 ax.grid(alpha=0.3)
 plt.show()
@@ -84,9 +133,36 @@ from conjugate.helpers import poisson_gamma_inputs
 
 # Raw data: daily page views over 30 days
 daily_views = [
-    1247, 1356, 1189, 1445, 1523, 1234, 1345, 1456, 1567, 1432,
-    1234, 1345, 1456, 1567, 1678, 1789, 1234, 1345, 1456, 1567,
-    1678, 1789, 1890, 1234, 1345, 1456, 1567, 1678, 1789, 1890
+    1247,
+    1356,
+    1189,
+    1445,
+    1523,
+    1234,
+    1345,
+    1456,
+    1567,
+    1432,
+    1234,
+    1345,
+    1456,
+    1567,
+    1678,
+    1789,
+    1234,
+    1345,
+    1456,
+    1567,
+    1678,
+    1789,
+    1890,
+    1234,
+    1345,
+    1456,
+    1567,
+    1678,
+    1789,
+    1890,
 ]
 
 # Extract sufficient statistics
@@ -131,9 +207,28 @@ from conjugate.models import multinomial_dirichlet
 from conjugate.helpers import multinomial_dirichlet_inputs
 
 # Raw survey data: customer satisfaction ratings
-responses = ['Excellent', 'Good', 'Fair', 'Good', 'Excellent', 'Fair', 'Good',
-             'Excellent', 'Good', 'Good', 'Fair', 'Poor', 'Good', 'Excellent',
-             'Fair', 'Good', 'Excellent', 'Good', 'Fair', 'Good']
+responses = [
+    "Excellent",
+    "Good",
+    "Fair",
+    "Good",
+    "Excellent",
+    "Fair",
+    "Good",
+    "Excellent",
+    "Good",
+    "Good",
+    "Fair",
+    "Poor",
+    "Good",
+    "Excellent",
+    "Fair",
+    "Good",
+    "Excellent",
+    "Good",
+    "Fair",
+    "Good",
+]
 
 # Convert to counts automatically
 inputs = multinomial_dirichlet_inputs(responses)
@@ -141,11 +236,12 @@ print("Response counts:", inputs)
 
 # Count each category
 from collections import Counter
+
 counts = Counter(responses)
 print("Manual count verification:", dict(counts))
 
 # Set up prior - start with symmetric Dirichlet
-categories = ['Excellent', 'Good', 'Fair', 'Poor']
+categories = ["Excellent", "Good", "Fair", "Poor"]
 prior_alpha = [1, 1, 1, 1]  # Uniform prior across categories
 prior = Dirichlet(prior_alpha)
 
@@ -163,7 +259,10 @@ for cat, prob in zip(categories, posterior_probs):
 
 # 95% credible intervals for each category
 for i, cat in enumerate(categories):
-    lower, upper = posterior.alpha[i] / posterior.alpha.sum(), posterior.alpha[i] / posterior.alpha.sum()
+    lower, upper = (
+        posterior.alpha[i] / posterior.alpha.sum(),
+        posterior.alpha[i] / posterior.alpha.sum(),
+    )
     # More precise credible intervals would require sampling
     print(f"{cat} probability: {posterior_probs[i]:.3f}")
 ```
@@ -183,9 +282,36 @@ from conjugate.helpers import normal_inputs
 
 # Raw temperature measurements from a sensor (in Celsius)
 temperatures = [
-    20.1, 20.4, 19.9, 20.2, 20.0, 20.3, 19.8, 20.1, 20.2, 19.9,
-    20.0, 20.1, 20.3, 19.7, 20.4, 20.0, 20.2, 19.9, 20.1, 20.0,
-    20.3, 19.8, 20.2, 20.1, 19.9, 20.0, 20.4, 20.1, 20.0, 20.2
+    20.1,
+    20.4,
+    19.9,
+    20.2,
+    20.0,
+    20.3,
+    19.8,
+    20.1,
+    20.2,
+    19.9,
+    20.0,
+    20.1,
+    20.3,
+    19.7,
+    20.4,
+    20.0,
+    20.2,
+    19.9,
+    20.1,
+    20.0,
+    20.3,
+    19.8,
+    20.2,
+    20.1,
+    19.9,
+    20.0,
+    20.4,
+    20.1,
+    20.0,
+    20.2,
 ]
 
 # Extract sufficient statistics
@@ -207,7 +333,9 @@ print(f"Posterior rate (β): {posterior.beta:.3f}")
 
 # Expected temperature and variance
 expected_temp = posterior.mu
-expected_variance = posterior.beta / (posterior.alpha - 1) if posterior.alpha > 1 else float('inf')
+expected_variance = (
+    posterior.beta / (posterior.alpha - 1) if posterior.alpha > 1 else float("inf")
+)
 print(f"Expected temperature: {expected_temp:.3f}°C")
 print(f"Expected variance: {expected_variance:.6f}")
 ```
@@ -228,9 +356,36 @@ import numpy as np
 
 # Raw data: time between customer arrivals (in minutes)
 arrival_intervals = [
-    3.2, 1.8, 4.1, 2.7, 3.9, 2.1, 5.2, 1.9, 3.4, 2.8,
-    4.5, 1.7, 3.8, 2.9, 4.2, 3.1, 2.4, 5.1, 1.6, 3.7,
-    2.5, 4.8, 3.3, 2.2, 4.6, 1.9, 3.5, 2.6, 4.3, 3.0
+    3.2,
+    1.8,
+    4.1,
+    2.7,
+    3.9,
+    2.1,
+    5.2,
+    1.9,
+    3.4,
+    2.8,
+    4.5,
+    1.7,
+    3.8,
+    2.9,
+    4.2,
+    3.1,
+    2.4,
+    5.1,
+    1.6,
+    3.7,
+    2.5,
+    4.8,
+    3.3,
+    2.2,
+    4.6,
+    1.9,
+    3.5,
+    2.6,
+    4.3,
+    3.0,
 ]
 
 # Extract sufficient statistics

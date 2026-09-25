@@ -1,8 +1,6 @@
-import pytest
-
-import numpy as np
-
 import matplotlib.pyplot as plt
+import numpy as np
+import pytest
 from matplotlib.figure import Figure
 
 from conjugate.distributions import (

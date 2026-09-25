@@ -22,8 +22,9 @@ For PyTensor compatibility:
     ```
 """
 
+from collections.abc import Callable
+
 import numpy as np
-from typing import Callable
 
 from conjugate._typing import NUMERIC
 
@@ -232,6 +233,17 @@ def gamma_known_shape_inputs(
 
     Returns:
         Dict with keys 'x_total' and 'n' for use with gamma_known_shape()
+
+    Example:
+        ```python
+        from conjugate.models import gamma_known_shape
+        from conjugate.helpers import gamma_known_shape_inputs
+
+        data = [2, 4, 6, 8]
+        inputs = gamma_known_shape_inputs(data)
+        # inputs = {'x_total': 20, 'n': 4}
+        posterior = gamma_known_shape(**inputs, alpha=2.0, prior=prior)
+        ```
     """
     if sum_fn is None:
         sum_fn = _default_sum
@@ -594,6 +606,18 @@ def log_normal_inputs(
 
     Returns:
         Dict with keys 'ln_x_total', 'ln_x2_total', and 'n'
+
+    Example:
+        ```python
+        import numpy as np
+        from conjugate.models import log_normal
+        from conjugate.helpers import log_normal_inputs
+
+        data = [1.0, np.e, np.e**2]
+        inputs = log_normal_inputs(data)
+        # inputs = {'ln_x_total': 3.0, 'ln_x2_total': 5.0, 'n': 3}
+        posterior = log_normal(**inputs, prior=prior)
+        ```
     """
     if sum_fn is None:
         sum_fn = _default_sum
@@ -634,6 +658,17 @@ def gamma_known_rate_inputs(
 
     Returns:
         Dict with keys 'x_prod' and 'n'
+
+    Example:
+        ```python
+        from conjugate.models import gamma_known_rate
+        from conjugate.helpers import gamma_known_rate_inputs
+
+        data = [1, 2, 3, 4]
+        inputs = gamma_known_rate_inputs(data)
+        # inputs = {'x_prod': 24, 'n': 4}
+        posterior = gamma_known_rate(**inputs, beta=1.0, prior=prior)
+        ```
     """
     if prod_fn is None:
         prod_fn = _default_prod
@@ -669,6 +704,17 @@ def gamma_inputs(
 
     Returns:
         Dict with keys 'x_total', 'x_prod', and 'n'
+
+    Example:
+        ```python
+        from conjugate.models import gamma
+        from conjugate.helpers import gamma_inputs
+
+        data = [1, 2, 3, 4]
+        inputs = gamma_inputs(data)
+        # inputs = {'x_total': 10, 'x_prod': 24, 'n': 4}
+        posterior = gamma(**inputs, prior=prior)
+        ```
     """
     if sum_fn is None:
         sum_fn = _default_sum
@@ -707,6 +753,17 @@ def beta_inputs(
 
     Returns:
         Dict with keys 'x_prod', 'one_minus_x_prod', and 'n'
+
+    Example:
+        ```python
+        from conjugate.models import beta
+        from conjugate.helpers import beta_inputs
+
+        data = [0.2, 0.5, 0.7]
+        inputs = beta_inputs(data)
+        # inputs = {'x_prod': 0.07, 'one_minus_x_prod': 0.12, 'n': 3}
+        posterior = beta(**inputs, prior=prior)
+        ```
     """
     if prod_fn is None:
         prod_fn = _default_prod
@@ -751,6 +808,17 @@ def pareto_gamma_inputs(
 
     Returns:
         Dict with keys 'ln_x_total', 'n', and 'x_m' (if provided)
+
+    Example:
+        ```python
+        from conjugate.models import pareto_gamma
+        from conjugate.helpers import pareto_gamma_inputs
+
+        data = [3, 4, 6]
+        inputs = pareto_gamma_inputs(data, x_m=2.0)
+        # inputs = {'n': 3, 'ln_x_total': 4.2767, 'x_m': 2.0}
+        posterior = pareto_gamma(**inputs, prior=prior)
+        ```
     """
     if sum_fn is None:
         sum_fn = _default_sum
@@ -791,6 +859,17 @@ def uniform_pareto_inputs(
 
     Returns:
         Dict with keys 'x_max' and 'n'
+
+    Example:
+        ```python
+        from conjugate.models import uniform_pareto
+        from conjugate.helpers import uniform_pareto_inputs
+
+        data = [2, 5, 3, 4]
+        inputs = uniform_pareto_inputs(data)
+        # inputs = {'x_max': 5, 'n': 4}
+        posterior = uniform_pareto(**inputs, prior=prior)
+        ```
     """
     if max_fn is None:
         max_fn = _default_max
@@ -828,6 +907,17 @@ def inverse_gamma_known_rate_inputs(
 
     Returns:
         Dict with keys 'reciprocal_x_total' and 'n'
+
+    Example:
+        ```python
+        from conjugate.models import inverse_gamma_known_rate
+        from conjugate.helpers import inverse_gamma_known_rate_inputs
+
+        data = [1.0, 2.0, 4.0]
+        inputs = inverse_gamma_known_rate_inputs(data)
+        # inputs = {'reciprocal_x_total': 1.75, 'n': 3}
+        posterior = inverse_gamma_known_rate(**inputs, alpha=2.0, prior=prior)
+        ```
     """
     if sum_fn is None:
         sum_fn = _default_sum
@@ -872,6 +962,18 @@ def von_mises_known_concentration_inputs(
 
     Returns:
         Dict with keys 'cos_total', 'sin_total', and 'n'
+
+    Example:
+        ```python
+        import numpy as np
+        from conjugate.models import von_mises_known_concentration
+        from conjugate.helpers import von_mises_known_concentration_inputs
+
+        data = [0.0, np.pi / 2, np.pi]
+        inputs = von_mises_known_concentration_inputs(data)
+        # inputs = {'cos_total': 0.0, 'sin_total': 1.0, 'n': 3}
+        posterior = von_mises_known_concentration(**inputs, kappa=2.0, prior=prior)
+        ```
     """
     if sum_fn is None:
         sum_fn = _default_sum
@@ -916,6 +1018,17 @@ def von_mises_known_direction_inputs(
 
     Returns:
         Dict with keys 'centered_cos_total' and 'n'
+
+    Example:
+        ```python
+        from conjugate.models import von_mises_known_direction
+        from conjugate.helpers import von_mises_known_direction_inputs
+
+        data = [0.1, 0.2, 0.3]
+        inputs = von_mises_known_direction_inputs(data, mu=0.2)
+        # inputs = {'centered_cos_total': 2.99, 'n': 3}
+        posterior = von_mises_known_direction(**inputs, prior=prior)
+        ```
     """
     if sum_fn is None:
         sum_fn = _default_sum
@@ -959,6 +1072,17 @@ def weibull_inverse_gamma_known_shape_inputs(
 
     Returns:
         Dict with keys 'x_beta_total' and 'n'
+
+    Example:
+        ```python
+        from conjugate.models import weibull_inverse_gamma_known_shape
+        from conjugate.helpers import weibull_inverse_gamma_known_shape_inputs
+
+        data = [1.0, 2.0, 3.0]
+        inputs = weibull_inverse_gamma_known_shape_inputs(data, beta=2.0)
+        # inputs = {'x_beta_total': 14.0, 'n': 3}
+        posterior = weibull_inverse_gamma_known_shape(**inputs, prior=prior)
+        ```
     """
     if sum_fn is None:
         sum_fn = _default_sum
@@ -994,6 +1118,18 @@ def multivariate_normal_known_covariance_inputs(
 
     Returns:
         Dict with keys 'x_bar' and 'n'
+
+    Example:
+        ```python
+        import numpy as np
+        from conjugate.models import multivariate_normal_known_covariance
+        from conjugate.helpers import multivariate_normal_known_covariance_inputs
+
+        X = np.array([[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]])
+        inputs = multivariate_normal_known_covariance_inputs(X)
+        # inputs = {'x_bar': array([3., 4.]), 'n': 3}
+        posterior = multivariate_normal_known_covariance(**inputs, cov=cov, prior=prior)
+        ```
     """
     if len_fn is None:
 
@@ -1029,6 +1165,20 @@ def multivariate_normal_known_precision_inputs(
 
     Returns:
         Dict with keys 'x_bar' and 'n'
+
+    Example:
+        ```python
+        import numpy as np
+        from conjugate.models import multivariate_normal_known_precision
+        from conjugate.helpers import multivariate_normal_known_precision_inputs
+
+        X = np.array([[2.0, 0.0], [4.0, 2.0], [6.0, 4.0]])
+        inputs = multivariate_normal_known_precision_inputs(X)
+        # inputs = {'x_bar': array([4., 2.]), 'n': 3}
+        posterior = multivariate_normal_known_precision(
+            **inputs, precision=precision, prior=prior
+        )
+        ```
     """
     if len_fn is None:
 

@@ -1,12 +1,9 @@
-import pytest
-
 import numpy as np
-
+import pytest
 from matplotlib.axes import Axes
 
-
-from conjugate.plot import resolve_label
 from conjugate.distributions import Beta, Binomial
+from conjugate.plot import resolve_label
 
 
 @pytest.mark.parametrize(

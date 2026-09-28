@@ -1,5 +1,4 @@
 import numpy as np
-
 from scipy.special import beta
 from scipy.stats import gamma
 

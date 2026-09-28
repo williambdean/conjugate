@@ -35,23 +35,23 @@ Below are the currently supported distributions
 
 """
 
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Callable
-
-from packaging import version
+from typing import Any
 
 import numpy as np
-
-from scipy import stats, __version__ as scipy_version
+from packaging import version
+from scipy import __version__ as scipy_version
+from scipy import stats
 from scipy.special import gammaln, i0
 
-from conjugate._compound_gamma import compound_gamma
 from conjugate._beta_geometric import beta_geometric
-from conjugate._typing import NUMERIC, Real, PositiveReal, Natural, Probability
+from conjugate._compound_gamma import compound_gamma
+from conjugate._typing import NUMERIC, Natural, PositiveReal, Probability, Real
 from conjugate.plot import (
+    ContinuousPlotDistMixin,
     DirichletPlotDistMixin,
     DiscretePlotMixin,
-    ContinuousPlotDistMixin,
 )
 from conjugate.slice import SliceMixin
 

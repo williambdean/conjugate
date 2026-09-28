@@ -1,7 +1,6 @@
-import conjugate
-
 from pathlib import Path
 
+import conjugate
 
 ROOT = Path(__file__).parents[1]
 PYPROJECT_TOML = ROOT / "pyproject.toml"

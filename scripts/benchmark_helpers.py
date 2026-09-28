@@ -1,20 +1,20 @@
 """Performance benchmarks for conjugate.helpers module."""
 
 import time
+
 import numpy as np
-from typing import Dict, List
 
 from conjugate.helpers import (
-    poisson_gamma_inputs,
     bernoulli_beta_inputs,
     exponential_gamma_inputs,
-    normal_inputs,
     multinomial_dirichlet_inputs,
     multivariate_normal_known_covariance_inputs,
+    normal_inputs,
+    poisson_gamma_inputs,
 )
 
 
-def benchmark_function(func, data, name: str, runs: int = 10) -> Dict[str, float]:
+def benchmark_function(func, data, name: str, runs: int = 10) -> dict[str, float]:
     """Benchmark a helper function with timing statistics."""
     times = []
 
@@ -38,7 +38,7 @@ def benchmark_function(func, data, name: str, runs: int = 10) -> Dict[str, float
     }
 
 
-def generate_test_data(size: int) -> Dict[str, any]:
+def generate_test_data(size: int) -> dict[str, any]:
     """Generate test data of specified size for benchmarking."""
     np.random.seed(42)  # Reproducible results
 
@@ -52,7 +52,7 @@ def generate_test_data(size: int) -> Dict[str, any]:
     }
 
 
-def run_benchmarks(sizes: List[int] = [100, 1000, 10000, 100000]) -> List[Dict]:
+def run_benchmarks(sizes: list[int] = [100, 1000, 10000, 100000]) -> list[dict]:
     """Run comprehensive benchmarks across different data sizes."""
     results = []
 
@@ -101,7 +101,7 @@ def run_benchmarks(sizes: List[int] = [100, 1000, 10000, 100000]) -> List[Dict]:
     return results
 
 
-def analyze_scaling(results: List[Dict]) -> None:
+def analyze_scaling(results: list[dict]) -> None:
     """Analyze how performance scales with data size."""
     print("\n" + "=" * 60)
     print("SCALING ANALYSIS")
@@ -144,7 +144,7 @@ def analyze_scaling(results: List[Dict]) -> None:
             )
 
 
-def performance_summary(results: List[Dict]) -> None:
+def performance_summary(results: list[dict]) -> None:
     """Provide a performance summary with recommendations."""
     print("\n" + "=" * 60)
     print("PERFORMANCE SUMMARY")

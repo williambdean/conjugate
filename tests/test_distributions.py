@@ -1,11 +1,7 @@
-import pytest
-
-from packaging import version
-
-import numpy as np
-
 import matplotlib.pyplot as plt
-
+import numpy as np
+import pytest
+from packaging import version
 from scipy import __version__ as scipy_version
 
 from conjugate.distributions import (

@@ -3,9 +3,10 @@
 Generate images for raw-data-workflow.md examples
 """
 
-import numpy as np
-import matplotlib.pyplot as plt
 from pathlib import Path
+
+import matplotlib.pyplot as plt
+import numpy as np
 
 # Ensure the images directory exists
 images_dir = Path("docs/images")
@@ -15,8 +16,8 @@ images_dir.mkdir(exist_ok=True)
 def generate_ab_testing_example():
     """Generate A/B Testing example and image"""
     from conjugate.distributions import Beta
-    from conjugate.models import binomial_beta
     from conjugate.helpers import bernoulli_beta_inputs
+    from conjugate.models import binomial_beta
 
     print("=" * 60)
     print("EXAMPLE 1: A/B Testing with Conversion Rates")
@@ -113,8 +114,8 @@ def generate_ab_testing_example():
 def generate_website_analytics_example():
     """Generate Website Analytics example and image"""
     from conjugate.distributions import Gamma
-    from conjugate.models import poisson_gamma, poisson_gamma_predictive
     from conjugate.helpers import poisson_gamma_inputs
+    from conjugate.models import poisson_gamma, poisson_gamma_predictive
 
     print("\n" + "=" * 60)
     print("EXAMPLE 2: Website Analytics - Daily Page Views")
@@ -228,9 +229,10 @@ def generate_website_analytics_example():
 
 def generate_survey_analysis_example():
     """Generate Customer Survey Analysis example and image"""
+    from collections import Counter
+
     from conjugate.distributions import Dirichlet
     from conjugate.models import multinomial_dirichlet
-    from collections import Counter
 
     print("\n" + "=" * 60)
     print("EXAMPLE 3: Customer Survey Analysis")
@@ -334,8 +336,8 @@ def generate_survey_analysis_example():
 def generate_temperature_example():
     """Generate Temperature Sensor example and image"""
     from conjugate.distributions import NormalInverseGamma
-    from conjugate.models import normal
     from conjugate.helpers import normal_inputs
+    from conjugate.models import normal
 
     print("\n" + "=" * 60)
     print("EXAMPLE 4: Sensor Measurements - Temperature Data")
@@ -466,8 +468,8 @@ def generate_temperature_example():
 def generate_exponential_example():
     """Generate Time Between Events example and image"""
     from conjugate.distributions import Gamma
-    from conjugate.models import exponential_gamma
     from conjugate.helpers import exponential_gamma_inputs
+    from conjugate.models import exponential_gamma
 
     print("\n" + "=" * 60)
     print("EXAMPLE 5: Time Between Events - Exponential Model")

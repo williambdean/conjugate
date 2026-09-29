@@ -32,6 +32,7 @@ from conjugate.distributions import (
     NormalInverseWishart,
     Pareto,
     StudentT,
+    VonMisesKnownConcentration,
 )
 from conjugate.models import (
     bernoulli_beta,
@@ -73,6 +74,7 @@ from conjugate.models import (
     poisson_gamma,
     poisson_gamma_predictive,
     uniform_pareto,
+    von_mises_known_concentration,
     weibull_inverse_gamma_known_shape,
 )
 
@@ -776,3 +778,25 @@ def test_normal_normal_inverse_gamma_predictive_deprecation() -> None:
         )
 
     assert isinstance(predictive, StudentT)
+
+
+def test_von_mises_known_concentration() -> None:
+    """Test that von_mises_known_concentration works without n parameter."""
+    prior = VonMisesKnownConcentration(a=1.0, b=0.0)
+
+    # Test with simple data
+    cos_total = 9.5
+    sin_total = 2.0
+    kappa = 2.0
+
+    posterior = von_mises_known_concentration(
+        cos_total=cos_total,
+        sin_total=sin_total,
+        kappa=kappa,
+        prior=prior,
+    )
+
+    assert isinstance(posterior, VonMisesKnownConcentration)
+    # Check that posterior parameters are computed
+    assert posterior.a > 0
+    assert 0 <= posterior.b <= 2 * np.pi

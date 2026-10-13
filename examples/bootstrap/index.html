@@ -63,9 +63,9 @@
 
     
     
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.16/dist/main.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.25.1/dist/main.js"></script>
 <link
-    href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.16/dist/style.css"
+    href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.25.1/dist/style.css"
     rel="stylesheet"
     title="marimo-islands"
     crossorigin="anonymous"
@@ -79,8 +79,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet" />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"
-    integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww"
+    href="https://cdn.jsdelivr.net/npm/katex@0.18.5/dist/katex.min.css"
+    integrity="sha384-2dNi/m6JtSiviznrOIZ5fTiZ5As0In2QwkuXSgoqcQtCNplvJAbt+jveeN+8en73"
     crossorigin="anonymous"
 />
 <marimo-filename hidden></marimo-filename>
@@ -1649,7 +1649,7 @@ data comes from a Poisson distribution with an unknown rate parameter.</p>
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">poisson_gamma_predictive</span><span class="p">,</span>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">)</span>
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="n">seed</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">ord</span><span class="p">,</span> <span class="s2">&quot;Bootstrap comparison&quot;</span><span class="p">))</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="n">seed</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">ord</span><span class="p">,</span> <span class="s2">"Bootstrap comparison"</span><span class="p">))</span>
 </span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
 </span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="n">true_lambda</span> <span class="o">=</span> <span class="mf">1.5</span>
@@ -1744,16 +1744,16 @@ the maximum value of 10 samples.</p>
 </span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>    <span class="n">bootstrap_samples</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">bootstrap_stat</span><span class="p">)</span>
 </span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>    <span class="n">conjugate_samples</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">conjugate_stat</span><span class="p">)</span>
 </span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>
-</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>    <span class="n">true_pdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>    <span class="n">true_pdf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"True"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">)</span>
 </span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>    <span class="n">bootstrap_samples</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">plot_processing</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="n">max_value</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Bootstrap&quot;</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Bootstrap"</span>
 </span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>    <span class="p">)</span>
 </span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>    <span class="n">conjugate_samples</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">plot_processing</span><span class="p">,</span> <span class="n">max_value</span><span class="o">=</span><span class="n">max_value</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Model&quot;</span>
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Model"</span>
 </span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>    <span class="p">)</span>
 </span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>
 </span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="w"> </span><span class="si">= }</span><span class="s2"> samples&quot;</span><span class="p">)</span>
+</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="w"> </span><span class="si">= }</span><span class="s2"> samples"</span><span class="p">)</span>
 </span></code></pre></div>
 <!---
 plt.savefig("./docs/images/bootstrap-comparison.png")

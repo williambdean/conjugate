@@ -61,9 +61,9 @@
 
     
     
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.16/dist/main.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.25.1/dist/main.js"></script>
 <link
-    href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.23.16/dist/style.css"
+    href="https://cdn.jsdelivr.net/npm/@marimo-team/islands@0.25.1/dist/style.css"
     rel="stylesheet"
     title="marimo-islands"
     crossorigin="anonymous"
@@ -77,8 +77,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&amp;family=Lora&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet" />
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"
-    integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww"
+    href="https://cdn.jsdelivr.net/npm/katex@0.18.5/dist/katex.min.css"
+    integrity="sha384-2dNi/m6JtSiviznrOIZ5fTiZ5As0In2QwkuXSgoqcQtCNplvJAbt+jveeN+8en73"
     crossorigin="anonymous"
 />
 <marimo-filename hidden></marimo-filename>
@@ -1501,9 +1501,9 @@
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">max_value</span> <span class="o">=</span> <span class="mi">7</span>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">dists</span> <span class="o">=</span> <span class="p">[</span><span class="n">daily_pois</span><span class="p">,</span> <span class="n">two_day_pois</span><span class="p">,</span> <span class="n">weekly_pois</span><span class="p">]</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">base_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;daily&quot;</span><span class="p">,</span> <span class="s2">&quot;two day&quot;</span><span class="p">,</span> <span class="s2">&quot;weekly&quot;</span><span class="p">]</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">base_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"daily"</span><span class="p">,</span> <span class="s2">"two day"</span><span class="p">,</span> <span class="s2">"weekly"</span><span class="p">]</span>
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="k">for</span> <span class="n">dist</span><span class="p">,</span> <span class="n">base_label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">dists</span><span class="p">,</span> <span class="n">base_labels</span><span class="p">):</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_label</span><span class="si">}</span><span class="s2"> rate=</span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">lam</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_label</span><span class="si">}</span><span class="s2"> rate=</span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">lam</span><span class="si">}</span><span class="s2">"</span>
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">dist</span><span class="o">.</span><span class="n">set_max_value</span><span class="p">(</span><span class="n">max_value</span><span class="p">)</span><span class="o">.</span><span class="n">plot_pmf</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
 </span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -1519,9 +1519,9 @@
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">norm_times_2</span> <span class="o">=</span> <span class="n">norm</span> <span class="o">*</span> <span class="mi">2</span>
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">bound</span> <span class="o">=</span> <span class="mi">6</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">ax</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">set_bounds</span><span class="p">(</span><span class="o">-</span><span class="n">bound</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;normal (std = </span><span class="si">{</span><span class="n">norm</span><span class="o">.</span><span class="n">sigma</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">ax</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">set_bounds</span><span class="p">(</span><span class="o">-</span><span class="n">bound</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"normal (std = </span><span class="si">{</span><span class="n">norm</span><span class="o">.</span><span class="n">sigma</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">norm_times_2</span><span class="o">.</span><span class="n">set_bounds</span><span class="p">(</span><span class="o">-</span><span class="n">bound</span><span class="p">,</span> <span class="n">bound</span><span class="p">)</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;normal * 2 (std = </span><span class="si">{</span><span class="n">norm_times_2</span><span class="o">.</span><span class="n">sigma</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"normal * 2 (std = </span><span class="si">{</span><span class="n">norm_times_2</span><span class="o">.</span><span class="n">sigma</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)"</span>
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">)</span>
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>

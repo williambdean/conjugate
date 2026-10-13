@@ -1,5 +1,6 @@
+from collections.abc import Iterable
 from types import UnionType
-from typing import Any, Annotated, Iterable, get_origin
+from typing import Annotated, Any, get_origin
 
 from conjugate import distributions, models
 from conjugate.plot import PlotDistMixin

@@ -1,12 +1,12 @@
 import pytest
 
 from conjugate.distributions import Beta
-from conjugate.models import binomial_beta, bernoulli_beta
 from conjugate.interactive import (
     get_prior_distribution,
     lookup_model,
     lookup_model_by_predictive,
 )
+from conjugate.models import bernoulli_beta, binomial_beta
 
 
 @pytest.mark.parametrize(
